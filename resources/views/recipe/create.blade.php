@@ -47,8 +47,13 @@
         </br>
 
         <div class="form-group">
-            <label for="photo_1"> </label>
+            <label for="photo"> </label>
             <input type="file" name="photo" class="form-control" placeholder="Foto:">
+        </div>
+
+        <div class="form-group">
+            <label for="photo2"> </label>
+            <input type="file" name="photo2" class="form-control" placeholder="Foto:">
         </div>
         
         <input type ="hidden" name = "user_id" value="{{ Auth::user()->id }}"/>

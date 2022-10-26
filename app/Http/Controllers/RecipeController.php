@@ -18,6 +18,10 @@ class RecipeController extends Controller
         //
     } 
 
+    public function upload_photo(Request $request){
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -36,7 +40,8 @@ class RecipeController extends Controller
         $recipe->portion = request('portion');
         $recipe->instruction = request('instruction');
         $recipe->created_at = time();
-        $recipe->photo = request('photo');
+        $recipe->photo = request()->file('photo')->store('recipes');
+        $recipe->photo = request()->file('photo')->store('recipes');
 
         /*
         $user_recipe = new UserRecipe();
