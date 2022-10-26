@@ -65,16 +65,14 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
+            @if (Route::has('login'))       <!-- se sei loggato allora -->
                 <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+                    @auth                   <!-- mostro il tasto home -->
+                        <a href="/home">Home</a>
+                    @else                   <!-- altrimenti i tasti login e register -->
+                        <a href="/login">Login</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
+                        <a href="/register">Register</a>
                     @endauth
                 </div>
             @endif

@@ -36,6 +36,7 @@ class RecipeController extends Controller
         $recipe->portion = request('portion');
         $recipe->instruction = request('instruction');
         $recipe->created_at = time();
+        $recipe->photo = request('photo');
 
         /*
         $user_recipe = new UserRecipe();

@@ -27,7 +27,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="/">  <!-- era {{ url('/') }} -->
+                <a class="navbar-brand" href="/">
                     Foodie
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -45,11 +45,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="/login">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="/register">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -64,18 +64,16 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
+                                    
+                                    <!--Per fare il logout:-->
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
-                                    </form> 
-
-                                    
+                                    </form>
                                 </div>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="/recipe/create"></a> 
-                                    
+                                <a class="nav-link" href="/recipe/create">{{__('Nuova ricetta')}}</a> 
                             </li>
                         @endguest
                     </ul>
