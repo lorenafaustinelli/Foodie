@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RecipeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,4 +22,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('recipe', 'RecipeController');
+//Route::resource('recipe', 'RecipeController');
+
+//Prove Lisa
+Route::get('/recipe/create', 'RecipeController@create');
+Route::post('/recipe', 'RecipeController@store');

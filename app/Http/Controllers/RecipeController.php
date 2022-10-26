@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Recipe;
+use App\UserRecipe;
 use Illuminate\Http\Request;
 
 class RecipeController extends Controller
@@ -14,7 +16,7 @@ class RecipeController extends Controller
     public function index()
     {
         //
-    }
+    } 
 
     /**
      * Show the form for creating a new resource.
@@ -26,12 +28,31 @@ class RecipeController extends Controller
         return view('recipe.create');
     }
 
+    public function store(){
+        //dump(request()->all());
+        $recipe = new Recipe();
+        $recipe->name_recipe = request('name_recipe');
+        $recipe->time = request('time');
+        $recipe->portion = request('portion');
+        $recipe->instruction = request('instruction');
+        $recipe->created_at = time();
+
+        /*
+        $user_recipe = new UserRecipe();
+        $user_recipe->user_id = $u_id;
+        */
+
+        $recipe->save();
+        return redirect('/');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    /*
     public function store(Request $request)
     {
         //store effettivo dei dati
@@ -46,11 +67,12 @@ class RecipeController extends Controller
             'user_id'     => 'required',
         ]);
 
+
         //setto il nome dell'immagine e uso storeAs per salvarla nella destinazione e con il nome scelti
         $photo_name = time() . '.' . $request->photo->extension(); //controllare funzione time()
         $request->file('photo')->storeAs('public/images', $photo_name);
 
-        Recipe::create([
+        RecipeController::create([
             'name_recipe' => $request->name_recipe,
             'time'        => $request->time,
             'portion'     => $request->portion,
@@ -75,12 +97,12 @@ class RecipeController extends Controller
             $photo = request()->file('photo3')->getClientOriginalName();
             request()->file('photo3')->storeAs('photo3', $recipe->id . '/' . $photo3, '');
             $recipe->update(['photo3' => $photo3]);
-        } */
+        } 
 
         return redirect('recipe.index');
-  
-    }
 
+    }
+*/
     /**
      * Display the specified resource.
      *
@@ -104,6 +126,14 @@ class RecipeController extends Controller
     }
 
     /**
+     * Trovo la ricetta in questione
+     */
+    public function find($id){
+        //$recipe = ;
+        return $id;//$recipe;
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -113,7 +143,7 @@ class RecipeController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request -> all(); 
-        $recipe = Recipe::find($id);
+        $recipe = RecipeController::find($id);
         $recipe->update($input);
 
         return redirect('recipe');
@@ -127,6 +157,7 @@ class RecipeController extends Controller
      */
     public function destroy($id)
     {
+        $recipe = RecipeController::find($id);
         $recipe -> delete();
 
         return redirect('recipe');

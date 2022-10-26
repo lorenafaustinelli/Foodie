@@ -27,7 +27,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="/">  <!-- era {{ url('/') }} -->
                     Foodie
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -74,7 +74,8 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('recipe.create') }}">{{ __('Nuova ricetta') }}</a>
+                                <a class="nav-link" href="/recipe/create"></a> 
+                                    
                             </li>
                         @endguest
                     </ul>
