@@ -25,4 +25,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Prove Lisa
 Route::get('/recipe/create', 'RecipeController@create');
-Route::post('/recipe', 'RecipeController@store');
+//Route::post('/recipe', 'RecipeController@store');
+Route::post('/recipe/store', 'RecipeController@store');
+
+
+
+//Prove Lorena
+Route::post('/recipe_ingredient/store', 'RecipeIngredientController@store');
+Route::get('/recipe_ingredient/create', 'RecipeIngredientController@create');
+Route::post('/recipe_category/store', 'RecipeCategoryController@store');
+Route::get('/recipe_category/store', 'RecipeCategoryController@store');

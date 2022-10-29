@@ -18,10 +18,6 @@ class RecipeController extends Controller
         //
     } 
 
-    public function upload_photo(Request $request){
-
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -33,6 +29,7 @@ class RecipeController extends Controller
     }
 
     public function store(){
+
         //dump(request()->all());
         $recipe = new Recipe();
         $recipe->name_recipe = request('name_recipe');
@@ -40,8 +37,9 @@ class RecipeController extends Controller
         $recipe->portion = request('portion');
         $recipe->instruction = request('instruction');
         $recipe->created_at = time();
+        //le foto risultano obbligatorie da mettere nonostante il "nullable()" nel db
         $recipe->photo = request()->file('photo')->store('recipes');
-        $recipe->photo = request()->file('photo')->store('recipes');
+        $recipe->photo2 = request()->file('photo2')->store('recipes');
 
         /*
         $user_recipe = new UserRecipe();
@@ -49,7 +47,9 @@ class RecipeController extends Controller
         */
 
         $recipe->save();
-        return redirect('/');
+        //return redirect('recipe');
+        //questa nuova versione di redirect serve per passare l'id della ricetta per aggiungerlo alla tabella RecipeIngredient
+        return redirect('/recipe_ingredient/create')->with(['recipe_id' => 'Recipe::$recipe()->id']);
     }
 
     /**
@@ -98,12 +98,6 @@ class RecipeController extends Controller
             request()->file('photo2')->storeAs('photo2', $recipe->id . '/' . $photo2, '');
             $recipe->update(['photo2' => $photo2]);
         }
-
-        if($request()->hasFile('photo3')){
-            $photo = request()->file('photo3')->getClientOriginalName();
-            request()->file('photo3')->storeAs('photo3', $recipe->id . '/' . $photo3, '');
-            $recipe->update(['photo3' => $photo3]);
-        } 
 
         return redirect('recipe.index');
 

@@ -24,7 +24,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        //visibile solo dall'admin
+        return view('category.create');
     }
 
     /**
@@ -35,7 +36,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = new Category();
+        $category->name_category = request('name_category');
+        
+        $category->save();
+        return redirect('/');
     }
 
     /**
@@ -69,7 +74,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $input = $request -> all(); 
+        $category->name_category = $input['name_category'];
+        $recipe->update($input);
+
+        $category->save();
+        return redirect('category');
     }
 
     /**
@@ -80,6 +90,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect('category');
     }
 }

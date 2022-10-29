@@ -35,7 +35,7 @@ class RecipeCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**

@@ -5,13 +5,16 @@
 <!-- <link href = "{{ asset('css/stile.css')}}" rel = "stylesheet"> -->
 <div class="container">
 <?php //view per inserire una nuova ricetta, mancano gli ingredienti ?>
-<h1> Inserisci una nuova ricetta: </h1>
+<!-- <h1> Inserisci una nuova ricetta: </h1> -->
+<!-- <h1> Nuova Ricetta! </h1> --> 
+<h2> Iniziamo con alcune informazioni sulla ricetta: <h2>
+
 </br> 
 </br>
     
 
 
-    <form action="/recipe" method="POST" enctype="multipart/form-data">
+    <form action="/recipe/store" method="POST" enctype="multipart/form-data">
         
         {{ csrf_field() }}
         
@@ -60,7 +63,7 @@
        
         </br>
 
-        <button type="submit" class="btn btn-primary"> Crea e salva!</button>
+        <button type="submit" class="btn btn-primary"> Continua </button>
 
     </form>
 

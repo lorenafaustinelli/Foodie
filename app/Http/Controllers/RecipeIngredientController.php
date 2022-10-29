@@ -24,7 +24,8 @@ class RecipeIngredientController extends Controller
      */
     public function create()
     {
-        //
+        return view('recipe_ingredient.create');
+        
     }
 
     /**
@@ -35,7 +36,15 @@ class RecipeIngredientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $recipe_ingredient = new RecipeIngredient();
+        //essendo che l'utente selezionerà il nome bisogna settare il fatt
+        $recipe_ingredient->recipe_id = $request-> recipe_id;
+        $recipe_ingredient->ingredient_id = $request-> ingredient_id;
+        $recipe_ingredient->quantity = $request-> quantity;
+        $recipe_ingredient->measure = $request-> measure;
+
+        $recipe_ingredient->save();
+        return response()->json($recipe_ingredient);
     }
 
     /**
@@ -80,6 +89,7 @@ class RecipeIngredientController extends Controller
      */
     public function destroy(RecipeIngredient $recipeIngredient)
     {
-        //
+        $recipe_ingredient->delete();
+        return redirect('/');
     }
 }
