@@ -31,7 +31,14 @@ Route::post('/recipe/store', 'RecipeController@store');
 
 
 //Prove Lorena
-Route::post('/recipe_ingredient/store', 'RecipeIngredientController@store');
-Route::get('/recipe_ingredient/create', 'RecipeIngredientController@create');
 Route::post('/recipe_category/store', 'RecipeCategoryController@store');
-Route::get('/recipe_category/store', 'RecipeCategoryController@store');
+Route::get('/recipe_category/store', 'RecipeCategoryController@store'); 
+
+//RecipeIngredient
+Route::get('/recipe_ingredient', 'RecipeIngredientController@index');
+Route::post('/recipe_ingredient/store', 'RecipeIngredientController@store')->name('recipe_ingredient.add');
+Route::get('/recipe_ingredient/store', 'RecipeIngredientController@store');
+Route::get('/recipe_ingredient/create', 'RecipeIngredientController@create');
+
+//Ingredient
+Route::get('/recipe_ingredient/create', 'IngredientController@index');

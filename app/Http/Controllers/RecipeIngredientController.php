@@ -14,7 +14,9 @@ class RecipeIngredientController extends Controller
      */
     public function index()
     {
-        //
+        $recipe_ingredients = RecipeIngredient::all();
+
+        return view('/recipe_ingredient', compact('recipe_ingredients')); 
     }
 
     /**
@@ -37,7 +39,6 @@ class RecipeIngredientController extends Controller
     public function store(Request $request)
     {
         $recipe_ingredient = new RecipeIngredient();
-        //essendo che l'utente selezionerà il nome bisogna settare il fatt
         $recipe_ingredient->recipe_id = $request-> recipe_id;
         $recipe_ingredient->ingredient_id = $request-> ingredient_id;
         $recipe_ingredient->quantity = $request-> quantity;
@@ -92,4 +93,6 @@ class RecipeIngredientController extends Controller
         $recipe_ingredient->delete();
         return redirect('/');
     }
+
+    
 }

@@ -14,7 +14,9 @@ class IngredientController extends Controller
      */
     public function index()
     {
-        //
+        $ingredients = Ingredient::all();
+
+        return view('/recipe_ingredient/create', compact('ingredients'));
     }
 
     /**
@@ -82,4 +84,6 @@ class IngredientController extends Controller
     {
         //
     }
+
+    
 }
