@@ -48,7 +48,7 @@ class RecipeController extends Controller
 
         $recipe->save();
         //return redirect('recipe');
-        //questa nuova versione di redirect serve per passare l'id della ricetta per aggiungerlo alla tabella RecipeIngredient
+        //questa viene passato l'id della ricetta per aggiungerlo alla tabella RecipeIngredient nella pagina successiva
         return redirect('/recipe_ingredient/create')->with(['recipe_id' => 'Recipe::$recipe()->id']);
     }
 
