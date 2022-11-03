@@ -1,5 +1,6 @@
 @extends('layouts.app')
-
+<?php
+/*<input type ="hidden" name = "recipe_id" value="{{ $recipe_id }}"/> */ ?>
 @section('content')
 
 
@@ -40,12 +41,12 @@
 
         <form id="ingredientform">
 
-        <input type ="hidden" name = "recipe_id" value="id_recipe"/>
+        
         
         <div class="form-group">
             <label for="seleziona ingrediente"> </label>
             <select class="form-control" id="ingredient_id" name="ingredient_id">
-                @foreach ($ingredients as $ingredient)
+            @foreach ($ingredients as $ingredient)
                   <option value="{{ $ingredient->id }}">{{ $ingredient->name_ingredient }} </option>
                 @endforeach
             </select>
@@ -73,14 +74,15 @@
   </div>
 </div>
 
-<script>
-    $("#ingredientform").submit(function(e){
+<script type="application/javascript">
+  $(document).ready(function() {
+    $('#ingredientform').on('click', function(e){
         e.preventDefault();
         
         let recipe_id = $("#recipe_id").val();
         let ingredient_id = $("#ingredient_id").val();
-        let quantity = $("quantity").val();
-        let measure = $("measure").val();
+        let quantity = $("#quantity").val();
+        let measure = $("#measure").val();
         let _token = $("input[name = _token]").val();
 
         $.ajax({
@@ -100,12 +102,17 @@
               $("#RecipeIngredientsTable tbody").prepend('<tr><td>' + response.ingredient_id + '</td><td>' + response.quantity +'</td><td>'+ response.measure +'</td></tr>')
               $("#ingredientform")[0].reset();
               $("#ingredientModal").modal('hide');
-            }
-          }
+            }else{
+                  alert("Error")
+              }
+          }, error:function(error){
+              console.log(error)
+           }
+          
 
         });
-        
     });
+  });
 </script>
 
 @endsection

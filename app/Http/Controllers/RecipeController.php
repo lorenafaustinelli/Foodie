@@ -28,7 +28,7 @@ class RecipeController extends Controller
         return view('recipe.create');
     }
 
-    public function store(){
+    public function store(Request $request){
 
         //dump(request()->all());
         $recipe = new Recipe();
@@ -47,9 +47,10 @@ class RecipeController extends Controller
         */
 
         $recipe->save();
+        //$recipe_id = $recipe->id;
         //return redirect('recipe');
         //questa viene passato l'id della ricetta per aggiungerlo alla tabella RecipeIngredient nella pagina successiva
-        return view('/recipe_ingredient/create');
+        return view('/recipe_ingredient/create');//->withInput('recipe_id')
     }
 
     /**
