@@ -50,7 +50,7 @@ class RecipeController extends Controller
         //$recipe_id = $recipe->id;
         //return redirect('recipe');
         //questa viene passato l'id della ricetta per aggiungerlo alla tabella RecipeIngredient nella pagina successiva
-        return view('/recipe_ingredient/create');//->withInput('recipe_id')
+        return redirect('/recipe_ingredient/create');//->withInput('recipe_id')
     }
 
     /**
