@@ -17,9 +17,9 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([[
 
-            'name'       =>      'Giacomo',
-            'surname'    =>      'Merlin', 
-            'email'      =>      'giacomomerlin@foodie.it',
+            'name'       =>      'Lorena',
+            'surname'    =>      'Faustinelli', 
+            'email'      =>      'lorena@foodie.it',
             'admin'      =>      true,
             'password'   =>      bcrypt('password'),
             'created_at' =>      date('Y-m-d h:i:s'), 
@@ -27,24 +27,15 @@ class UsersTableSeeder extends Seeder
             
         ], [
 
-            'name'      =>       'Chiara',
-            'surname'   =>       'Bottoni', 
-            'email'     =>       'chiarabottoni@foodie.it',
+            'name'      =>       'Lisa',
+            'surname'   =>       'Giacobazzi', 
+            'email'     =>       'lisa@foodie.it',
             'admin'     =>        true,
             'password'  =>        bcrypt('password'),
             'created_at' =>       date('Y-m-d h:i:s'),
             'updated_at'  =>      date('Y-m-d h:i:s'),
 
-        ], 
-            [    
-                'name'      =>       'Antonio',
-                'surname'   =>       'Ferrari', 
-                'email'     =>       'antonioferrari@foodie.it',
-                'password'  =>       bcrypt('password'),
-                'admin'      =>      true, 
-                'created_at' =>      date('Y-m-d h:i:s'),
-                'updated_at' =>     date('Y-m-d h:i:s'),
-            ]
+        ]
         ]);
     }
 }
