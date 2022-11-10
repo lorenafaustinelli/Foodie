@@ -1,8 +1,11 @@
 @extends('layouts.app')
 
 @section('content') 
+<?php 
 
-<div class="container">
+    /*
+    
+    <div class="container">
     <h1> Tutti gli ingredienti </h1>
 
     @foreach($ingredients as $ingredient)
@@ -24,6 +27,24 @@
         </tbody>
     </table>
 </div>
+
+
+    
+    */
+
+    ?>
+
+    <div class="ingredients">
+        <ul>
+            @foreach ($ingredients as $ingredient)
+            <li>{{ $ingredient->name_ingredient}} </li>
+            <li>{{ $ingredient->variation }} </li>
+            @endforeach
+        </lu>
+    </div>
+
+
+
 
 
 

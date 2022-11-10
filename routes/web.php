@@ -41,4 +41,5 @@ Route::get('/recipe_ingredient/store', 'RecipeIngredientController@store');
 Route::get('/recipe_ingredient/create', 'RecipeIngredientController@create');
 
 //Ingredient
-Route::get('/recipe_ingredient/create', 'IngredientController@index');
+//Route::get('/recipe_ingredient/create', 'IngredientController@index');
+Route::get('/ingredients', 'IngredientController@index');

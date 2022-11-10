@@ -1,6 +1,10 @@
 @extends('layouts.app')
 <?php
-/*<input type ="hidden" name = "recipe_id" value="{{ $recipe_id }}"/> */ ?>
+/*<input type ="hidden" name = "recipe_id" value="{{ $recipe_id }}"/> 
+   */ 
+  var_dump($id);
+  
+  ?>
 @section('content')
 
 
@@ -21,13 +25,20 @@
                         </tr> 
                     </thead>
                     <tbody>
-                      
+                      <tr>
+                        @foreach($recipe_ingredients->where('recipe_id', '$id') as $rp)
+                        <td> {{ $rp->$ingredient_id}} </td>
+                        <td> {{ $rp->$quantity}} </td>
+                        <td> {{ $rp->$measure}} </td>
+                        @endforeach
+                      </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="ingredientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -41,12 +52,12 @@
 
         <form id="ingredientform">
 
-        
+        <input type ="hidden" name = "recipe_id" class="recipe_id form-control" value="{{ $id }}" >
         
         <div class="form-group">
             <label for="seleziona ingrediente"> </label>
-            <select class="form-control" id="ingredient_id" name="ingredient_id">
-            @foreach ($ingredients as $ingredient)
+            <select name="ingredient_id" class="ingredient_id form-control" name="ingredient_id">
+                @foreach ($ingredients as $ingredient)
                   <option value="{{ $ingredient->id }}">{{ $ingredient->name_ingredient }} </option>
                 @endforeach
             </select>
@@ -54,47 +65,54 @@
 
         <div class="form-group">
         <label for="quantity"> </label>
-        <input type="number" name="quantity" class="form-control" id="quantity" placeholder="Quantità:">
+        <input type="number" name="quantity" class="quantity form-control" placeholder="Quantità:">
         </div>
 
         <div class="form-group">
         <label for="measure"> </label>
-        <input type="text" name="measure" class="form-control" id="measure" placeholder="Unità di misura:">
+        <input type="text" name="measure" class="measure form-control" placeholder="Unità di misura:">
         </div>
 
       </div>
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary"> Aggiungi </button>
+        <button type="button" class="btn btn-primary add_ingredient" > Aggiungi </button>
       </div>
 
       
     </div>
   </div>
-</div>
+</div> 
 
-<script type="application/javascript">
+
+
+<script>
   $(document).ready(function() {
-    $('#ingredientform').on('click', function(e){
-        e.preventDefault();
-        
-        let recipe_id = $("#recipe_id").val();
-        let ingredient_id = $("#ingredient_id").val();
-        let quantity = $("#quantity").val();
-        let measure = $("#measure").val();
-        let _token = $("input[name = _token]").val();
+    $(document).on('click', '.add_ingredient', function(e){
+      e.preventDefault();
+      //console.log("hello muddafakka");  
 
-        $.ajax({
+      var data = {
+        'recipe_id': $('.recipe_id').val(),
+        'ingredient_id': $('.ingredient_id').val(),
+        'quantity': $('.quantity').val(),
+        'measure': $('.measure').val(),
+      }
+
+      $.ajaxSetup({
+
+        headers:{
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+
+      //console.log(data);  
+      $.ajax({
           url: "{{route('recipe_ingredient.add')}}",
           type:"POST",
-          data:{
-            recipe_id:recipe_id,
-            ingredient_id:ingredient_id,
-            quantity:quantity,
-            measure:measure,
-            _token:_token
-          },
+          data:data,
+          dataType: "json",
           success:function(response)
           {
             if(response)
@@ -102,17 +120,15 @@
               $("#RecipeIngredientsTable tbody").prepend('<tr><td>' + response.ingredient_id + '</td><td>' + response.quantity +'</td><td>'+ response.measure +'</td></tr>')
               $("#ingredientform")[0].reset();
               $("#ingredientModal").modal('hide');
-            }else{
-                  alert("Error")
-              }
-          }, error:function(error){
-              console.log(error)
-           }
-          
+            }
+          }
 
         });
+      
     });
   });
+  
+
 </script>
 
 @endsection
