@@ -1,10 +1,8 @@
 @extends('layouts.app')
 <?php
-/*<input type ="hidden" name = "recipe_id" value="{{ $recipe_id }}"/> 
-   */ 
+  /*<input type ="hidden" name = "recipe_id" value="{{ $recipe_id }}"/> */ 
   var_dump($id);
-  
-  ?>
+?>
 @section('content')
 
 
@@ -27,9 +25,9 @@
                     <tbody>
                       <tr>
                         @foreach($recipe_ingredients->where('recipe_id', '$id') as $rp)
-                        <td> {{ $rp->$ingredient_id}} </td>
+                        <?php /*<td> {{ $rp->$ingredient_id}} </td>
                         <td> {{ $rp->$quantity}} </td>
-                        <td> {{ $rp->$measure}} </td>
+                        <td> {{ $rp->$measure}} </td> */?>
                         @endforeach
                       </tr>
                     </tbody>
@@ -91,7 +89,7 @@
   $(document).ready(function() {
     $(document).on('click', '.add_ingredient', function(e){
       e.preventDefault();
-      //console.log("hello muddafakka");  
+      //console.log("hello muddafakka");   ahahahah
 
       var data = {
         'recipe_id': $('.recipe_id').val(),
@@ -122,9 +120,7 @@
               $("#ingredientModal").modal('hide');
             }
           }
-
         });
-      
     });
   });
   

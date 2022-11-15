@@ -14,6 +14,6 @@ class Recipe extends Model
      * @var array
      */
     protected $fillable = [
-        'name_recipe', 'time', 'portion', 'instruction', 'photo'
+        'name_recipe', 'time', 'portion', 'instruction', 'photo', 'photo2'
     ];
 }

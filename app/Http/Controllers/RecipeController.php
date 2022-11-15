@@ -37,9 +37,15 @@ class RecipeController extends Controller
         $recipe->portion = request('portion');
         $recipe->instruction = request('instruction');
         $recipe->created_at = time();
-        //le foto risultano obbligatorie da mettere nonostante il "nullable()" nel db
-        $recipe->photo = request()->file('photo')->store('recipes');
-        $recipe->photo2 = request()->file('photo2')->store('recipes');
+
+        if($recipe->photo){
+            $recipe->photo = request()->file('photo')->store('recipes');
+            if($recipe->photo2){
+                $recipe->photo2 = request()->file('photo2')->store('recipes');
+            }
+        }
+        
+        
 
         /*
         $user_recipe = new UserRecipe();

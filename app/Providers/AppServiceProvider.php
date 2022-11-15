@@ -21,11 +21,10 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      *
-     * @return void
+     * @return voidi j
      */
     public function boot()
     {   
-
         //per rendere visibile da tutte le pagine la variabile ingredients
         view()->composer('*',function($view) {
             $view->with('ingredients', Ingredient::all());
