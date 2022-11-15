@@ -14,6 +14,6 @@ class Recipe extends Model
      * @var array
      */
     protected $fillable = [
-        'name_recipe', 'time', 'portion', 'instruction', 'photo', 'photo2'
+        'name_recipe', 'time', 'portion', 'instruction', 'photo', 'photo2'  //ora funzionano anche jpg e png, ma controllare altri formati
     ];
 }
