@@ -1,7 +1,18 @@
 @extends('layouts.app')
 <?php
-  /*<input type ="hidden" name = "recipe_id" value="{{ $recipe_id }}"/> */ 
-  var_dump($id);
+  /*<input type ="hidden" name = "recipe_id" value="{{ $recipe_id }}"/> 
+  
+  
+<?php $name_ingredient = $_POST['ingredient_id']; 
+        echo $name_ingredient;?>
+
+        @foreach($ingredients->where('id', 'ingredient_id') as $ingredient)
+        $name_ingredient = $ingredient->name_ingredient
+      @endforeach
+
+       var_dump($id);
+  */ 
+ 
 ?>
 @section('content')
 
@@ -50,17 +61,16 @@
 
         <form id="ingredientform">
 
-        <input type ="hidden" name = "recipe_id" class="recipe_id form-control" value="{{ $id }}" >
+        <input type ="hidden" name="recipe_id" class="recipe_id form-control" value="{{ $id }}" >
         
         <div class="form-group">
             <label for="seleziona ingrediente"> </label>
             <select name="ingredient_id" class="ingredient_id form-control" name="ingredient_id">
                 @foreach ($ingredients as $ingredient)
-                  <option value="{{ $ingredient->id }}">{{ $ingredient->name_ingredient }} </option>
+                  <option value="{{ $ingredient->id }}"> {{$ingredient->name_ingredient }} </option>
                 @endforeach
             </select>
         </div> 
-
         <div class="form-group">
         <label for="quantity"> </label>
         <input type="number" name="quantity" class="quantity form-control" placeholder="Quantità:">
@@ -82,9 +92,13 @@
     </div>
   </div>
 </div> 
+<br>
+<br>
+<div class="d-grid gap-2 col-6 mx-auto">
+  <a class="btn btn-primary" href="{{ route('recipe_category.create', ['recipe_id' => $id]) }}" role="button">Prosegui</a>
+</div>
 
-
-
+      
 <script>
   $(document).ready(function() {
     $(document).on('click', '.add_ingredient', function(e){
@@ -94,6 +108,7 @@
       var data = {
         'recipe_id': $('.recipe_id').val(),
         'ingredient_id': $('.ingredient_id').val(),
+        'name_ingredient': $('.name_ingredient').val(),
         'quantity': $('.quantity').val(),
         'measure': $('.measure').val(),
       }
@@ -115,7 +130,7 @@
           {
             if(response)
             {
-              $("#RecipeIngredientsTable tbody").prepend('<tr><td>' + response.ingredient_id + '</td><td>' + response.quantity +'</td><td>'+ response.measure +'</td></tr>')
+              $("#RecipeIngredientsTable tbody").prepend('<tr><td>' + response.name_ingredient + '</td><td>' + response.quantity +'</td><td>'+ response.measure +'</td></tr>')
               $("#ingredientform")[0].reset();
               $("#ingredientModal").modal('hide');
             }

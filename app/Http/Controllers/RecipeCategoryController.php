@@ -24,7 +24,7 @@ class RecipeCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('recipe_category.create');
     }
 
     /**

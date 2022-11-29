@@ -42,8 +42,6 @@ class RecipeController extends Controller
         if($recipe->photo2){
             $recipe->photo2 = request()->file('photo2')->store('recipes');
         }
-        
-        
 
         /*
         $user_recipe = new UserRecipe();

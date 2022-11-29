@@ -7,7 +7,7 @@
 <?php //view per inserire una nuova ricetta, mancano gli ingredienti ?>
 <!-- <h1> Inserisci una nuova ricetta: </h1> -->
 <!-- <h1> Nuova Ricetta! </h1> --> 
-<h2> Iniziamo con alcune informazioni sulla ricetta: <h2>
+<h1> Iniziamo con alcune informazioni sulla ricetta: <h1>
 
 </br> 
 </br>
@@ -46,7 +46,7 @@
             <textarea rows="5" cols="50" name="instruction" placeholder="Istruzioni:">
             </textarea>
         </div>
-        <!-- mancano i tag -->
+
         </br>
 
         <div class="form-group">
