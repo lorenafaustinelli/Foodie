@@ -14,7 +14,9 @@ class RecipeCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $recipe_categories = RecipeCategory::all();
+
+        return view('/recipe_category', compact('recipe_categories')); 
     }
 
     /**
@@ -35,7 +37,12 @@ class RecipeCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $recipe_category = new RecipeCategory();
+        $recipe_category->recipe_id = $request-> recipe_id;
+        $recipe_category->category_id = $request-> category_id;
+
+        $recipe_category->save();
+        return response()->json($recipe_category);
     }
 
     /**

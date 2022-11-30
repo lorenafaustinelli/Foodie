@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Ingredient;
 use App\RecipeIngredient;
+use App\Category;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*',function($view) {
             $view->with('ingredients', Ingredient::all());
             $view->with('recipe_ingredients', RecipeIngredient::all());
+            $view->with('categories', Category::all());
         });
     }
 }

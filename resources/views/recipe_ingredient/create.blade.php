@@ -94,8 +94,12 @@
 </div> 
 <br>
 <br>
+<?php 
+
+  //per passare l'id della ricetta alla pagina delle categorie
+  session()->put('id', $id); ?>
 <div class="d-grid gap-2 col-6 mx-auto">
-  <a class="btn btn-primary" href="{{ route('recipe_category.create', ['recipe_id' => $id]) }}" role="button">Prosegui</a>
+  <a class="btn btn-primary" href="{{ route('recipe_category.create') }}" role="button">Prosegui</a>
 </div>
 
       
