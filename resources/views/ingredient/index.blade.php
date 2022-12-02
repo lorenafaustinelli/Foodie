@@ -2,9 +2,7 @@
 
 @section('content') 
 <?php 
-
-    /*
-    
+/*
     <div class="container">
     <h1> Tutti gli ingredienti </h1>
 
@@ -27,12 +25,8 @@
         </tbody>
     </table>
 </div>
-
-
-    
-    */
-
-    ?>
+*/
+?>
 
     <div class="ingredients">
         <ul>
@@ -42,10 +36,4 @@
             @endforeach
         </lu>
     </div>
-
-
-
-
-
-
 @endsection

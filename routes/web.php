@@ -15,12 +15,25 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    //prendo dal database le ricette scritte fin'ora, ordinate dall'ultima 
+    $recipes = App\Recipe::latest()->get();
+
+    return view('welcome', [
+        'recipes' => $recipes   //passo le ricette alla view
+    ]);
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', function () {
+    //prendo dal database le ricette scritte fin'ora, ordinate dall'ultima 
+    $recipes = App\Recipe::latest()->get();
+
+    return view('home', [
+        'recipes' => $recipes   //passo le ricette alla view
+    ]);
+});
 //Route::resource('recipe', 'RecipeController');
 
 //Prove Lisa

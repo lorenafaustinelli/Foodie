@@ -90,7 +90,7 @@ class RecipeIngredientController extends Controller
      */
     public function destroy(RecipeIngredient $recipeIngredient)
     {
-        $recipe_ingredient->delete();
+        $recipeIngredient->delete();
         return redirect('/');
     }
 

@@ -2,36 +2,31 @@
 
 @section('content')
 <?php 
-{{ $id = session()->get('id'); }}
+  {{ $id = session()->get('id'); }}
 
-//per passare l'id ricetta che si sta creando
- var_dump($id);
+  //per passare l'id ricetta che si sta creando
+  var_dump($id);
 ?>
 
 <div class="container">
-    <h1> Ultimo step! </h1>
-    <h2> Associa le categorie corrispondendi alla tua ricetta </h2>
-   <div class="row">
-       <div class="card">
-            <div class="card-header">
-               <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#categoryModal"> Aggiungi un ingrediente </a>
-            </div> 
-            <div class="card-body">
-                <table id="RecipeCategoriesTable" class="table">
-                    <thead>
-                        <tr>
-                            <th>Categoria </th>
-                        </tr> 
-                    </thead>
-                    <tbody>
-                      <tr>
-                        
-                      </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+  <h1> Ultimo step! </h1>
+  <h2> Associa le categorie corrispondendi alla tua ricetta </h2>
+  <div class="row">
+    <div class="card">
+      <div class="card-header">
+        <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#categoryModal"> Specifica una categoria </a>
+      </div> 
+      <div class="card-body">
+        <table id="RecipeCategoriesTable" class="table">
+          <thead>
+            <tr>
+              <th>Categoria </th>
+            </tr> 
+          </thead>
+        </table>
+      </div>
     </div>
+  </div>
 </div>
 
 

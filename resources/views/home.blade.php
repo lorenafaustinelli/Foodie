@@ -16,8 +16,15 @@
 
                     {{ __('You are logged in!') }}
                 </div>
+
+                <!-- Stampo le ricette nella home -->
+                @foreach ($recipes as $recipe)
+                    <h3>{{ $recipe->name_recipe }}</h3>
+                    {{ $recipe->photo }}    <!-- CAPIRE COME RENDERE LE IMMAGINI -->
+                    <p><a href="#">{{ $recipe->instruction }}</a></p>
+                @endforeach
             </div>
         </div>
-    </div>
+    </div> 
 </div>
 @endsection
