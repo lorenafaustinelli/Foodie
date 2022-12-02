@@ -15,12 +15,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    //prendo dal database le ricette scritte fin'ora, ordinate dall'ultima 
-    $recipes = App\Recipe::latest()->get();
-
-    return view('welcome', [
-        'recipes' => $recipes   //passo le ricette alla view
-    ]);
+    return view('welcome');
 });
 
 Auth::routes();
