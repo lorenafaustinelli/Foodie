@@ -15,7 +15,7 @@ class UserRecipeController extends Controller
      */
     public function index()
     {
-        //
+        return view('user_recipe/index');
     }
 
     /**

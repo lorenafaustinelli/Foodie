@@ -69,7 +69,7 @@
 <br>
 <br>
 <div class="d-grid gap-2 col-6 mx-auto"> 
-  <a class="btn btn-primary" href="{{ route('recipe_category.create') }}" role="button">Concludi</a>
+  <a class="btn btn-primary" href="{{ url('/home') }}" role="button">Concludi</a>
 </div>
 
       
@@ -77,7 +77,6 @@
   $(document).ready(function() {
     $(document).on('click', '.add_category', function(e){
       e.preventDefault();
-      //console.log("hello muddafakka");   ahahahah
 
       var data = {
         'recipe_id': $('.recipe_id').val(),
@@ -91,7 +90,6 @@
         }
       });
 
-      //console.log(data);  
       $.ajax({
           url: "{{route('recipe_category.add')}}",
           type:"POST",

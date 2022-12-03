@@ -46,7 +46,7 @@ Route::get('/recipe_category/store', 'RecipeCategoryController@store');
 //RecipeIngredient
 Route::get('/recipe_ingredient', 'RecipeIngredientController@index');
 Route::post('/recipe_ingredient/store', 'RecipeIngredientController@store')->name('recipe_ingredient.add');
-Route::get('/recipe_ingredient/store', 'RecipeIngredientController@store');
+//Route::get('/recipe_ingredient/store', 'RecipeIngredientController@store');
 Route::get('/recipe_ingredient/create', 'RecipeIngredientController@create');
 
 //Ingredient
@@ -56,4 +56,7 @@ Route::get('/ingredients', 'IngredientController@index');
 //RecipeCategory
 Route::get('/recipe_category/create', 'RecipeCategoryController@create')->name('recipe_category.create');
 Route::post('/recipe_category/create', 'RecipeCategoryController@store')->name('recipe_category.add');
+
+//UserRecipe
+Route::get('user_recipe/index', 'UserRecipeController@index')->name('user.recipe');
 

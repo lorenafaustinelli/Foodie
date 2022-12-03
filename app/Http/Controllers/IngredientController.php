@@ -86,5 +86,17 @@ class IngredientController extends Controller
         //
     }
 
+    /**
+     * Dato un id come parametro restituisce il nome dell'ingrediente corrispondente
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function name($id)
+    {
+        foreach($ingredients->where('id', $id) as $ingredient)
+        $name = $ingredient->$name_ingredient; 
+        return $name;
+    }
+
     
 }
