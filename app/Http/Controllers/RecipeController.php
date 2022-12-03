@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Recipe;
 use App\UserRecipe;
 use Illuminate\Http\Request;
@@ -43,6 +44,8 @@ class RecipeController extends Controller
             $recipe->photo2 = request()->file('photo2')->store('recipes');
         }
 
+
+
         /*
         $user_recipe = new UserRecipe();
         $user_recipe->user_id = $u_id;
@@ -50,6 +53,11 @@ class RecipeController extends Controller
 
         $recipe->save();
         $recipe_id = $recipe->id;
+        
+        //per abbinare la ricetta all'utente
+        $user_id =Auth::user()->id; 
+        UserRecipe::create(['user_id' => $user_id, 'recipe_id' => $recipe_id]);
+        
         //return redirect('recipe');
         //questa viene passato l'id della ricetta per aggiungerlo alla tabella RecipeIngredient nella pagina successiva
         return view('/recipe_ingredient/create')->with('id', $recipe->id);//compact('id'));//)->with('$recipe_id');

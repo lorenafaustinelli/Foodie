@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\UserRecipe;
+use Auth;
 use Illuminate\Http\Request;
 
 class UserRecipeController extends Controller
@@ -35,7 +36,22 @@ class UserRecipeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /*$user_recipe = new UserRecipe();
+        $user_recipe->user_id = request('user_id');
+        $user_recipe->recipe_id = request('recipe_id');
+
+        $user_recipe->save(); */
+        $request->validate([
+            'user_id' => 'required',
+            'recipe_id' => 'required',
+        ]);
+
+        $input = $request->all();
+
+        UserRecipe::firstorCreate([
+            'user_id' => $request['user_id'],
+            'recipe_id' => $request['recipe_id']
+        ]);
     }
 
     /**

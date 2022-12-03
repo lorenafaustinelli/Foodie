@@ -134,7 +134,7 @@
           {
             if(response)
             {
-              $("#RecipeIngredientsTable tbody").prepend('<tr><td>' + response.name_ingredient + '</td><td>' + response.quantity +'</td><td>'+ response.measure +'</td></tr>')
+              $("#RecipeIngredientsTable tbody").prepend('<tr><td>' + response.name_ingredient + '</td><td>' + response.quantity +'</td><td>'+ response.measure +'</td></tr>');
               $("#ingredientform")[0].reset();
               $("#ingredientModal").modal('hide');
             }
