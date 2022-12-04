@@ -2,10 +2,11 @@
 
 @section('content')
 <?php 
+  //recupero id della ricetta che sto creando
   {{ $id = session()->get('id'); }}
 
-  //per passare l'id ricetta che si sta creando
-  var_dump($id);
+  
+  //var_dump($id);
 ?>
 
 <div class="container">

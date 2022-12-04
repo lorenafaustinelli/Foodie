@@ -16,7 +16,7 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
 
-        return view('/category', compact('categories')); 
+        return view('category/index', compact('categories')); 
     }
 
     /**
@@ -42,7 +42,7 @@ class CategoryController extends Controller
         $category->name_category = request('name_category');
         
         $category->save();
-        return redirect('/');
+        return view('/category/index');
     }
 
     /**

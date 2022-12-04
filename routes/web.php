@@ -50,8 +50,14 @@ Route::post('/recipe_ingredient/store', 'RecipeIngredientController@store')->nam
 Route::get('/recipe_ingredient/create', 'RecipeIngredientController@create');
 
 //Ingredient
-//Route::get('/recipe_ingredient/create', 'IngredientController@index');
-Route::get('/ingredients', 'IngredientController@index');
+Route::get('/ingredient/create', 'IngredientController@create');
+Route::get('/ingredient/index', 'IngredientController@index')->name('ingredients');
+Route::post('/ingredient/store', 'IngredientController@store');
+
+//Category
+Route::get('/category/create', 'CategoryController@create');
+Route::get('/category/index', 'CategoryController@index');
+Route::post('/category/store', 'CategoryController@store');
 
 //RecipeCategory
 Route::get('/recipe_category/create', 'RecipeCategoryController@create')->name('recipe_category.create');

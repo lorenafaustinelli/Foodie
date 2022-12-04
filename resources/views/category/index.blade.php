@@ -3,22 +3,20 @@
 @section('content') 
 
 <div class="container">
-  <h1> Ingredienti </h1>
+  <h1> Categorie </h1>
    <div class="row">
        <div class="card">
             <div class="card-body">
                 <table id="IngredientsTable" class="table">
                     <thead>
                         <tr>
-                            <th>Ingrediente </th>
-                            <th>Variazione </th>
+                            <th>Nome categoria </th>
                         </tr> 
                     </thead>
                     <tbody>
-                      @foreach($ingredients as $ingredient)
+                      @foreach($categories as $category)
                       <tr>
-                      <td> {{ $ingredient->name_ingredient}} </td>
-                      <td> {{ $ingredient->variation }} </td>
+                      <td> {{ $category->name_category}} </td>
                       </tr>
                       @endforeach
                     </tbody>
