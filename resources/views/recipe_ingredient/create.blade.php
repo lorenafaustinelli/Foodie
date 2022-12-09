@@ -59,15 +59,21 @@
                 @endforeach
             </select>
         </div> 
+
         <div class="form-group">
         <label for="quantity"> </label>
         <input type="number" id="quantity" class="quantity form-control" placeholder="Quantità:">
         </div>
 
         <div class="form-group">
-        <label for="measure"> </label>
-        <input type="text" id="measure" class="measure form-control" placeholder="Unità di misura:">
-        </div>
+            <label for="Unità di misura:"> </label>
+            <select id="measure" class="measure form-control" name="measure">
+                @foreach ($measurements as $measurement)
+                  <option value="{{ $measurement->name_measurement }}"> {{$measurement->name_measurement }} </option>
+                @endforeach
+            </select>
+        </div> 
+
 
       </div>
 

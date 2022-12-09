@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use App\Ingredient;
 use App\RecipeIngredient;
 use App\Category;
+use App\UserRecipe;
+use App\UnityOfMeasurement;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,6 +33,9 @@ class AppServiceProvider extends ServiceProvider
             $view->with('ingredients', Ingredient::all());
             $view->with('recipe_ingredients', RecipeIngredient::all());
             $view->with('categories', Category::all());
+            $view->with('user_recipes', UserRecipe::all());
+            $view->with('measurements', UnityOfMeasurement::all());
+
         });
     }
 }
