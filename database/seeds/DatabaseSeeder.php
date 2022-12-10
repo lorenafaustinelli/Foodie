@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(IntolerancesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(UnityOfMeasurementTableSeeder::class);
+        
     }
 }
