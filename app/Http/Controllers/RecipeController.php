@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Recipe;
 use App\UserRecipe;
+use App\Category;
+use App\RecipeCategory;
+use App\RecipeIngredient;
+
 use Illuminate\Http\Request;
 
 class RecipeController extends Controller
@@ -121,8 +125,17 @@ class RecipeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+        //parte ricetta
+        $id_recipe = $id; 
+        $recipe = Recipe::where('id', $id)->get();
+        //parte categoria
+        $category_id = RecipeCategory::where('recipe_id', '=', $id)->pluck('category_id');
+        $category_names = Category::where('id', '=', $category_id)->pluck('name_category');
+        //parte ingredienti
+        $ingredient_id = RecipeIngredient::where('recipe_id', '=', $id)->pluck('ingredient_id', 'quantity', 'measure');
+
+        return view('/recipe/show', compact('recipe', 'category_names', 'ingredient_id'));
     }
 
     /**

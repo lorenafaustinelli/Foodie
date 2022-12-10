@@ -14,8 +14,10 @@ class UserRecipeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('user_recipe/index');
+    {   
+        $user_id = Auth::user()->id;
+        $users_recipes = UserRecipe::where('user_id', '=', $user_id)->pluck('recipe_id');
+        return view('user_recipe/index', compact('users_recipes'));
     }
 
     /**
@@ -98,4 +100,6 @@ class UserRecipeController extends Controller
     {
         //
     }
+
+    
 }

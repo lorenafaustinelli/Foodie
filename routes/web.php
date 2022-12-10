@@ -43,6 +43,11 @@ Route::post('/recipe/store', 'RecipeController@store');
 Route::post('/recipe_category/store', 'RecipeCategoryController@store');
 Route::get('/recipe_category/store', 'RecipeCategoryController@store'); 
 
+//Recipe
+Route::get('recipe/{$id}', function($id){
+    return Recipe::show($id);
+})->name('recipe.show');
+
 //RecipeIngredient
 Route::get('/recipe_ingredient', 'RecipeIngredientController@index');
 Route::post('/recipe_ingredient/store', 'RecipeIngredientController@store')->name('recipe_ingredient.add');

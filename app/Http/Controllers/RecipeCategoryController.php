@@ -89,4 +89,11 @@ class RecipeCategoryController extends Controller
     {
         //
     }
+    //funzione che restituisce il nome di una categoria il cui id è passato come paramentro 
+    public function category($id)
+    {   
+        $category_id = RecipeCategory::where('recipe_id', $id)->pluck('category_id');
+        $category_name = Category::where('id', $category_id)->pluck('name_category');
+        return $category_name;
+    }
 }
