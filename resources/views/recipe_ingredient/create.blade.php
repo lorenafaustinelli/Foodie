@@ -26,7 +26,7 @@
                         </tr> 
                     </thead>
                     <tbody>
-                      <tr>
+                      <tr>  <!-- riferimenti oer ajax - inserisce i testo qua -->
                         
                       </tr>
                     </tbody>
@@ -91,8 +91,8 @@
 <?php 
 
   //per passare l'id della ricetta alla pagina delle categorie
-  session()->put('id', $id); ?>
-<div class="d-grid gap-2 col-6 mx-auto">
+  session()->put('id', $id); ?>  <!-- oggetti di sessione che vengono mandati da una pagina all'altra -->
+<div class="d-grid gap-2 col-6 mx-auto"> 
   <a class="btn btn-primary" href="{{ route('recipe_category.create') }}" role="button">Prosegui</a>
 </div>
 
