@@ -1,14 +1,6 @@
 @extends('layouts.app')
 <?php
   /*<input type ="hidden" name = "recipe_id" value="{{ $recipe_id }}"/> 
-  
-  
-<?php $name_ingredient = $_POST['ingredient_id']; 
-        echo $name_ingredient;?>
-
-        @foreach($ingredients->where('id', 'ingredient_id') as $ingredient)
-        $name_ingredient = $ingredient->name_ingredient
-      @endforeach
 
        var_dump($id);
   */ 
@@ -35,11 +27,7 @@
                     </thead>
                     <tbody>
                       <tr>
-                        @foreach($recipe_ingredients->where('recipe_id', '$id') as $rp)
-                        <?php /*<td> {{ $rp->$ingredient_id}} </td>
-                        <td> {{ $rp->$quantity}} </td>
-                        <td> {{ $rp->$measure}} </td> */?>
-                        @endforeach
+                        
                       </tr>
                     </tbody>
                 </table>
@@ -61,25 +49,31 @@
 
         <form id="ingredientform">
 
-        <input type ="hidden" name="recipe_id" class="recipe_id form-control" value="{{ $id }}" >
+        <input type ="hidden" id="recipe_id" class="recipe_id form-control" value="{{ $id }}" >
         
         <div class="form-group">
             <label for="seleziona ingrediente"> </label>
-            <select name="ingredient_id" class="ingredient_id form-control" name="ingredient_id">
+            <select id="ingredient_id" class="ingredient_id form-control" name="ingredient_id">
                 @foreach ($ingredients as $ingredient)
-                  <option value="{{ $ingredient->id }}"> {{$ingredient->name_ingredient }} </option>
+                  <option value="{{ $ide = $ingredient->id }}"> {{$ingredient->name_ingredient }} </option>
                 @endforeach
             </select>
         </div> 
+
         <div class="form-group">
         <label for="quantity"> </label>
-        <input type="number" name="quantity" class="quantity form-control" placeholder="Quantità:">
+        <input type="number" id="quantity" class="quantity form-control" placeholder="Quantità:">
         </div>
 
         <div class="form-group">
-        <label for="measure"> </label>
-        <input type="text" name="measure" class="measure form-control" placeholder="Unità di misura:">
-        </div>
+            <label for="Unità di misura:"> </label>
+            <select id="measure" class="measure form-control" name="measure">
+                @foreach ($measurements as $measurement)
+                  <option value="{{ $measurement->name_measurement }}"> {{$measurement->name_measurement }} </option>
+                @endforeach
+            </select>
+        </div> 
+
 
       </div>
 
@@ -102,21 +96,19 @@
   <a class="btn btn-primary" href="{{ route('recipe_category.create') }}" role="button">Prosegui</a>
 </div>
 
-      
-<script>
+  
+<script type="text/javascript">
   $(document).ready(function() {
     $(document).on('click', '.add_ingredient', function(e){
       e.preventDefault();
       //console.log("hello muddafakka");   ahahahah
-
+      
       var data = {
         'recipe_id': $('.recipe_id').val(),
         'ingredient_id': $('.ingredient_id').val(),
-        'name_ingredient': $('.name_ingredient').val(),
         'quantity': $('.quantity').val(),
         'measure': $('.measure').val(),
       }
-
       $.ajaxSetup({
 
         headers:{
@@ -124,7 +116,6 @@
         }
       });
 
-      //console.log(data);  
       $.ajax({
           url: "{{route('recipe_ingredient.add')}}",
           type:"POST",
@@ -134,7 +125,7 @@
           {
             if(response)
             {
-              $("#RecipeIngredientsTable tbody").prepend('<tr><td>' + response.name_ingredient + '</td><td>' + response.quantity +'</td><td>'+ response.measure +'</td></tr>')
+              $("#RecipeIngredientsTable tbody").prepend('<tr><td>' + response.ingredient_id + '</td><td>' + response.quantity +'</td><td>'+ response.measure +'</td></tr>');
               $("#ingredientform")[0].reset();
               $("#ingredientModal").modal('hide');
             }

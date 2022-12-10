@@ -18,13 +18,19 @@ class CategoriesTableSeeder extends Seeder
         'name_category'   =>      'vegano', 
         
     ], [
+
         'name_category'   =>      'vegetariano',
         
-    ], [    
+    ], [ 
+
         'name_category'   =>      'carne',
          
     ], [
-        'name_category'   =>       'pesce'
+
+        'name_category'   =>       'pesce',
+    ], [
+        
+        'name_category'   =>        'dolci',
     ]
     ]);
 

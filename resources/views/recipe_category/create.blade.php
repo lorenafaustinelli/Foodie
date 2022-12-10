@@ -2,10 +2,11 @@
 
 @section('content')
 <?php 
+  //recupero id della ricetta che sto creando
   {{ $id = session()->get('id'); }}
 
-  //per passare l'id ricetta che si sta creando
-  var_dump($id);
+  
+  //var_dump($id);
 ?>
 
 <div class="container">
@@ -23,6 +24,9 @@
               <th>Categoria </th>
             </tr> 
           </thead>
+          <tbody>
+            
+          </tbody>
         </table>
       </div>
     </div>
@@ -45,8 +49,8 @@
         <input type ="hidden" name="recipe_id" class="recipe_id form-control" value="{{ $id }}" >
         
         <div class="form-group">
-            <label for="seleziona ingrediente"> </label>
-            <select name="ingredient_id" class="ingredient_id form-control" name="ingredient_id">
+            <label for="seleziona categoria"> </label>
+            <select name="category_id" class="category_id form-control" name="category_id">
                 @foreach ($categories as $category)
                   <option value="{{ $category->id }}"> {{$category->name_category }} </option>
                 @endforeach
@@ -56,7 +60,7 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary add_ingredient" > Aggiungi </button>
+        <button type="button" class="btn btn-primary add_category" > Aggiungi </button>
       </div>
 
       
@@ -65,20 +69,19 @@
 </div> 
 <br>
 <br>
-<div class="d-grid gap-2 col-6 mx-auto">
-  <a class="btn btn-primary" href="{{ route('recipe_category.create') }}" role="button">Prosegui</a>
+<div class="d-grid gap-2 col-6 mx-auto"> 
+  <a class="btn btn-primary" href="{{ url('/home') }}" role="button">Concludi</a>
 </div>
 
-<?php /*
       
 <script>
   $(document).ready(function() {
-    $(document).on('click', '.add_ingredient', function(e){
+    $(document).on('click', '.add_category', function(e){
       e.preventDefault();
-      //console.log("hello muddafakka");   ahahahah
 
       var data = {
-        
+        'recipe_id': $('.recipe_id').val(),
+        'category_id': $('.category_id').val(),        
       }
 
       $.ajaxSetup({
@@ -88,9 +91,8 @@
         }
       });
 
-      //console.log(data);  
       $.ajax({
-          url: "{{route('recipe_ingredient.add')}}",
+          url: "{{route('recipe_category.add')}}",
           type:"POST",
           data:data,
           dataType: "json",
@@ -98,9 +100,9 @@
           {
             if(response)
             {
-              $("#RecipeIngredientsTable tbody").prepend('<tr><td>' + response. + '</td><td>' + response.quantity +'</td><td>'+ response.measure +'</td></tr>')
-              $("#ingredientform")[0].reset();
-              $("#ingredientModal").modal('hide');
+              $("#RecipeCategoriesTable tbody").prepend('<tr><td>' + response.category_id +'</td></tr>');
+              $("#categoryform")[0].reset();
+              $("#categoryModal").modal('hide');
             }
           }
         });
@@ -108,6 +110,6 @@
   });
   
 
-</script> */ ?>
+</script> 
 
 @endsection

@@ -27,7 +27,7 @@ class IngredientController extends Controller
      */
     public function create()
     {
-        //
+        return view('/ingredient/create');
     }
 
     /**
@@ -38,7 +38,15 @@ class IngredientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $ingredient = new Ingredient();
+        $ingredient->name_ingredient = request('name_ingredient');
+
+        if($ingredient->variation){
+            $ingredient->variation = request('variation');
+        }
+
+        $ingredient->save();
+        return view('/ingredient/index');
     }
 
     /**
@@ -84,6 +92,18 @@ class IngredientController extends Controller
     public function destroy(Ingredient $ingredient)
     {
         //
+    }
+
+    /**
+     * Dato un id come parametro restituisce il nome dell'ingrediente corrispondente
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function name_ingredient(Integer $id)
+    {
+        foreach($ingredients->where('id', $id) as $ingredient)
+        $name = $ingredient->$name_ingredient; 
+        return $name;
     }
 
     

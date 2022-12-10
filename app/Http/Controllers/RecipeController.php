@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Recipe;
 use App\UserRecipe;
+use App\Category;
+use App\RecipeCategory;
+use App\RecipeIngredient;
+
 use Illuminate\Http\Request;
 
 class RecipeController extends Controller
@@ -43,6 +48,8 @@ class RecipeController extends Controller
             $recipe->photo2 = request()->file('photo2')->store('recipes');
         }
 
+
+
         /*
         $user_recipe = new UserRecipe();
         $user_recipe->user_id = $u_id;
@@ -50,6 +57,11 @@ class RecipeController extends Controller
 
         $recipe->save();
         $recipe_id = $recipe->id;
+        
+        //per abbinare la ricetta all'utente
+        $user_id =Auth::user()->id; 
+        UserRecipe::create(['user_id' => $user_id, 'recipe_id' => $recipe_id]);
+        
         //return redirect('recipe');
         //questa viene passato l'id della ricetta per aggiungerlo alla tabella RecipeIngredient nella pagina successiva
         return view('/recipe_ingredient/create')->with('id', $recipe->id);//compact('id'));//)->with('$recipe_id');
@@ -113,8 +125,17 @@ class RecipeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+        //parte ricetta
+        $id_recipe = $id; 
+        $recipe = Recipe::where('id', $id)->get();
+        //parte categoria
+        $category_id = RecipeCategory::where('recipe_id', '=', $id)->pluck('category_id');
+        $category_names = Category::where('id', '=', $category_id)->pluck('name_category');
+        //parte ingredienti
+        $ingredient_id = RecipeIngredient::where('recipe_id', '=', $id)->pluck('ingredient_id', 'quantity', 'measure');
+
+        return view('/recipe/show', compact('recipe', 'category_names', 'ingredient_id'));
     }
 
     /**

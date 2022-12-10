@@ -43,17 +43,31 @@ Route::post('/recipe/store', 'RecipeController@store');
 Route::post('/recipe_category/store', 'RecipeCategoryController@store');
 Route::get('/recipe_category/store', 'RecipeCategoryController@store'); 
 
+//Recipe
+Route::get('recipe/{$id}', function($id){
+    return Recipe::show($id);
+})->name('recipe.show');
+
 //RecipeIngredient
 Route::get('/recipe_ingredient', 'RecipeIngredientController@index');
 Route::post('/recipe_ingredient/store', 'RecipeIngredientController@store')->name('recipe_ingredient.add');
-Route::get('/recipe_ingredient/store', 'RecipeIngredientController@store');
+//Route::get('/recipe_ingredient/store', 'RecipeIngredientController@store');
 Route::get('/recipe_ingredient/create', 'RecipeIngredientController@create');
 
 //Ingredient
-//Route::get('/recipe_ingredient/create', 'IngredientController@index');
-Route::get('/ingredients', 'IngredientController@index');
+Route::get('/ingredient/create', 'IngredientController@create');
+Route::get('/ingredient/index', 'IngredientController@index')->name('ingredients');
+Route::post('/ingredient/store', 'IngredientController@store');
+
+//Category
+Route::get('/category/create', 'CategoryController@create');
+Route::get('/category/index', 'CategoryController@index');
+Route::post('/category/store', 'CategoryController@store');
 
 //RecipeCategory
 Route::get('/recipe_category/create', 'RecipeCategoryController@create')->name('recipe_category.create');
 Route::post('/recipe_category/create', 'RecipeCategoryController@store')->name('recipe_category.add');
+
+//UserRecipe
+Route::get('user_recipe/index', 'UserRecipeController@index')->name('user.recipe');
 
