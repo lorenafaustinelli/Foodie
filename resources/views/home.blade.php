@@ -15,14 +15,19 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                </div>                
+            </div>
+            <br>
+            <div class="card">
+                <div class="card-header">{{ __('Your Time Line') }}</div>
+                <div class="card-body">
+                    <!-- Stampo le ricette nella home -->
+                    @foreach ($recipes as $recipe)
+                        <h3>{{ $recipe->name_recipe }}</h3>
+                        <img src="$recipe->photo" alt="">     <!-- CAPIRE COME RENDERE LE IMMAGINI: devrebbe funzionare ma abbiamo solo zip e pdf -->
+                        <p><a href="#">{{ $recipe->instruction }}</a></p>
+                    @endforeach
                 </div>
-
-                <!-- Stampo le ricette nella home -->
-                @foreach ($recipes as $recipe)
-                    <h3>{{ $recipe->name_recipe }}</h3>
-                    {{ $recipe->photo }}    <!-- CAPIRE COME RENDERE LE IMMAGINI -->
-                    <p><a href="#">{{ $recipe->instruction }}</a></p>
-                @endforeach
             </div>
         </div>
     </div> 
