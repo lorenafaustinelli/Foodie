@@ -29,6 +29,7 @@ Route::get('/home', function () {
         'recipes' => $recipes   //passo le ricette alla view
     ]);
 });
+
 //Route::resource('recipe', 'RecipeController');
 
 //Prove Lisa
