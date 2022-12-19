@@ -1,5 +1,6 @@
 <?php
 
+use App\UnityOfMeasurement;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,7 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(IntolerancesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(UnityOfMeasurementTableSeeder::class);
-        
         
     }
 }
