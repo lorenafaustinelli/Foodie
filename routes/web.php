@@ -32,7 +32,7 @@ Route::get('/home', function () {
 //Route::resource('recipe', 'RecipeController'); 
 
 //Prove Lisa
-Route::get('/recipe/create', 'RecipeController@create');
+Route::get('/recipe/create', 'RecipeController@create')->name('recipe.create');
 //Route::post('/recipe', 'RecipeController@store');
 Route::post('/recipe/store', 'RecipeController@store');
 //Route::get('/recipe/store', 'RecipeController@store');
@@ -44,9 +44,10 @@ Route::post('/recipe_category/store', 'RecipeCategoryController@store');
 Route::get('/recipe_category/store', 'RecipeCategoryController@store'); 
 
 //Recipe pagina per vedere la singola ricetta
-Route::get('recipe/{$id}', function($id){
+/*Route::get('/recipe/show', function($id){
     return Recipe::show($id);
-})->name('recipe.show');
+})->name('recipe.show'); */
+Route::get('/recipe/show/{id}', 'RecipeController@show')->name('recipe.show'); 
 
 //RecipeIngredient
 Route::get('/recipe_ingredient', 'RecipeIngredientController@index');
@@ -68,5 +69,8 @@ Route::get('/recipe_category/create', 'RecipeCategoryController@create')->name('
 Route::post('/recipe_category/create', 'RecipeCategoryController@store')->name('recipe_category.add');
 
 //UserRecipe
-Route::get('user_recipe/index', 'UserRecipeController@index')->name('user.recipe');
+Route::get('/user_recipe/index', 'UserRecipeController@index')->name('user.recipe');
+
+//Research
+Route::view('/research/advanced_search', '/research/advanced_search')->name('advanced.search');
 

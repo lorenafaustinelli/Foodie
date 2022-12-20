@@ -31,8 +31,15 @@ class RecipeController extends Controller
     public function create()
     {
         return view('recipe.create');
-    }
+    } 
 
+
+     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request){
 
         //dump(request()->all());
@@ -43,9 +50,9 @@ class RecipeController extends Controller
         $recipe->instruction = request('instruction');
         $recipe->created_at = time();
 
-        $recipe->photo = request()->file('photo')->store('recipes');
+        $recipe->photo = request()->file('photo')->store('/recipes');
         if($recipe->photo2){
-            $recipe->photo2 = request()->file('photo2')->store('recipes');
+            $recipe->photo2 = request()->file('photo2')->store('/recipes');
         }
 
 
@@ -67,57 +74,7 @@ class RecipeController extends Controller
         return view('/recipe_ingredient/create')->with('id', $recipe->id);//compact('id'));//)->with('$recipe_id');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    /*
-    public function store(Request $request)
-    {
-        //store effettivo dei dati
-        //CREA FILE LOG PER VEDERE COSA ARRIVA
-
-        $request->validate([
-            'name_recipe' => 'required',
-            'time'        => 'required',
-            'portion'     => 'required',
-            'instruction' => 'required',
-            'photo'       => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'user_id'     => 'required',
-        ]);
-
-
-        //setto il nome dell'immagine e uso storeAs per salvarla nella destinazione e con il nome scelti
-        $photo_name = time() . '.' . $request->photo->extension(); //controllare funzione time()
-        $request->file('photo')->storeAs('public/images', $photo_name);
-
-        RecipeController::create([
-            'name_recipe' => $request->name_recipe,
-            'time'        => $request->time,
-            'portion'     => $request->portion,
-            'instruction' => $request->instruction,
-            'photo'       => $request->photo_name,
-            'user_id'     => $request->user_id,
-        ]);
-
-        /*if($request()->hasFile('photo')){
-            $photo = request()->file('photo')->getClientOriginalName();
-            request()->file('photo')->store('recipe_photos');
-            $recipe->update(['photo' => $photo]);
-        }
-
-       if($request()->hasFile('photo2')){
-            $photo = request()->file('photo2')->getClientOriginalName();
-            request()->file('photo2')->storeAs('photo2', $recipe->id . '/' . $photo2, '');
-            $recipe->update(['photo2' => $photo2]);
-        }
-
-        return redirect('recipe.index');
-
-    }
-*/
+   
     /**
      * Display the specified resource.
      *
@@ -127,15 +84,20 @@ class RecipeController extends Controller
     public function show($id)
     {   
         //parte ricetta
-        $id_recipe = $id; 
-        $recipe = Recipe::where('id', $id)->get();
+        $recipe = Recipe::find($id);  //where('id', $id);
         //parte categoria
         $category_id = RecipeCategory::where('recipe_id', '=', $id)->pluck('category_id');
-        $category_names = Category::where('id', '=', $category_id)->pluck('name_category');
+        if($category_id->isNotEmpty()){
+            $category_names = Category::where('id', '=', $category_id)->pluck('name_category');
+        }
         //parte ingredienti
         $ingredient_id = RecipeIngredient::where('recipe_id', '=', $id)->pluck('ingredient_id', 'quantity', 'measure');
 
-        return view('/recipe/show', compact('recipe', 'category_names', 'ingredient_id'));
+        if($category_id->isNotEmpty()){
+            return view('/recipe/show', compact('recipe', 'category_names'));
+        } else{
+            return view('/recipe/show', compact('recipe'));
+        }
     }
 
     /**

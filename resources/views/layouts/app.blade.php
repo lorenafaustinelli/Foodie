@@ -34,7 +34,7 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+            <div class="container fluid">
                 <a class="navbar-brand" href="/">
                     Foodie
                 </a>
@@ -42,11 +42,16 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
+                <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Ricerca rapida" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
-                    </ul>
+                    </ul> 
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -65,7 +70,6 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a> 
-                                
                                 
                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     
@@ -86,9 +90,14 @@
                                     </form>
                                 </div>
                             </li>
-
+                            <!-- pagina creazione ricette -->
                             <li class="nav-item">
-                                <a class="nav-link" href="/recipe/create">{{__('Nuova ricetta')}}</a> 
+                                <a class="nav-link" href="{{ route('recipe.create') }}">{{__('Nuova ricetta')}}</a> 
+                            </li>
+
+                            <!-- pagina ricerca avanzata-->
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('advanced.search') }}">{{__('Ricerca avanzata')}}</a> 
                             </li>
                         @endguest
                     </ul>
