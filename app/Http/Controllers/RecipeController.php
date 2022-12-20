@@ -50,9 +50,9 @@ class RecipeController extends Controller
         $recipe->instruction = request('instruction');
         $recipe->created_at = time();
 
-        $recipe->photo = request()->file('photo')->store('/recipes');
+        $recipe->photo = request()->file('photo')->store('public/recipes');
         if($recipe->photo2){
-            $recipe->photo2 = request()->file('photo2')->store('/recipes');
+            $recipe->photo2 = request()->file('photo2')->store('public/recipes');
         }
 
 
