@@ -3,7 +3,7 @@
 <head>
 
 
-    <?php //use Illuminate\Http\Request; ?>
+    <?php //use Illuminate\Http\Request;                 <form action="{{ url('search')}}" method="GET" role="search">  ?>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -42,10 +42,15 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Ricerca rapida" aria-label="Search">
+                <!-- barra di ricerca -->
+
+                <form action="{{ url('search') }}" method="GET" role="search">
+                    <div class="input-group">
+                        <input type="search" name="search" value="" placeholder="Ricerca rapida" class="form-control me-2" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
+                    </div>
                 </form>
+
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->

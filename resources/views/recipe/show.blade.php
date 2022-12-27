@@ -14,5 +14,7 @@
     <p> Numero di porzioni: {{$recipe->portion}} </p>
 
     
+
+    
 </div>
 @endsection

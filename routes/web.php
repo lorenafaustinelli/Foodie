@@ -40,14 +40,9 @@ Route::post('/recipe/store', 'RecipeController@store');
 
 
 //Prove Lorena
-Route::post('/recipe_category/store', 'RecipeCategoryController@store');
-Route::get('/recipe_category/store', 'RecipeCategoryController@store'); 
 
-//Recipe pagina per vedere la singola ricetta
-/*Route::get('/recipe/show', function($id){
-    return Recipe::show($id);
-})->name('recipe.show'); */
-Route::get('/recipe/show/{id}', 'RecipeController@show')->name('recipe.show'); 
+Route::get('/recipe/show/{id}', 'RecipeController@show')->name('recipe.show');
+
 
 //RecipeIngredient
 Route::get('/recipe_ingredient', 'RecipeIngredientController@index');
@@ -67,10 +62,13 @@ Route::post('/category/store', 'CategoryController@store');
 //RecipeCategory
 Route::get('/recipe_category/create', 'RecipeCategoryController@create')->name('recipe_category.create');
 Route::post('/recipe_category/create', 'RecipeCategoryController@store')->name('recipe_category.add');
+Route::post('/recipe_category/store', 'RecipeCategoryController@store');
 
 //UserRecipe
 Route::get('/user_recipe/index', 'UserRecipeController@index')->name('user.recipe');
 
 //Research
 Route::view('/research/advanced_search', '/research/advanced_search')->name('advanced.search');
+Route::get('search', 'RecipeController@search_recipe'); 
+Route::view('research/results', '/research/results')->name('research.results');
 

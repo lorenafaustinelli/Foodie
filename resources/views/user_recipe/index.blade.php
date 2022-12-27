@@ -5,7 +5,8 @@
 
 <div class="container">
     <h1> Ricette create da {{ Auth::user()->name }} </h1>
-    <!-- scorro gli id delle ricette scritte dall'utente -->   
+    <!-- scorro gli id delle ricette scritte dall'utente -->  
+    <div class="grid-layout"> 
     @foreach($users_recipes as $ur)
         
        
@@ -23,8 +24,12 @@
             <div class="card-body">
                 <a href="{{ route('recipe.show', $ur)}}" class="card-link"> Vedi ricetta</a>
             </div>
-            </div>
+            
         </div>
+        
+    @endforeach
+    </div> 
+
 </div>
-@endforeach
+
 @endsection

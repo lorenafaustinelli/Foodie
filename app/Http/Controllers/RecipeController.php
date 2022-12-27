@@ -119,6 +119,17 @@ class RecipeController extends Controller
         return $id;//$recipe;
     }
 
+    //funzione per ricerca rapida ricette da layout
+    public function search_recipe(Request $request){
+
+        if($request->search){
+            $recipe = Recipe::where('name_recipe', 'LIKE', '%'.$request->search.'%')->latest()->paginate(15);
+            return view('research.results', compact('recipe'));
+        }else{
+            return redirect()->back()->with('message', 'Ricerca a vuoto');
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      *
