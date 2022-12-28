@@ -95,9 +95,24 @@
                                     </form>
                                 </div>
                             </li>
-                            <!-- pagina creazione ricette -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('recipe.create') }}">{{__('Nuova ricetta')}}</a> 
+
+
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{__('Inserimento')}}
+                                </a> 
+                                
+                               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="{{ route('recipe.create') }}">
+                                    {{__('Ricetta')}}
+                                    </a>
+                                    
+                                    <a class="dropdown-item" href="{{ route('add.ingredient') }}">
+                                    {{ __('Ingrediente') }}
+                                    </a>
+                                    
+                                </div>
                             </li>
 
                             <!-- pagina ricerca avanzata-->

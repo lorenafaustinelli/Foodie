@@ -50,7 +50,7 @@ Route::post('/recipe_ingredient/store', 'RecipeIngredientController@store')->nam
 Route::get('/recipe_ingredient/create', 'RecipeIngredientController@create');
 
 //Ingredient
-Route::get('/ingredient/create', 'IngredientController@create');
+Route::get('/ingredient/create', 'IngredientController@create')->name('add.ingredient');
 Route::get('/ingredient/index', 'IngredientController@index')->name('ingredients');
 Route::post('/ingredient/store', 'IngredientController@store');
 

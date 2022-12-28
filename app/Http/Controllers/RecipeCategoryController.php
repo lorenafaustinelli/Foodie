@@ -37,6 +37,11 @@ class RecipeCategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'recipe_id' => 'required',
+            'category_id' => 'required'
+        ]);
+
         $recipe_category = new RecipeCategory();
         $recipe_category->recipe_id = $request-> recipe_id;
         $recipe_category->category_id = $request-> category_id;

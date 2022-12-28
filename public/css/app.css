@@ -10935,5 +10935,6 @@ a.text-dark:focus {
 .grid-layout {    
   display:grid;    
   grid-template-columns: 400px 400px 400px;  
+  grid-row-gap: 35px;
 }
 
