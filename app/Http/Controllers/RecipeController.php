@@ -8,6 +8,7 @@ use App\UserRecipe;
 use App\Category;
 use App\RecipeCategory;
 use App\RecipeIngredient;
+use App\Ingredient;
 
 use Illuminate\Http\Request;
 
@@ -93,18 +94,38 @@ class RecipeController extends Controller
     {   
         //parte ricetta
         $recipe = Recipe::find($id);  //where('id', $id);
+
         //parte categoria
         $category_id = RecipeCategory::where('recipe_id', '=', $id)->pluck('category_id');
-        if($category_id->isNotEmpty()){
-            $category_names = Category::where('id', '=', $category_id)->pluck('name_category');
-        }
-        //parte ingredienti
-        $ingredient_id = RecipeIngredient::where('recipe_id', '=', $id)->pluck('ingredient_id', 'quantity', 'measure');
 
         if($category_id->isNotEmpty()){
-            return view('/recipe/show', compact('recipe', 'category_names'));
+            $category_names = Category::where('id', '=', $category_id)->value('name_category');
+        }
+
+        //parte ingredienti
+        $ingredient_id = RecipeIngredient::where('recipe_id', '=', $id)->pluck('ingredient_id');
+
+        if($ingredient_id->isNotEmpty()){
+            $ingredient = Ingredient::where('id', '=', $id)->pluck('name_ingredient');
+        }
+
+        //ritorno view con collezioni elementi
+
+        if($category_id->isNotEmpty()){
+
+            if($ingredient_id->isNotEmpty()){
+
+                return view('/recipe/show', compact('recipe', 'category_names', 'ingredient'));
+
+            } else{
+
+                return view('/recipe/show', compact('recipe', 'category_names'));
+            }
+
         } else{
+
             return view('/recipe/show', compact('recipe'));
+
         }
     }
 

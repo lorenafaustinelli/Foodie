@@ -10931,10 +10931,55 @@ a.text-dark:focus {
   }
 }
 
-/* css aggiunto da lorena per griglia*/
+/* css aggiunto da lorena per griglia visualizzazione proprie ricette */ 
 .grid-layout {    
   display:grid;    
   grid-template-columns: 400px 400px 400px;  
   grid-row-gap: 35px;
 }
+
+/* css aggiunto da lorena per viasualizzazione ricetta */
+.showrecipe {  display: grid;
+  grid-template-columns: 1.4fr 0.9fr;
+  grid-template-rows: 0.3fr 1.2fr 1.5fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  justify-content: start;
+  grid-template-areas:
+    "Title ."
+    "Photo Info"
+    "Instruction Ingredient";
+}
+
+.Title {
+  justify-self: center;
+  grid-area: Title;
+}
+
+.Photo {
+  justify-self: center;
+  grid-area: Photo;
+}
+
+.Instruction {
+  justify-self: center;
+  align-self: center;
+  grid-area: Instruction;
+  width: 500px;
+  white-space: pre-wrap;
+}
+
+.Info {  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    ".";
+  justify-self: start;
+  align-self: start;
+  grid-area: Info;
+}
+
+.Ingredient { grid-area: Ingredient; } 
 
