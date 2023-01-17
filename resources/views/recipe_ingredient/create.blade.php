@@ -125,9 +125,10 @@
           {
             if(response)
             {
-              $("#RecipeIngredientsTable tbody").prepend('<tr><td>' + response.ingredient_id + '</td><td>' + response.quantity +'</td><td>'+ response.measure +'</td></tr>');
+              $("#RecipeIngredientsTable tbody").prepend('<tr><td>' + response.ing_name + '</td><td>' + data.quantity +'</td><td>'+ response.measure +'</td></tr>');
               $("#ingredientform")[0].reset();
               $("#ingredientModal").modal('hide');
+              //console.log(response);
             }
           }
         });

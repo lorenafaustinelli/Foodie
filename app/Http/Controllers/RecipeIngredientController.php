@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\RecipeIngredient;
 use Illuminate\Http\Request;
+use App\Ingredient;
+use Illuminate\Support\Facades\DB;
 
 class RecipeIngredientController extends Controller
 {
@@ -38,13 +40,13 @@ class RecipeIngredientController extends Controller
      */
     public function store(Request $request)
     {
-
+        /*
         $request->validate([
             'recipe_id' => 'required',
             'ingredient_id' => 'required',
             'quantity' => 'required',
             'measure' => 'required'
-        ]);
+        ]); */
 
         $recipe_ingredient = new RecipeIngredient();
         $recipe_ingredient->recipe_id = $request-> recipe_id;
@@ -53,7 +55,18 @@ class RecipeIngredientController extends Controller
         $recipe_ingredient->measure = $request-> measure;
 
         $recipe_ingredient->save();
-        return response()->json($recipe_ingredient);
+     
+        $ing_name = Ingredient::where('id', '=', $request->ingredient_id)
+        ->value('name_ingredient');
+
+        $response = [
+            'ing_name' => $ing_name,
+            'quantity' => $request-> quantity,
+            'measure' => $request-> measure
+        ];
+
+
+        return response()->json($response);
     }
 
     /**

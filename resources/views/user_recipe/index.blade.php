@@ -13,7 +13,7 @@
         <div class="card" style="width: 18rem;">
             <!-- scorro poi le ricette corrispondenti agli id del for precedente -->
             @foreach($recipes->where('id', '=', $ur) as $recipe)
-            <img src="{{ Storage::url($recipe->photo) }}" class="card-img-top" alt="foto ricetta">
+            <img src="{{ Storage::url($recipe->photo) }}" class="card-img-top" width="250px" height="180px" alt="foto ricetta">
             <div class="card-body">
                 <h5 class="card-title">{{ $recipe->name_recipe }}</h5>
             </div>

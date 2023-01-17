@@ -100,7 +100,7 @@
           {
             if(response)
             {
-              $("#RecipeCategoriesTable tbody").prepend('<tr><td>' + response.category_id +'</td></tr>');
+              $("#RecipeCategoriesTable tbody").prepend('<tr><td>' + response.name_category +'</td></tr>');
               $("#categoryform")[0].reset();
               $("#categoryModal").modal('hide');
             }

@@ -70,5 +70,6 @@ Route::get('/user_recipe/index', 'UserRecipeController@index')->name('user.recip
 //Research
 Route::view('/research/advanced_search', '/research/advanced_search')->name('advanced.search');
 Route::get('search', 'RecipeController@search_recipe'); 
+Route::get('advanced_search', 'RecipeController@advanced_search');
 Route::view('research/results', '/research/results')->name('research.results');
 
