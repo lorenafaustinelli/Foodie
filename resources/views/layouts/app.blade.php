@@ -68,6 +68,11 @@
                                 
                                 
                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                    <!-- visualizzare il proprio profilo -->
+                                    <a class="dropdown-item">
+                                        Il mio profilo
+                                    </a>
                                     
                                     <!-- visualizzare le proprie ricette-->
                                     <a class="dropdown-item" href="{{ route('user.recipe') }}">
