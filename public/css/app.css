@@ -1,5 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
-
 /*!
  * Bootstrap v4.6.2 (https://getbootstrap.com/)
  * Copyright 2011-2022 The Bootstrap Authors
@@ -10931,4 +10930,101 @@ a.text-dark:focus {
     border-color: #dee2e6;
   }
 }
+
+/* css aggiunto da lorena per griglia visualizzazione proprie ricette */ 
+.grid-layout {    
+  display:grid;    
+  grid-template-columns: 400px 400px 400px;  
+  grid-row-gap: 35px;
+}
+
+/* css aggiunto da lorena per viasualizzazione ricetta  
+.showrecipe {  display: grid;
+  grid-template-columns: 1.4fr 0.9fr;
+  grid-template-rows: 0.3fr 1.2fr 1.5fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  justify-content: start;
+  grid-template-areas:
+    "Title ."
+    "Photo Info"
+    "Instruction Ingredient";
+}
+
+.Title {
+  justify-self: center;
+  grid-area: Title;
+}
+
+.Photo {
+  justify-self: center;
+  align-self: start;
+  grid-area: Photo;
+}
+
+.Instruction {
+  justify-self: center;
+  align-self: stretch;
+  grid-area: Instruction;
+  width: 500px;
+  white-space: pre-wrap;
+}
+
+.Info {  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    ".";
+  justify-self: start;
+  align-self: start;
+  grid-area: Info;
+}
+
+.Ingredient { grid-area: Ingredient; } */
+
+.showrecipe {  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-rows: 0.4fr 0.9fr 1.5fr;
+  grid-auto-columns: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "Title Button"
+    "Photo Ingredient"
+    "Instruction .";
+}
+
+.Title {
+  justify-self: center; 
+  align-self: center; 
+  grid-area: Title; 
+}
+.Photo {
+  justify-self: center;
+  align-self: start;
+  grid-area: Photo;
+}
+
+.Instruction {
+  white-space: pre-wrap;
+  justify-self: center; 
+  align-self: start; 
+  grid-area: Instruction; 
+  width: 500px; 
+  height: 300px; 
+}
+  
+
+.Ingredient {
+  justify-self: start;
+  grid-area: Ingredient;
+}
+
+.Button {
+  align-self: center;
+  grid-area: Button;
+}
+
 

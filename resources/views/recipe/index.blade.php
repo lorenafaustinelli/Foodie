@@ -4,6 +4,7 @@
         
       
         <h1> Ricette </h1>
+        
          <!-- <div class="row g-4 mt-1">
         @forelse($recipe as $key => $row)
         <div class="col-lg-4">

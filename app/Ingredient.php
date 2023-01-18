@@ -11,4 +11,5 @@ class Ingredient extends Model
     protected $fillable = [
         'name_ingredient', 'variation'
     ];
+    
 }

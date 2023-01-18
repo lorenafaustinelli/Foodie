@@ -8,6 +8,8 @@ use App\UserRecipe;
 use App\Category;
 use App\RecipeCategory;
 use App\RecipeIngredient;
+use App\Ingredient;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -31,9 +33,24 @@ class RecipeController extends Controller
     public function create()
     {
         return view('recipe.create');
-    }
+    } 
 
+
+     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request){
+
+        $request->validate([
+            'name_recipe' => 'required',
+            'time' => 'required',
+            'portion' => 'required',
+            'instruction' => 'required',
+            'photo' => 'required'
+        ]);
 
         //dump(request()->all());
         $recipe = new Recipe();
@@ -43,9 +60,9 @@ class RecipeController extends Controller
         $recipe->instruction = request('instruction');
         $recipe->created_at = time();
 
-        $recipe->photo = request()->file('photo')->store('recipes');
+        $recipe->photo = request()->file('photo')->store('public/recipes');
         if($recipe->photo2){
-            $recipe->photo2 = request()->file('photo2')->store('recipes');
+            $recipe->photo2 = request()->file('photo2')->store('public/recipes');
         }
 
 
@@ -67,57 +84,7 @@ class RecipeController extends Controller
         return view('/recipe_ingredient/create')->with('id', $recipe->id);//compact('id'));//)->with('$recipe_id');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    /*
-    public function store(Request $request)
-    {
-        //store effettivo dei dati
-        //CREA FILE LOG PER VEDERE COSA ARRIVA
-
-        $request->validate([
-            'name_recipe' => 'required',
-            'time'        => 'required',
-            'portion'     => 'required',
-            'instruction' => 'required',
-            'photo'       => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'user_id'     => 'required',
-        ]);
-
-
-        //setto il nome dell'immagine e uso storeAs per salvarla nella destinazione e con il nome scelti
-        $photo_name = time() . '.' . $request->photo->extension(); //controllare funzione time()
-        $request->file('photo')->storeAs('public/images', $photo_name);
-
-        RecipeController::create([
-            'name_recipe' => $request->name_recipe,
-            'time'        => $request->time,
-            'portion'     => $request->portion,
-            'instruction' => $request->instruction,
-            'photo'       => $request->photo_name,
-            'user_id'     => $request->user_id,
-        ]);
-
-        /*if($request()->hasFile('photo')){
-            $photo = request()->file('photo')->getClientOriginalName();
-            request()->file('photo')->store('recipe_photos');
-            $recipe->update(['photo' => $photo]);
-        }
-
-       if($request()->hasFile('photo2')){
-            $photo = request()->file('photo2')->getClientOriginalName();
-            request()->file('photo2')->storeAs('photo2', $recipe->id . '/' . $photo2, '');
-            $recipe->update(['photo2' => $photo2]);
-        }
-
-        return redirect('recipe.index');
-
-    }
-*/
+   
     /**
      * Display the specified resource.
      *
@@ -127,15 +94,39 @@ class RecipeController extends Controller
     public function show($id)
     {   
         //parte ricetta
-        $id_recipe = $id; 
-        $recipe = Recipe::where('id', $id)->get();
+        $recipe = Recipe::find($id);  //where('id', $id);
+
         //parte categoria
         $category_id = RecipeCategory::where('recipe_id', '=', $id)->pluck('category_id');
-        $category_names = Category::where('id', '=', $category_id)->pluck('name_category');
-        //parte ingredienti
-        $ingredient_id = RecipeIngredient::where('recipe_id', '=', $id)->pluck('ingredient_id', 'quantity', 'measure');
 
-        return view('/recipe/show', compact('recipe', 'category_names', 'ingredient_id'));
+        if($category_id->isNotEmpty()){
+            $category_names = Category::where('id', '=', $category_id)->value('name_category');
+        }
+        //bisogna fare join tra recipe ingredient e ingredient, passando solo gli elementi di recipe ingredient con l'id della ricetta
+        //parte ingredienti
+        $recipe_ing = DB::table('recipe_ingredients')->where('recipe_id', '=', $id)
+        ->join('ingredients', 'ingredients.id', "=", 'recipe_ingredients.ingredient_id')
+        ->select('name_ingredient', 'quantity', 'measure')
+        ->get();
+
+        //ritorno view con collezioni elementi
+
+        if($category_id->isNotEmpty()){
+
+            if($recipe_ing->isNotEmpty()){
+
+                return view('/recipe/show', compact('recipe', 'category_names', 'recipe_ing'));
+
+            } else{
+
+                return view('/recipe/show', compact('recipe', 'category_names'));
+            }
+
+        } else{
+
+            return view('/recipe/show', compact('recipe'));
+
+        }
     }
 
     /**
@@ -156,6 +147,85 @@ class RecipeController extends Controller
         //$recipe = ;
         return $id;//$recipe;
     }
+
+    //funzione per ricerca rapida ricette da layout
+    public function search_recipe(Request $request){
+
+        if($request->search){
+            $recipe = Recipe::where('name_recipe', 'LIKE', '%'.$request->search.'%')->latest()->paginate(15);
+            return view('research.results', compact('recipe'));
+        }else{
+            return redirect()->back()->with('message', 'Ricerca a vuoto');
+        }
+    }
+
+    //funzione per ricerca avanzata
+    public function advanced_search(Request $request){
+
+        if($request->advanced_search){
+            //la richiesta ha il campo nome
+            $recipe = DB::table('recipes')->where('name_recipe', '=', '%'.$request->name_recipe.'%')
+            ->where('time', '=', $request->time)
+            ->latest()->paginate(15);
+
+                /*if($request->time){
+                
+                //se la ricerca ha il campo tempo di preparazione
+                if($request->category_id1){
+                    
+                    if($request->category_id2){
+
+                        if($request->ingredient_id1){
+
+                            if($request->ingredient_id2){
+
+                                if($request->ingredient_id3){
+
+                                    $recipe_t = DB::table('recipes')->where('name_recipe', '=', '%'.$request->name.'%')
+                                    ->where('time', '=', $request->time)
+                                    ->join('recipe_categories', 'recipe_id', "=", 'recipes.id')
+                                    ->where('category_id', "=", $request->category_id1)
+                                    ->where('category_id', "=", $request->category_id2)
+                                    ->join('recipe_ingredients', 'recipe_id', "=", 'recipes.id')
+                                    ->where('ingredient_id', "=", $request->ingredient_id1)
+                                    ->where('ingredient_id', "=", $request->ingredient_id2)
+                                    ->where('ingredient_id', "=", $request->ingredient_id3)
+                                    ->get();
+
+
+                                }
+                                else{
+
+                                }
+                            }
+                            else{
+
+                            }
+
+                        }
+                        else{
+
+                        }
+                    }
+                    else{
+
+                    }
+                }
+                else{
+
+                }*/
+            
+                
+            //se ho solo il nome della ricerca ma non il tempo
+            return view('research.results', compact('recipe'));
+        }
+        else{
+
+            redirect('/home')->with('message', 'Ricerca a vuoto');
+        }
+    }
+
+    
 
     /**
      * Update the specified resource in storage.

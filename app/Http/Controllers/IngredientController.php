@@ -37,7 +37,10 @@ class IngredientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        $request->validate([
+            'name_ingredient' => 'required'
+        ]);
         $ingredient = new Ingredient();
         $ingredient->name_ingredient = request('name_ingredient');
 

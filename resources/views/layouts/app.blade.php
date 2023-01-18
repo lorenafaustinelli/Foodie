@@ -3,7 +3,7 @@
 <head>
 
 
-    <?php //use Illuminate\Http\Request; ?>
+    <?php //use Illuminate\Http\Request;                 <form action="{{ url('search')}}" method="GET" role="search">  ?>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -34,19 +34,29 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="/">
+            <div class="container fluid">
+                <a class="navbar-brand" href="/home">
                     Foodie
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
+                <!-- barra di ricerca -->
+
+                <form action="{{ url('search') }}" method="GET" role="search">
+                    <div class="input-group">
+                        <input type="search" name="search" value="" placeholder="Ricerca rapida" class="form-control me-2" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </div>
+                </form>
+
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
-                    </ul>
+                    </ul> 
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -65,7 +75,6 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a> 
-                                
                                 
                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
@@ -92,8 +101,28 @@
                                 </div>
                             </li>
 
+
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{__('Inserimento')}}
+                                </a> 
+                                
+                               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="{{ route('recipe.create') }}">
+                                    {{__('Ricetta')}}
+                                    </a>
+                                    
+                                    <a class="dropdown-item" href="{{ route('add.ingredient') }}">
+                                    {{ __('Ingrediente') }}
+                                    </a>
+                                    
+                                </div>
+                            </li>
+
+                            <!-- pagina ricerca avanzata-->
                             <li class="nav-item">
-                                <a class="nav-link" href="/recipe/create">{{__('Nuova ricetta')}}</a> 
+                                <a class="nav-link" href="{{ route('advanced.search') }}">{{__('Ricerca avanzata')}}</a> 
                             </li>
                         @endguest
                     </ul>

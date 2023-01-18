@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\RecipeCategory;
+use App\Category;
 use Illuminate\Http\Request;
 
 class RecipeCategoryController extends Controller
@@ -37,12 +38,26 @@ class RecipeCategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'recipe_id' => 'required',
+            'category_id' => 'required'
+        ]);
+
         $recipe_category = new RecipeCategory();
         $recipe_category->recipe_id = $request-> recipe_id;
         $recipe_category->category_id = $request-> category_id;
 
         $recipe_category->save();
-        return response()->json($recipe_category);
+
+        $name_category = Category::where('id', '=', $request->category_id)
+        ->value('name_category');
+
+        $response = [
+            'name_category' => $name_category,
+        ];
+
+
+        return response()->json($response);
     }
 
     /**
