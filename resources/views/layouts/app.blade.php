@@ -35,6 +35,11 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container fluid">
+            @guest
+                <a class="navbar-brand" href="/home">
+                    Foodie
+                </a>
+                @else
                 <a class="navbar-brand" href="/home">
                     Foodie
                 </a>
@@ -51,7 +56,7 @@
                     </div>
                 </form>
 
-
+                @endguest
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
