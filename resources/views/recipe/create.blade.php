@@ -29,7 +29,7 @@
 
         <div class="form-group">
             <label for="Tempo"> </label>
-            <input type="number" min="1" max="490" step="3" name="time" placeholder="Tempo di preparazione in minuti:">
+            <input type="number" min="0" max="490" step="5" name="time" placeholder="Tempo di preparazione in minuti:">
         </div>
 
         </br>
