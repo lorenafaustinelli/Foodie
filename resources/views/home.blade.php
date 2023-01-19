@@ -12,9 +12,9 @@
                 <div class="card-body">
                     <!-- Stampo le ricette nella home -->
                     @foreach ($recipes as $recipe)
-                        <h3> <a href="{{ route('recipe.show', $recipe)}}" class="card-link">{{ $recipe->name_recipe }}</a> </h3>
-                        <img src="{{ Storage::url($recipe->photo) }}" class="card-img-top"  alt="foto ricetta">
-                        <p><a href="#">{{ $recipe->instruction }}</a></p>
+                            <h3> {{ $recipe->name_recipe }} </h3>
+                            <img src="{{ Storage::url($recipe->photo) }}" class="card-img-top"  alt="foto ricetta">
+                            <p><a href="#">{{ $recipe->instruction }}</a></p>
                     @endforeach
                 </div>
             </div>
