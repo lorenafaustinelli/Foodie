@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateRecipesTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations. 
      *
      * @return void
      */
@@ -16,7 +16,7 @@ class CreateRecipesTable extends Migration
         Schema::create('recipes', function (Blueprint $table) {
             
             $table->id();
-            $table->timestamps(); 
+            $table->timestamps();
             $table->string('name_recipe');
             $table->integer('time');
             $table->integer('portion');

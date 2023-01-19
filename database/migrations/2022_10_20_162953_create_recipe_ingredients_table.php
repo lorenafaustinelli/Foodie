@@ -21,8 +21,8 @@ class CreateRecipeIngredientsTable extends Migration
             $table->timestamps();
 
 
-            $table->foreign('recipe_id')->references('id')->on('recipes');
-            $table->foreign('ingredient_id')->references('id')->on('ingredients');
+            $table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');
+            $table->foreign('ingredient_id')->references('id')->on('ingredients')->onDelete('cascade');
             
         });
     }
