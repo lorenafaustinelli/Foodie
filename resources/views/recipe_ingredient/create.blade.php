@@ -26,7 +26,7 @@
                         </tr> 
                     </thead>
                     <tbody>
-                      <tr>  <!-- riferimenti oer ajax - inserisce i testo qua -->
+                      <tr>  <!-- riferimenti per ajax - inserisce i testo qua -->
                         
                       </tr>
                     </tbody>
@@ -62,7 +62,7 @@
 
         <div class="form-group">
         <label for="quantity"> </label>
-        <input type="number" id="quantity" class="quantity form-control" placeholder="Quantità:">
+        <input type="number" id="quantity" min="1" max="5000" class="quantity form-control" placeholder="Quantità:">
         </div>
 
         <div class="form-group">

@@ -17,7 +17,7 @@
 
     <div class ="Ingredient"> 
         <h5> Ingredienti </h5>
-        <table> 
+        <table width="300">
         <tbody>
     @if($recipe_ing != '')
         @foreach ($recipe_ing as $i)
@@ -36,6 +36,7 @@
     @endif
         </tbody>
         </table>
+        </br>
         <p> Numero di porzioni: {{ $recipe->portion }} </p>
     </div>
     <div class ="Instruction">
