@@ -15,16 +15,12 @@
             @foreach($recipes->where('id', '=', $ur) as $recipe)
             <img src="{{ Storage::url($recipe->photo) }}" class="card-img-top" width="250px" height="180px" alt="foto ricetta">
             <div class="card-body">
-                <h5 class="card-title">{{ $recipe->name_recipe }}</h5>
+                <a href="{{ route('recipe.show', $ur)}}" class="card-link">{{ $recipe->name_recipe }}</a>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">{{ $recipe->time }} minuti</li>
             </ul>
                 @endforeach
-            <div class="card-body">
-                <a href="{{ route('recipe.show', $ur)}}" class="card-link"> Vedi ricetta</a>
-            </div>
-            
         </div>
         
     @endforeach

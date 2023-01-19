@@ -11,7 +11,7 @@
                     <!-- Stampo le ricette nella home -->
                     @foreach ($recipes as $recipe)
                         <h3>{{ $recipe->name_recipe }}</h3>
-                        <img src="$recipe->photo" alt="">     <!-- CAPIRE COME RENDERE LE IMMAGINI: devrebbe funzionare ma abbiamo solo zip e pdf -->
+                        <img src="{{ Storage::url($recipe->photo) }}" class="card-img-top"  alt="foto ricetta">
                         <p><a href="#">{{ $recipe->instruction }}</a></p>
                     @endforeach
                 </div>
