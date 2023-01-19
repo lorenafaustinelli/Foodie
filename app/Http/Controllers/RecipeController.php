@@ -93,6 +93,10 @@ class RecipeController extends Controller
      */
     public function show($id)
     {   
+
+        //dichiarazioni
+        $category_names = "";
+        $recipe_ing = "";
         //parte ricetta
         $recipe = Recipe::find($id);  //where('id', $id);
 
@@ -109,8 +113,10 @@ class RecipeController extends Controller
         ->select('name_ingredient', 'quantity', 'measure')
         ->get();
 
-        //ritorno view con collezioni elementi
+        return view('/recipe/show', compact('recipe', 'category_names', 'recipe_ing'));
 
+        //ritorno view con collezioni elementi
+        /*
         if($category_id->isNotEmpty()){
 
             if($recipe_ing->isNotEmpty()){
@@ -126,7 +132,7 @@ class RecipeController extends Controller
 
             return view('/recipe/show', compact('recipe'));
 
-        }
+        } */
     }
 
     /**

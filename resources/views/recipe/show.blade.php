@@ -19,7 +19,7 @@
         <h5> Ingredienti </h5>
         <table> 
         <tbody>
-
+    @if($recipe_ing != '')
         @foreach ($recipe_ing as $i)
             <tr>
 
@@ -31,20 +31,28 @@
 
             </tr>
         @endforeach 
-        
+    @else 
+
+    @endif
         </tbody>
         </table>
         <p> Numero di porzioni: {{ $recipe->portion }} </p>
     </div>
-
     <div class ="Instruction">
+    @if($category_names != '')
 
        
             <p> Categoria: {{ $category_names }} </p> 
             <p> Tempo di preparazione: {{ $recipe->time }} minuti </p>
             <h5> Preparazione </h5> {{ $recipe->instruction }}</p> </div> <!-- tenere </div> qui perchè sennò si disallinea testo -->
             
-        
+    @else
+
+            <p> Tempo di preparazione: {{ $recipe->time }} minuti </p>
+            <h5> Preparazione </h5> {{ $recipe->instruction }}</p> </div> <!-- tenere </div> qui perchè sennò si disallinea testo -->
+
+
+    @endif
 
 
        
