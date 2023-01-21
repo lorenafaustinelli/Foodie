@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');  //assegnazione del nome - Route(home)
+//Route::get('/home', 'HomeController@index')->name('home');  //assegnazione del nome - Route(home)
 Route::get('/home', function () {
     //prendo dal database le ricette scritte fin'ora, ordinate dall'ultima 
     $recipes = App\Recipe::latest()->get();
@@ -28,8 +28,15 @@ Route::get('/home', function () {
     return view('home', [
         'recipes' => $recipes   //passo le ricette alla view
     ]);
-});
-//Route::resource('recipe', 'RecipeController'); 
+})->name('home');
+
+Route::get('/userPage', function(){
+    $recipes = App\Recipe::all();
+
+    return view('userPage', [
+        'recipes' => $recipes
+    ]);
+})->name('userPage');
 
 //Prove Lisa
 Route::get('/recipe/create', 'RecipeController@create')->name('recipe.create');
@@ -37,12 +44,8 @@ Route::get('/recipe/create', 'RecipeController@create')->name('recipe.create');
 Route::post('/recipe/store', 'RecipeController@store');
 //Route::get('/recipe/store', 'RecipeController@store');
 
-
-
 //Prove Lorena
-
 Route::get('/recipe/show/{id}', 'RecipeController@show')->name('recipe.show');
-
 
 //RecipeIngredient
 Route::get('/recipe_ingredient', 'RecipeIngredientController@index');
