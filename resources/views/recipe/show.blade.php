@@ -38,6 +38,7 @@
         </table>
         </br>
         <p> Numero di porzioni: {{ $recipe->portion }} </p>
+        
     </div>
     <div class ="Instruction">
     @if($category_names != '')

@@ -22,7 +22,7 @@
   <div class="form-group">
   <div class="row mb-3">
     <div class="col-sm-10">
-      <input type="number" min="1" max="600" class="form-control" name="time" placeholder="minuti" id="time" >
+      <input type="number" min="0" max="600" step="5" class="form-control" name="time" placeholder="minuti" id="time" >
     </div>
   </div>
   </div>
@@ -70,16 +70,6 @@
         </select>
       </div>
     </div> 
-    <div class="form-group">
-      <div class="w-25">
-        <select id="ingredient_id3" class="form-select" aria-label="Default select example" name="ingredient_id3">
-        <option selected></option>
-          @foreach ($ingredients as $ing)
-            <option value="{{ $ing->id }}"> {{$ing->name_ingredient }} </option>
-          @endforeach
-        </select>
-      </div>
-    </div>
     </br>
     </br>
 
