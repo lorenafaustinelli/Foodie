@@ -61,7 +61,7 @@ class RecipeController extends Controller
         $recipe->created_at = time();
 
         $recipe->photo = request()->file('photo')->store('public/recipes');
-        if($recipe->photo2){
+        if($request->photo2){
             $recipe->photo2 = request()->file('photo2')->store('public/recipes');
         }
 
@@ -101,11 +101,19 @@ class RecipeController extends Controller
         $recipe = Recipe::find($id);  //where('id', $id);
 
         //parte categoria
-        $category_id = RecipeCategory::where('recipe_id', '=', $id)->pluck('category_id');
+        //$category_id = RecipeCategory::where('recipe_id', '=', $id)->pluck('category_id');
 
+        $recipe_category = DB::table('recipe_categories')->where('recipe_id', '=', $id)
+        ->join('categories', 'categories.id', "=", 'recipe_categories.category_id')
+        ->select('name_category')
+        ->get();
+
+        /*
         if($category_id->isNotEmpty()){
             $category_names = Category::where('id', '=', $category_id)->value('name_category');
-        }
+        }*/
+
+
         //bisogna fare join tra recipe ingredient e ingredient, passando solo gli elementi di recipe ingredient con l'id della ricetta
         //parte ingredienti
         $recipe_ing = DB::table('recipe_ingredients')->where('recipe_id', '=', $id)
@@ -113,7 +121,7 @@ class RecipeController extends Controller
         ->select('name_ingredient', 'quantity', 'measure')
         ->get();
 
-        return view('/recipe/show', compact('recipe', 'category_names', 'recipe_ing'));
+        return view('/recipe/show', compact('recipe', 'recipe_category', 'recipe_ing'));
 
     }
 
@@ -210,7 +218,7 @@ class RecipeController extends Controller
                                 ->where('category_id', 'LIKE', $request->category_id2)
                                 ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
                                 ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
-                                ->where('ingredient_id', 'LIKE', $request->ingredient_id12)
+                                ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
                                 ->paginate(15);
                                 return view('research.results', compact('recipe'));
 
@@ -278,7 +286,7 @@ class RecipeController extends Controller
                             ->where('category_id', 'LIKE', $request->category_id2)
                             ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
                             ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
-                            ->where('ingredient_id', 'LIKE', $request->ingredient_id12)
+                            ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
                             ->paginate(15);
                             return view('research.results', compact('recipe'));
                         }
@@ -290,7 +298,7 @@ class RecipeController extends Controller
                         ->where('category_id', 'LIKE', $request->category_id2)
                         ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
                         ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
-                        ->where('ingredient_id', 'LIKE', $request->ingredient_id12)
+                        ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
                         ->paginate(15);
                         return view('research.results', compact('recipe'));
 
@@ -302,7 +310,7 @@ class RecipeController extends Controller
                         ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                         ->where('category_id', 'LIKE', $request->category_id2)
                         ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
-                        ->where('ingredient_id', 'LIKE', $request->ingredient_id12)
+                        ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
                         ->paginate(15);
                         return view('research.results', compact('recipe'));
                     }
@@ -348,7 +356,7 @@ class RecipeController extends Controller
                                 ->where('category_id', 'LIKE', $request->category_id2)
                                 ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
                                 ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
-                                ->where('ingredient_id', 'LIKE', $request->ingredient_id12)
+                                ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
                                 ->paginate(15);
                                 return view('research.results', compact('recipe'));
 
@@ -397,41 +405,429 @@ class RecipeController extends Controller
                     ->paginate(15);
                     return view('research.results', compact('recipe'));
 
-                }
-                else if($request->category_id2){
+                }else if($request->category_id2){
 
                     if($request->ingredient_id1){
 
-                    }else if($request->ingredient_id2){
-                        //RIPRENDERE DA QUESTI
+                        if($request->ingredient_id2){
 
-                    } else{
+                            //la request ha i campi name_recipe, category2, ingredient_id1 e ingredient_id2
+                            $recipe = Recipe::where('name_recipe', 'LIKE', '%'.$request->name_recipe.'%')
+                            ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                            ->where('category_id', 'LIKE', $request->category_id2)
+                            ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                            ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
+                            ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
+                            ->paginate(15);
+                            return view('research.results', compact('recipe'));
 
-                        //la richiesta ha i campi name_recipe e category_id2
+                        }else {
+                        //la richiesta ha i campi name_recipe e category_id2, ingredient_id1
+
                         $recipe = Recipe::where('name_recipe', 'LIKE', '%'.$request->name_recipe.'%')
                         ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                         ->where('category_id', 'LIKE', $request->category_id2)
+                        ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                        ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
+                        ->paginate(15);
+                        return view('research.results', compact('recipe'));
+                        }
+                    }
+                } else if($request->ingredient_id1){
+                    //la request ha i campi name_recipe e ingredient_id1
+                    
+                    if($request->ingredient_id2){
+                        //la request ha i campi name_recipe ingredient_id1 e ingredient_id2
+
+                        $recipe = Recipe::where('name_recipe', 'LIKE', '%'.$request->name_recipe.'%')
+                        ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                        ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
+                        ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
                         ->paginate(15);
                         return view('research.results', compact('recipe'));
                     }
-                }
-                
 
-            }
+                    $recipe = Recipe::where('name_recipe', 'LIKE', '%'.$request->name_recipe.'%')
+                    ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                    ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
+                    ->paginate(15);
+                    return view('research.results', compact('recipe'));
+
+                } else if($request->ingredient_id2){
+                    //la request ha i campi name_recipe e ingredient_id2 
+
+                    $recipe = Recipe::where('name_recipe', 'LIKE', '%'.$request->name_recipe.'%')
+                    ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                    ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
+                    ->paginate(15);
+                    return view('research.results', compact('recipe'));
+                }
+
+            } 
+
             //la ricetta ha solo il campo name_recipe
             $recipe = Recipe::where('name_recipe', 'LIKE', '%'.$request->name_recipe.'%')
             ->paginate(15);
             return view('research.results', compact('recipe'));
 
         }
-        else{
+        else if($request->time){
+            //non c'è il campo name_recipe ma il campo time si
+            if($request->category_id1){
+                //la request ha i campi time e category_id1
 
-            //non c'è il campo name_recipe
+                if($request->category_id2){
+                    //la request ha i campi time, category_id1 e category_id2
 
+                    if($request->ingredient_id1){
+                        //la request ha i campi time, category_id1, category_id2 e ingredient_id1
+
+                        if($request->ingredient_id2){
+                            //la richiesta ha tutti i campi tranne name_recipe
+
+                            $recipe = Recipe::where('time', 'LIKE', $request->time)
+                            ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                            ->where('category_id', 'LIKE', $request->category_id1)
+                            ->where('category_id', 'LIKE', $request->category_id2)
+                            ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                            ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
+                            ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
+                            ->paginate(15);
+                            return view('research.results', compact('recipe'));
+
+                        }
+
+                        $recipe = Recipe::where('time', 'LIKE', $request->time)
+                        ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                        ->where('category_id', 'LIKE', $request->category_id1)
+                        ->where('category_id', 'LIKE', $request->category_id2)
+                        ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                        ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
+                        ->paginate(15);
+                        return view('research.results', compact('recipe'));
+
+                    } else if($request->ingredient_id2){
+                        //la request ha i campi time, category_id1, category_id2  e ingredient_id2
+                        
+                        $recipe = Recipe::where('time', 'LIKE', $request->time)
+                        ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                        ->where('category_id', 'LIKE', $request->category_id1)
+                        ->where('category_id', 'LIKE', $request->category_id2)
+                        ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                        ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
+                        ->paginate(15);
+                        return view('research.results', compact('recipe'));
+                    }
+
+                    //request ha i campi time category_id1 e category_id2
+                    $recipe = Recipe::where('time', 'LIKE', $request->time)
+                    ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                    ->where('category_id', 'LIKE', $request->category_id1)
+                    ->where('category_id', 'LIKE', $request->category_id2)
+                    ->paginate(15);
+                    return view('research.results', compact('recipe'));
+
+                } else if($request->ingredient_id1){
+
+                    if($request->ingredient_id2){
+                        //la request ha i campi time, category_id1, ingredient_id1 e ingredient_id2
+
+                        $recipe = Recipe::where('time', 'LIKE', $request->time)
+                        ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                        ->where('category_id', 'LIKE', $request->category_id1)
+                        ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                        ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
+                        ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
+                        ->paginate(15);
+                        return view('research.results', compact('recipe'));
+                    }
+
+                    //la request ha i campi time, category_id1, ingredient_id1
+                        
+                    $recipe = Recipe::where('time', 'LIKE', $request->time)
+                    ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                    ->where('category_id', 'LIKE', $request->category_id1)
+                    ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                    ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
+                    ->paginate(15);
+                    return view('research.results', compact('recipe'));
+
+
+
+                } else if($request->ingredient_id2){
+
+                    //la request ha i campi time, category_id1 e ingredient_id2
+
+                    $recipe = Recipe::where('time', 'LIKE', $request->time)
+                    ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                    ->where('category_id', 'LIKE', $request->category_id1)
+                    ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                    ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
+                    ->paginate(15);
+                    return view('research.results', compact('recipe'));
+
+                }
+
+               //la request ha i campi time, category_id1
+
+               $recipe = Recipe::where('time', 'LIKE', $request->time)
+               ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+               ->where('category_id', 'LIKE', $request->category_id1)
+               ->paginate(15);
+               return view('research.results', compact('recipe'));
+
+
+            } else if($request->category_id2){
+                //la request ha i campi time e category_id2
+
+                if($request->ingredient_id1){
+                    //la request ha i campi time, category_id2 e ingredient_id1
+
+                    if($request->ingredient_id2){
+                        //la request ha i campi time, category_id2, ingredient_id1 e ingredient_id2
+                        $recipe = Recipe::where('time', 'LIKE', $request->time)
+                        ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                        ->where('category_id', 'LIKE', $request->category_id2)
+                        ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                        ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
+                        ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
+                        ->paginate(15);
+                        return view('research.results', compact('recipe'));
+                    }
+                    
+                    $recipe = Recipe::where('time', 'LIKE', $request->time)
+                    ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                    ->where('category_id', 'LIKE', $request->category_id2)
+                    ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                    ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
+                    ->paginate(15);
+                    return view('research.results', compact('recipe'));
+
+                } else if($request->ingredient_id2){
+
+                    $recipe = Recipe::where('time', 'LIKE', $request->time)
+                    ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                    ->where('category_id', 'LIKE', $request->category_id2)
+                    ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                    ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
+                    ->paginate(15);
+                    return view('research.results', compact('recipe'));
+                }
+
+                $recipe = Recipe::where('time', 'LIKE', $request->time)
+                ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                ->where('category_id', 'LIKE', $request->category_id2)
+                ->paginate(15);
+                return view('research.results', compact('recipe'));
+
+
+            } else if($request->ingredient_id1){
+                //la request ha i campi time e ingredient_id1
+
+                if($request->ingredient_id2){
+                    //la request ha i campi time, ingredient_id1 e ingredientid2
+
+                    $recipe = Recipe::where('time', 'LIKE', $request->time)
+                    ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                    ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
+                    ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
+                    ->paginate(15);
+                    return view('research.results', compact('recipe'));
+                }
+
+                $recipe = Recipe::where('time', 'LIKE', $request->time)
+                ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
+                ->paginate(15);
+                return view('research.results', compact('recipe'));
+
+
+
+            } else if($request->ingredient_id2){
+                $recipe = Recipe::where('time', 'LIKE', $request->time)
+                ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
+                ->paginate(15);
+                return view('research.results', compact('recipe'));
+            } else {
+                //request ha solo il campo time
+
+                $recipe = Recipe::where('time', 'LIKE', $request->time)
+                ->paginate(15);
+                return view('research.results', compact('recipe'));
+
+
+            }
+
+
+        } else if($request->category_id1){
+            //la request non i campi name_recipe e time ma ha category_id1
+            if($request->category_id2){
+                //la request ha i campi category_id1 e category_id2
+
+                if($request->ingredient_id1){
+                    //la request ha i campi category_id1, category_id2 e ingredient_id1
+
+                    if($request->ingredient_id2){
+                        //la request ha i campi category_id1, category_id2, ingredient_id1 e ingredient_id2
+
+                        $recipe = Recipe::join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                        ->where('category_id', 'LIKE', $request->category_id1)
+                        ->where('category_id', 'LIKE', $request->category_id2)
+                        ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                        ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
+                        ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
+                        ->paginate(15);
+                        return view('research.results', compact('recipe'));
+                        
+                    }
+
+                    $recipe = Recipe::join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                    ->where('category_id', 'LIKE', $request->category_id1)
+                    ->where('category_id', 'LIKE', $request->category_id2)
+                    ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                    ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
+                    ->paginate(15);
+                    return view('research.results', compact('recipe'));
+
+                } else if($request->ingredient_id2){
+                    //la request ha i campi category_id1,category_id2 e ingredient_id2
+
+                    $recipe = Recipe::join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                    ->where('category_id', 'LIKE', $request->category_id1)
+                    ->where('category_id', 'LIKE', $request->category_id2)
+                    ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                    ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
+                    ->paginate(15);
+                    return view('research.results', compact('recipe'));
+                }
+
+                $recipe = Recipe::join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                ->where('category_id', 'LIKE', $request->category_id1)
+                ->where('category_id', 'LIKE', $request->category_id2)
+                ->paginate(15);
+                return view('research.results', compact('recipe'));
+
+            } else if($request->ingredient_id1){
+                //la request ha category_id1 e ingredient_id1
+
+                if($request->ingredient_id2){
+                    //la request ha category_id1, ingredient_id1 e ingredient_id2
+
+                    $recipe = Recipe::join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                    ->where('category_id', 'LIKE', $request->category_id1)
+                    ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                    ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
+                    ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
+                    ->paginate(15);
+                    return view('research.results', compact('recipe'));
+                } else {
+                    
+                    $recipe = Recipe::join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                    ->where('category_id', 'LIKE', $request->category_id1)
+                    ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                    ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
+                    ->paginate(15);
+                    return view('research.results', compact('recipe'));
+
+                }
+
+            } else if($request->ingredient_id2){
+                //la request ha category_id1 e ingredient_id2
+
+                $recipe = Recipe::join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                ->where('category_id', 'LIKE', $request->category_id1)
+                ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
+                ->paginate(15);
+                return view('research.results', compact('recipe'));
+
+
+            } else{
+                //la request ha solo category_id1
+
+                $recipe = Recipe::join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                ->where('category_id', 'LIKE', $request->category_id1)
+                ->paginate(15);
+                return view('research.results', compact('recipe'));
+
+            }
+
+            
+        } else if($request->category_id2){
+
+            //la request non ha name_recipe, time e category_id1 ma ha come primo parametro category_id2
+            if($request->ingredient_id1){
+                //la request ha category_id2 e ingredient_id1
+
+                if($request->ingredient_id2){
+                    //la request ha category_id2, ingredient_id1, ingredient_id2
+
+                    $recipe = Recipe::join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                    ->where('category_id', 'LIKE', $request->category_id2)
+                    ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                    ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
+                    ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
+                    ->paginate(15);
+                    return view('research.results', compact('recipe'));
+    
+                } else {
+
+                    $recipe = Recipe::join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                    ->where('category_id', 'LIKE', $request->category_id2)
+                    ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                    ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
+                    ->paginate(15);
+                    return view('research.results', compact('recipe'));
+                }
+            } else if($request->ingredient_id2){
+                //la request ha i campi category_id2 e ingredient_id
+
+                $recipe = Recipe::join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                ->where('category_id', 'LIKE', $request->category_id2)
+                ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
+                ->paginate(15);
+                return view('research.results', compact('recipe'));
+            } else {
+
+                //la request ha solo il campo category_id2
+                $recipe = Recipe::join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                ->where('category_id', 'LIKE', $request->category_id2)
+                ->paginate(15);
+                return view('research.results', compact('recipe'));
+            }
+        } else if($request->ingredient_id1){
+            //la richiesta non ha il campo name_recipe, time, category_id1, category_id2 ma solo ingredient_id1
+            if($request->ingredient_id2){
+
+                //la request ha solo i campi ingredient_id1 e ingredient_id2
+                $recipe = Recipe::join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
+                ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
+                ->paginate(15);
+                return view('research.results', compact('recipe'));
+                
+            } else {
+                $recipe = Recipe::join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
+                ->paginate(15);
+                return view('research.results', compact('recipe'));
+            }
+
+            
+        } else if($request->ingredient_id2){
+            //la request ha solo il campo ingredient_id2
+
+            $recipe = Recipe::join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+            ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
+            ->paginate(15);
+            return view('research.results', compact('recipe'));
+
+        } else {
+            //se l'utente non inserisce nessun campo ricarica la pagina di ricerca
+            return view('advanced.search');
         }
-
-        //PARTE TIME 
-
     
     } 
 

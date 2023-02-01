@@ -41,10 +41,10 @@
         
     </div>
     <div class ="Instruction">
-    @if($category_names != '')
+    @if($recipe_category != '')
 
        
-            <p> Categoria: {{ $category_names }} </p> 
+            <p> Categoria: @foreach($recipe_category as $cat)  {{ $cat->name_category }} @endforeach </p> 
             <p> Tempo di preparazione: {{ $recipe->time }} minuti </p>
             <h5> Preparazione </h5> {{ $recipe->instruction }}</p> </div> <!-- tenere </div> qui perchè sennò si disallinea testo -->
             

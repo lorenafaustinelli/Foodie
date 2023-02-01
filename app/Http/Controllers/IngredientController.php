@@ -40,11 +40,12 @@ class IngredientController extends Controller
     {   
         $request->validate([
             'name_ingredient' => 'required'
-        ]);
+        ]); 
+
         $ingredient = new Ingredient();
         $ingredient->name_ingredient = request('name_ingredient');
 
-        if($ingredient->variation){
+        if($request->variation){
             $ingredient->variation = request('variation');
         }
 
