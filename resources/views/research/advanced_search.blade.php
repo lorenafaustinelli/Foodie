@@ -18,7 +18,7 @@
   </div>
   </div>
   </br>
-  <h4> Tempo di preparazione: </h4> 
+  <h4> Tempo di preparazione massimo: </h4> 
   <div class="form-group">
   <div class="row mb-3">
     <div class="col-sm-10">
@@ -30,7 +30,7 @@
   <h4> Categorie: </h4> 
   <div class="form-group">
     <div class="w-25">
-      <select id="category_id" class="form-select" aria-label="Default select example" name="category_id1">
+      <select id="category_id1" class="form-select" aria-label="Default select example" name="category_id1">
       <option selected></option>
         @foreach ($categories as $cat)
           <option value="{{ $cat->id }}"> {{$cat->name_category }} </option>
@@ -40,7 +40,7 @@
   </div> 
   <div class="form-group">
     <div class="w-25">
-      <select id="category_id" class="form-select" aria-label="Default select example" name="category_id2">
+      <select id="category_id2" class="form-select" aria-label="Default select example" name="category_id2">
       <option selected></option>
         @foreach ($categories as $cat)
           <option value="{{ $cat->id }}"> {{$cat->name_category }} </option>

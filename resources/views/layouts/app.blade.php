@@ -106,7 +106,7 @@
                                 </div>
                             </li>
 
-
+                            <!-- menù per inserimento -->
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{__('Inserimento')}}
@@ -120,6 +120,10 @@
                                     
                                     <a class="dropdown-item" href="{{ route('add.ingredient') }}">
                                     {{ __('Ingrediente') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('add.category') }}">
+                                    {{ __('Categoria') }}
                                     </a>
                                     
                                 </div>

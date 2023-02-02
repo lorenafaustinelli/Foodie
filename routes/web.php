@@ -58,7 +58,7 @@ Route::get('/ingredient/index', 'IngredientController@index')->name('ingredients
 Route::post('/ingredient/store', 'IngredientController@store');
 
 //Category
-Route::get('/category/create', 'CategoryController@create');
+Route::get('/category/create', 'CategoryController@create')->name('add.category');
 Route::get('/category/index', 'CategoryController@index');
 Route::post('/category/store', 'CategoryController@store');
 

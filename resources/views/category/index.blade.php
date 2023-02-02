@@ -7,7 +7,7 @@
    <div class="row">
        <div class="card">
             <div class="card-body">
-                <table id="IngredientsTable" class="table">
+                <table id="CategoriesTable" class="table">
                     <thead>
                         <tr>
                             <th>Nome categoria </th>

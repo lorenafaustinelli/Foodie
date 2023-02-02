@@ -212,7 +212,7 @@ class RecipeController extends Controller
                                 //la richiesta ha tutti i campi
 
                                 $recipe = Recipe::where('name_recipe', 'LIKE', '%'.$request->name_recipe.'%')
-                                ->where('time', 'LIKE', $request->time)
+                                ->where('time', '<=', $request->time)
                                 ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                                 ->where('category_id', 'LIKE', $request->category_id1)
                                 ->where('category_id', 'LIKE', $request->category_id2)
@@ -226,7 +226,7 @@ class RecipeController extends Controller
                             
                             //la richiesta ha name_recipe, time, category_id1, category_id2 e ingredient_id1
                             $recipe = Recipe::where('name_recipe', 'LIKE', '%'.$request->name_recipe.'%')
-                            ->where('time', 'LIKE', $request->time)
+                            ->where('time', '<=', $request->time)
                             ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                             ->where('category_id', 'LIKE', $request->category_id1)
                             ->where('category_id', 'LIKE', $request->category_id2)
@@ -241,7 +241,7 @@ class RecipeController extends Controller
                             //la richiesta ha solo name_recipe, time, category_id1, category_id2 e ingredient_id2
 
                             $recipe = Recipe::where('name_recipe', 'LIKE', '%'.$request->name_recipe.'%')
-                            ->where('time', 'LIKE', $request->time)
+                            ->where('time', '<=', $request->time)
                             ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                             ->where('category_id', 'LIKE', $request->category_id1)
                             ->where('category_id', 'LIKE', $request->category_id2)
@@ -255,7 +255,7 @@ class RecipeController extends Controller
 
                             //la richiesta ha i campi name_recipe, time, category_id1 e category_id2
                             $recipe = Recipe::where('name_recipe', 'LIKE', '%'.$request->name_recipe.'%')
-                            ->where('time', 'LIKE', $request->time)
+                            ->where('time', '<=', $request->time)
                             ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                             ->where('category_id', 'LIKE', $request->category_id1)
                             ->where('category_id', 'LIKE', $request->category_id2)
@@ -268,7 +268,7 @@ class RecipeController extends Controller
     
                     //la richiesta ha i campi name_recipe, time e category_id1
                     $recipe = Recipe::where('name_recipe', 'LIKE', '%'.$request->name_recipe.'%')
-                    ->where('time', 'LIKE', $request->time)
+                    ->where('time', '<=', $request->time)
                     ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                     ->where('category_id', 'LIKE', $request->category_id1)
                     ->paginate(15);
@@ -281,7 +281,7 @@ class RecipeController extends Controller
                         if($request->ingredient_id2){
                             //la richiesta ha tutti i campi tranne category_1
                             $recipe = Recipe::where('name_recipe', 'LIKE', '%'.$request->name_recipe.'%')
-                            ->where('time', 'LIKE', $request->time)
+                            ->where('time', '<=', $request->time)
                             ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                             ->where('category_id', 'LIKE', $request->category_id2)
                             ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
@@ -293,7 +293,7 @@ class RecipeController extends Controller
 
                         //la richiesta ha i campi name_recipe, time, category2, ingredient1
                         $recipe = Recipe::where('name_recipe', 'LIKE', '%'.$request->name_recipe.'%')
-                        ->where('time', 'LIKE', $request->time)
+                        ->where('time', '<=', $request->time)
                         ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                         ->where('category_id', 'LIKE', $request->category_id2)
                         ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
@@ -306,7 +306,7 @@ class RecipeController extends Controller
                     else if($request->ingredient_id2){
                         //la richiesta ha i campi name_recipe, time, category2, ingredient_id2
                         $recipe = Recipe::where('name_recipe', 'LIKE', '%'.$request->name_recipe.'%')
-                        ->where('time', 'LIKE', $request->time)
+                        ->where('time', '<=', $request->time)
                         ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                         ->where('category_id', 'LIKE', $request->category_id2)
                         ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
@@ -317,7 +317,7 @@ class RecipeController extends Controller
                     else{
                         //la richiesta ha name_recipe, time e category_id2
                         $recipe = Recipe::where('name_recipe', 'LIKE', '%'.$request->name_recipe.'%')
-                        ->where('time', 'LIKE', $request->time)
+                        ->where('time', '<=', $request->time)
                         ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                         ->where('category_id', 'LIKE', $request->category_id2)
                         ->paginate(15);
@@ -329,7 +329,7 @@ class RecipeController extends Controller
 
                 //la richiesta ha solo i campi name_recipe e il campo time
                 $recipe = Recipe::where('name_recipe', 'LIKE', '%'.$request->name_recipe.'%')
-                ->where('time', 'LIKE', $request->time)
+                ->where('time', '<=', $request->time)
                 ->paginate(15);
                 return view('research.results', compact('recipe'));
 
@@ -485,7 +485,7 @@ class RecipeController extends Controller
                         if($request->ingredient_id2){
                             //la richiesta ha tutti i campi tranne name_recipe
 
-                            $recipe = Recipe::where('time', 'LIKE', $request->time)
+                            $recipe = Recipe::where('time', '<=', $request->time)
                             ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                             ->where('category_id', 'LIKE', $request->category_id1)
                             ->where('category_id', 'LIKE', $request->category_id2)
@@ -497,7 +497,7 @@ class RecipeController extends Controller
 
                         }
 
-                        $recipe = Recipe::where('time', 'LIKE', $request->time)
+                        $recipe = Recipe::where('time', '<=', $request->time)
                         ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                         ->where('category_id', 'LIKE', $request->category_id1)
                         ->where('category_id', 'LIKE', $request->category_id2)
@@ -509,7 +509,7 @@ class RecipeController extends Controller
                     } else if($request->ingredient_id2){
                         //la request ha i campi time, category_id1, category_id2  e ingredient_id2
                         
-                        $recipe = Recipe::where('time', 'LIKE', $request->time)
+                        $recipe = Recipe::where('time', '<=', $request->time)
                         ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                         ->where('category_id', 'LIKE', $request->category_id1)
                         ->where('category_id', 'LIKE', $request->category_id2)
@@ -520,7 +520,7 @@ class RecipeController extends Controller
                     }
 
                     //request ha i campi time category_id1 e category_id2
-                    $recipe = Recipe::where('time', 'LIKE', $request->time)
+                    $recipe = Recipe::where('time', '<=', $request->time)
                     ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                     ->where('category_id', 'LIKE', $request->category_id1)
                     ->where('category_id', 'LIKE', $request->category_id2)
@@ -532,7 +532,7 @@ class RecipeController extends Controller
                     if($request->ingredient_id2){
                         //la request ha i campi time, category_id1, ingredient_id1 e ingredient_id2
 
-                        $recipe = Recipe::where('time', 'LIKE', $request->time)
+                        $recipe = Recipe::where('time', '<=', $request->time)
                         ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                         ->where('category_id', 'LIKE', $request->category_id1)
                         ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
@@ -544,7 +544,7 @@ class RecipeController extends Controller
 
                     //la request ha i campi time, category_id1, ingredient_id1
                         
-                    $recipe = Recipe::where('time', 'LIKE', $request->time)
+                    $recipe = Recipe::where('time', '<=', $request->time)
                     ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                     ->where('category_id', 'LIKE', $request->category_id1)
                     ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
@@ -558,7 +558,7 @@ class RecipeController extends Controller
 
                     //la request ha i campi time, category_id1 e ingredient_id2
 
-                    $recipe = Recipe::where('time', 'LIKE', $request->time)
+                    $recipe = Recipe::where('time', '<=', $request->time)
                     ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                     ->where('category_id', 'LIKE', $request->category_id1)
                     ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
@@ -570,7 +570,7 @@ class RecipeController extends Controller
 
                //la request ha i campi time, category_id1
 
-               $recipe = Recipe::where('time', 'LIKE', $request->time)
+               $recipe = Recipe::where('time', '<=', $request->time)
                ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                ->where('category_id', 'LIKE', $request->category_id1)
                ->paginate(15);
@@ -585,7 +585,7 @@ class RecipeController extends Controller
 
                     if($request->ingredient_id2){
                         //la request ha i campi time, category_id2, ingredient_id1 e ingredient_id2
-                        $recipe = Recipe::where('time', 'LIKE', $request->time)
+                        $recipe = Recipe::where('time', '<=', $request->time)
                         ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                         ->where('category_id', 'LIKE', $request->category_id2)
                         ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
@@ -595,7 +595,7 @@ class RecipeController extends Controller
                         return view('research.results', compact('recipe'));
                     }
                     
-                    $recipe = Recipe::where('time', 'LIKE', $request->time)
+                    $recipe = Recipe::where('time', '<=', $request->time)
                     ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                     ->where('category_id', 'LIKE', $request->category_id2)
                     ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
@@ -605,7 +605,7 @@ class RecipeController extends Controller
 
                 } else if($request->ingredient_id2){
 
-                    $recipe = Recipe::where('time', 'LIKE', $request->time)
+                    $recipe = Recipe::where('time', '<=', $request->time)
                     ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                     ->where('category_id', 'LIKE', $request->category_id2)
                     ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
@@ -614,7 +614,7 @@ class RecipeController extends Controller
                     return view('research.results', compact('recipe'));
                 }
 
-                $recipe = Recipe::where('time', 'LIKE', $request->time)
+                $recipe = Recipe::where('time', '<=', $request->time)
                 ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                 ->where('category_id', 'LIKE', $request->category_id2)
                 ->paginate(15);
@@ -627,7 +627,7 @@ class RecipeController extends Controller
                 if($request->ingredient_id2){
                     //la request ha i campi time, ingredient_id1 e ingredientid2
 
-                    $recipe = Recipe::where('time', 'LIKE', $request->time)
+                    $recipe = Recipe::where('time', '<=', $request->time)
                     ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
                     ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
                     ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
@@ -635,7 +635,7 @@ class RecipeController extends Controller
                     return view('research.results', compact('recipe'));
                 }
 
-                $recipe = Recipe::where('time', 'LIKE', $request->time)
+                $recipe = Recipe::where('time', '<=', $request->time)
                 ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
                 ->where('ingredient_id', 'LIKE', $request->ingredient_id1)
                 ->paginate(15);
@@ -644,7 +644,7 @@ class RecipeController extends Controller
 
 
             } else if($request->ingredient_id2){
-                $recipe = Recipe::where('time', 'LIKE', $request->time)
+                $recipe = Recipe::where('time', '<=', $request->time)
                 ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
                 ->where('ingredient_id', 'LIKE', $request->ingredient_id2)
                 ->paginate(15);
@@ -652,7 +652,7 @@ class RecipeController extends Controller
             } else {
                 //request ha solo il campo time
 
-                $recipe = Recipe::where('time', 'LIKE', $request->time)
+                $recipe = Recipe::where('time', '<=', $request->time)
                 ->paginate(15);
                 return view('research.results', compact('recipe'));
 
