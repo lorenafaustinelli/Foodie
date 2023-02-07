@@ -55,7 +55,7 @@
             <label for="seleziona ingrediente"> </label>
             <select id="ingredient_id" class="ingredient_id form-control" name="ingredient_id">
                 @foreach ($ingredients as $ingredient)
-                  <option value="{{ $ide = $ingredient->id }}"> {{$ingredient->name_ingredient }} </option>
+                  <option value="{{ $ingredient->id }}"> {{$ingredient->name_ingredient }} </option>
                 @endforeach
             </select>
         </div> 
@@ -92,9 +92,9 @@
 
   //per passare l'id della ricetta alla pagina delle categorie
   session()->put('id', $id); ?>  <!-- oggetti di sessione che vengono mandati da una pagina all'altra -->
-<div class="d-grid gap-2 col-6 mx-auto"> 
-  <a class="btn btn-primary" href="{{ route('recipe_category.create') }}" role="button">Prosegui</a>
-</div>
+  <div class="d-grid gap-2 col-6 mx-auto"> 
+    <a class="btn btn-primary" href="{{ route('recipe_category.create') }}" role="button">Prosegui</a>
+  </div>
 
   
 <script type="text/javascript">

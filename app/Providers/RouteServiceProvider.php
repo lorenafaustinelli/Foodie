@@ -24,6 +24,16 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME = '/home';
 
     /**
+     * The path to the "ingredient" route for your application.
+     *
+     * @var string
+     */
+    //aggiunto da lorena
+    public const INGREDIENT = '/ingredients';
+
+
+
+    /**
      * Define your route model bindings, pattern filters, etc.
      *
      * @return void

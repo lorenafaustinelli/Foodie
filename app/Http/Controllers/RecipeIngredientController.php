@@ -40,13 +40,13 @@ class RecipeIngredientController extends Controller
      */
     public function store(Request $request)
     {
-        /*
+        
         $request->validate([
             'recipe_id' => 'required',
             'ingredient_id' => 'required',
             'quantity' => 'required',
             'measure' => 'required'
-        ]); */
+        ]);
 
         $recipe_ingredient = new RecipeIngredient();
         $recipe_ingredient->recipe_id = $request-> recipe_id;
