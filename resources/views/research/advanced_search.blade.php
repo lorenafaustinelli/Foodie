@@ -49,20 +49,10 @@
     </div>
   </div> 
   </br>
-  <h4> Ingredienti: </h4> 
+  <h4> Ingrediente: </h4> 
     <div class="form-group">
       <div class="w-25">
-        <select id="ingredient_id1" class="form-select" aria-label="Default select example" name="ingredient_id1">
-        <option selected></option>
-          @foreach ($ingredients as $ing)
-            <option value="{{ $ing->id }}"> {{$ing->name_ingredient }} </option>
-          @endforeach
-        </select>
-      </div>
-    </div> 
-    <div class="form-group">
-      <div class="w-25">
-        <select id="ingredient_id2" class="form-select" aria-label="Default select example" name="ingredient_id2">
+        <select id="ingredient_id" class="form-select" aria-label="Default select example" name="ingredient_id">
         <option selected></option>
           @foreach ($ingredients as $ing)
             <option value="{{ $ing->id }}"> {{$ing->name_ingredient }} </option>

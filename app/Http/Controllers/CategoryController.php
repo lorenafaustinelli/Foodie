@@ -26,7 +26,6 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //visibile solo dall'admin
         return view('category.create');
     }
 
@@ -38,7 +37,6 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'name_category' => 'required'
         ]);
