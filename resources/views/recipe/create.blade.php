@@ -49,9 +49,10 @@
                 </div>
             </div>
         </div>
-
-        <button type="submit" class="btn btn-primary"> Continua </button>
-
+        </br>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="submit" class="btn btn-primary"> Continua </button>
+        </div>
     </form>
 
 
