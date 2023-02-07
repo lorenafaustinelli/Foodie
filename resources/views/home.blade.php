@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">            
             <div class="card">
-                <div class="card-header">{{ __('Your Time Line') }}</div>
+                <div class="card-header">{{ __('Home') }}</div>
                 <div class="card-body">
                     <!-- Stampo le ricette nella home -->
                     @foreach ($recipes as $recipe)

@@ -11,105 +11,53 @@
 
 <div class="container">
   <h1> Ultimo step! </h1>
-  <h2> Associa le categorie corrispondendi alla tua ricetta </h2>
-  <div class="row">
-    <div class="card">
-      <div class="card-header">
-        <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#categoryModal"> Specifica una categoria </a>
-      </div> 
-      <div class="card-body">
-        <table id="RecipeCategoriesTable" class="table">
-          <thead>
-            <tr>
-              <th>Categoria </th>
-            </tr> 
-          </thead>
-          <tbody>
-            
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
 
+  <h2> Associa almeno una categoria alla tua ricetta </h2>
 
-<!-- Modal -->
-<div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Aggiungi:</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
+  <form action="/recipe_category/store" method="POST" enctype="multipart/form-data">
+    {{ csrf_field() }}
+    <div class="row">
+      <div class="card">
+        <div class="card-body">
+          <table id="RecipeCategoriesTable" class="table">
+            <thead>
+              <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 
-        <form id="categoryform">
+              <input type ="hidden" name = "recipe_id" id="recipe_id" value="{{ $id }}"/>
 
-        <input type ="hidden" name="recipe_id" class="recipe_id form-control" value="{{ $id }}" >
-        
-        <div class="form-group">
-            <label for="seleziona categoria"> </label>
-            <select name="category_id" class="category_id form-control" name="category_id">
+              <tr>
+                <div class="form-group">
+                <select id="category_id" class="form-control" name="category_id">
                 @foreach ($categories as $category)
                   <option value="{{ $category->id }}"> {{$category->name_category }} </option>
                 @endforeach
-            </select>
-        </div> 
-      </div>
+                </select>
+                </div>
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary add_category" > Aggiungi </button>
-      </div>
+                <div class="form-group">
+                <select id="category_id2" class="form-control" name="category_id2">
+                <option value="" selected> </option>
+                @foreach ($categories as $category)
+                  <option value="{{ $category->id }}"> {{$category->name_category }} </option>
+                @endforeach
 
-      
+                </select>
+                </div> 
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
     </div>
-  </div>
+    </br>
+    </br>
+    <div class="d-grid gap-2 col-6 mx-auto"> 
+      <button type="submit" class="btn btn-primary">Concludi</button>
+    </div>
+  </form>
 </div> 
-<br>
-<br>
-<div class="d-grid gap-2 col-6 mx-auto"> 
-  <a class="btn btn-primary" href="{{ url('/home') }}" role="button">Concludi</a>
-</div>
+ 
 
-      
-<script>
-  $(document).ready(function() {
-    $(document).on('click', '.add_category', function(e){
-      e.preventDefault();
 
-      var data = {
-        'recipe_id': $('.recipe_id').val(),
-        'category_id': $('.category_id').val(),        
-      }
-
-      $.ajaxSetup({
-
-        headers:{
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      });
-
-      $.ajax({
-          url: "{{route('recipe_category.add')}}",
-          type:"POST",
-          data:data,
-          dataType: "json",
-          success:function(response)
-          {
-            if(response)
-            {
-              $("#RecipeCategoriesTable tbody").prepend('<tr><td>' + response.name_category +'</td></tr>');
-              $("#categoryform")[0].reset();
-              $("#categoryModal").modal('hide');
-            }
-          }
-        });
-    });
-  });
-  
-
-</script> 
 
 @endsection

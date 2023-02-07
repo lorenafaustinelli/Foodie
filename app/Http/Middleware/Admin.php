@@ -17,11 +17,12 @@ class Admin
     public function handle($request, Closure $next)
     {   
         //UTENTE
-        
+
         //per lista ingredienti
         if(Auth::user()->admin=='false'){
             return redirect(RouteServiceProvider::INGREDIENT);
         }
+        
         return $next($request);
     }
 }

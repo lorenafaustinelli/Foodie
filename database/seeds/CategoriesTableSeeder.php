@@ -30,7 +30,7 @@ class CategoriesTableSeeder extends Seeder
         'name_category'   =>       'pesce',
     ], [
         
-        'name_category'   =>        'dolci',
+        'name_category'   =>       'dolci',
     ]
     ]);
 

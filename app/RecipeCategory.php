@@ -9,6 +9,6 @@ class RecipeCategory extends Model
     protected $table = 'recipe_categories';
 
     protected $fillable = [
-        'recipe_id', 'category_id',
+        'recipe_id', 'category_id', 'category_id2'
     ];
 }

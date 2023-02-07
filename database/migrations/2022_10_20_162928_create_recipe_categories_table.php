@@ -16,11 +16,14 @@ class CreateRecipeCategoriesTable extends Migration
         Schema::create('recipe_categories', function (Blueprint $table) {
             $table->bigInteger('recipe_id')->unsigned();
             $table->bigInteger('category_id')->unsigned();
+            $table->bigInteger('category_id2')->unsigned()->nullable(); 
             $table->timestamps();
 
 
             $table->foreign('recipe_id')->references('id')->on('recipes');
             $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id2')->references('id')->on('categories');
+
             
         });
     }

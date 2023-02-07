@@ -64,7 +64,6 @@ Route::post('/category/store', 'CategoryController@store');
 
 //RecipeCategory
 Route::get('/recipe_category/create', 'RecipeCategoryController@create')->name('recipe_category.create');
-Route::post('/recipe_category/create', 'RecipeCategoryController@store')->name('recipe_category.add');
 Route::post('/recipe_category/store', 'RecipeCategoryController@store');
 
 //UserRecipe
