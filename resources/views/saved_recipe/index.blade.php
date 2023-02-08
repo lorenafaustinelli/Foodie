@@ -5,7 +5,7 @@
 <div class="container">
     <h1> Ricette salvate da {{ Auth::user()->name }} </h1>
     <div class="grid-layout"> 
-    @foreach($saved_recipes->where('user_id', '=', Auth::user()->id) as $us) <!-- Scorro tutte le ricette salvate -->
+    @foreach($saved_recipes->where('user_id', '=', Auth::user()->id) as $us) <!-- Scorro tutte le ricette salvate dall'utente-->
             @foreach($recipes->where('id', '=', $us->recipe_id) as $recipe) <!-- Prendo da recipe le ricette --> 
                     <div class="card" style="width: 18rem;">
                         <img src="{{ Storage::url($recipe->photo) }}" class="card-img-top" width="250px" height="180px" alt="foto ricetta">
