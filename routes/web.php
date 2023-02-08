@@ -75,3 +75,5 @@ Route::get('search', 'RecipeController@search_recipe');
 Route::get('/advanced_search', 'RecipeController@advanced_search');
 Route::view('research/results', '/research/results')->name('research.results');
 
+//cancellazione 
+ROute::get('recipe_destroy/{id}', 'RecipeController@destroy')->name('recipe.delete');

@@ -154,11 +154,25 @@ class RecipeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id){
-        $recipe = RecipeController::find($id);
-        $recipe -> delete();
+    public function destroy(Request $request){
 
-        return redirect('recipe');
+        $id = $request->id;
+        //parte recipe_categories
+        RecipeCategory::where('recipe_id', $id)->delete();
+
+        //parte recipe_ingredients
+        RecipeIngredient::where('recipe_id', $id)->delete();
+
+        //parte user_recipe
+        UserRecipe::where('recipe_id', $id)->delete();
+
+        //parte saved_recipe
+        SavedRecipe::where('recipe_id', $id)->delete();
+
+        //parte recipe
+        Recipe::where('id', $id)->delete();
+
+        return redirect()->back();
     }
 
 
