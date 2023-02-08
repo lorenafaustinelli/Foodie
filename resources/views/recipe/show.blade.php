@@ -8,12 +8,11 @@
     </div>
 
     <div class="Button">
-        @foreach($saved_recipes->where('user_id', '=', Auth::user()->id) as $us) <!-- Scorro tutte le ricette salvate dall'utente-->
-            @if(!$us->where('recipe_id', '=', $recipe->id))
-                <a class="btn btn-success" role="button" href="{{ route('recipe.save', $recipe->id)}}"> Salva ricetta </a>
-            @endif
-        @endforeach
-        <a class="btn btn-success" role="button" href=""> Salvata </a>
+        @if($saved_recipes->where('user_id', '=', Auth::user()->id)->where('recipe_id', '=', $recipe))
+            <a class="btn btn-success" role="button" href=""> Salvata </a>
+        @else
+            <a class="btn btn-success" role="button" href="{{ route('recipe.save', $recipe->id)}}"> Salva ricetta </a>
+        @endif
     </div>
 
     <div class="Photo">
