@@ -94,7 +94,7 @@
                                     </a>
 
                                     <!-- Visualizzare le ricette salvate -->
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="{{ route('saved.index')}}">
                                         Le ricette salvate
                                     </a>
                                                                 

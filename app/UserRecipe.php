@@ -12,3 +12,4 @@ class UserRecipe extends Model
         'user_id', 'recipe_id',
     ];
 }
+ 
