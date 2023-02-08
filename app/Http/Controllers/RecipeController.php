@@ -126,7 +126,7 @@ class RecipeController extends Controller
         $savedRecipe->created_at = time();
         $savedRecipe->save();*/
 
-        SavedRecipe::create(['user_id' => $user, 'recipe_id' => $recipe, 'created_at' => time()]);
+        SavedRecipe::create(['user_id' => $user, 'recipe_id' => $id, 'created_at' => time(), 'updated_at' => time()]);
 
         return view('/recipe/show');
     }
