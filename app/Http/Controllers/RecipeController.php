@@ -218,7 +218,8 @@ class RecipeController extends Controller
                             $recipe = Recipe::where('name_recipe', 'LIKE', '%'.$request->name_recipe.'%')
                             ->where('time', '<=', $request->time)
                             ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
-                            ->where('category_id', [$request->category_id1, $request->category_id2])
+                            ->whereIn('category_id', [$request->category_id1, $request->category_id2])
+                            ->whereIn('category_id2', [$request->category_id1, $request->category_id2])
                             ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
                             ->where('ingredient_id', 'LIKE', $request->ingredient_id)
                             ->get();
@@ -231,7 +232,8 @@ class RecipeController extends Controller
                             $recipe = Recipe::where('name_recipe', 'LIKE', '%'.$request->name_recipe.'%')
                             ->where('time', '<=', $request->time)
                             ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
-                            ->where('category_id', [$request->category_id1, $request->category_id2])
+                            ->whereIn('category_id', [$request->category_id1, $request->category_id2])
+                            ->whereIn('category_id2', [$request->category_id1, $request->category_id2])
                             ->get();
                             return view('research.results', compact('recipe'));
                             
@@ -244,6 +246,7 @@ class RecipeController extends Controller
                         ->where('time', '<=', $request->time)
                         ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                         ->where('category_id', $request->category_id1)
+                        ->orWhere('category_id2', 'LIKE', $request->category_id1)
                         ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
                         ->where('ingredient_id', 'LIKE', $request->ingredient_id)
                         ->get();
@@ -255,6 +258,7 @@ class RecipeController extends Controller
                     ->where('time', '<=', $request->time)
                     ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                     ->where('category_id', 'LIKE', $request->category_id1)
+                    ->orWhere('category_id2', 'LIKE', $request->category_id1)
                     ->get();
                     return view('research.results', compact('recipe'));
 
@@ -267,6 +271,7 @@ class RecipeController extends Controller
                         ->where('time', '<=', $request->time)
                         ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                         ->where('category_id', 'LIKE', $request->category_id2)
+                        ->orWhere('category_id2', 'LIKE', $request->category_id2)
                         ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
                         ->where('ingredient_id', 'LIKE', $request->ingredient_id)
                         ->get();
@@ -278,6 +283,7 @@ class RecipeController extends Controller
                         ->where('time', '<=', $request->time)
                         ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                         ->where('category_id', 'LIKE', $request->category_id2)
+                        ->orWhere('category_id2', 'LIKE', $request->category_id2)
                         ->get();
                         return view('research.results', compact('recipe'));
 
@@ -336,6 +342,7 @@ class RecipeController extends Controller
                     $recipe = Recipe::where('name_recipe', 'LIKE', '%'.$request->name_recipe.'%')
                     ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                     ->where('category_id', 'LIKE', $request->category_id1)
+                    ->orWhere('category_id2', 'LIKE', $request->category_id1)
                     ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
                     ->where('ingredient_id', 'LIKE', $request->ingredient_id)
                     ->get();
@@ -347,6 +354,7 @@ class RecipeController extends Controller
                 $recipe = Recipe::where('name_recipe', 'LIKE', '%'.$request->name_recipe.'%')
                 ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                 ->where('category_id', 'LIKE', $request->category_id1)
+                ->orWhere('category_id2', 'LIKE', $request->category_id1)
                 ->get();
                 return view('research.results', compact('recipe'));
 
@@ -359,6 +367,7 @@ class RecipeController extends Controller
                     $recipe = Recipe::where('name_recipe', 'LIKE', '%'.$request->name_recipe.'%')
                     ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                     ->where('category_id', 'LIKE', $request->category_id2)
+                    ->orWhere('category_id2', 'LIKE', $request->category_id2)
                     ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
                     ->where('ingredient_id', 'LIKE', $request->ingredient_id)
                     ->get();
@@ -369,6 +378,7 @@ class RecipeController extends Controller
                     $recipe = Recipe::where('name_recipe', 'LIKE', '%'.$request->name_recipe.'%')
                     ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                     ->where('category_id', 'LIKE', $request->category_id2)
+                    ->orWhere('category_id2', 'LIKE', $request->category_id2)
                     ->get();
                     return view('research.results', compact('recipe'));
 
@@ -427,6 +437,7 @@ class RecipeController extends Controller
                     $recipe = Recipe::where('time', '<=', $request->time)
                     ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                     ->where('category_id', 'LIKE', $request->category_id1)
+                    ->orWhere('category_id2', 'LIKE', $request->category_id1)
                     ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
                     ->where('ingredient_id', 'LIKE', $request->ingredient_id)
                     ->get();
@@ -439,6 +450,7 @@ class RecipeController extends Controller
                $recipe = Recipe::where('time', '<=', $request->time)
                ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                ->where('category_id', 'LIKE', $request->category_id1)
+               ->orWhere('category_id2', 'LIKE', $request->category_id1)
                ->get();
                return view('research.results', compact('recipe'));
 
@@ -452,6 +464,7 @@ class RecipeController extends Controller
                     $recipe = Recipe::where('time', '<=', $request->time)
                     ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                     ->where('category_id', 'LIKE', $request->category_id2)
+                    ->orWhere('category_id2', 'LIKE', $request->category_id2)
                     ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
                     ->where('ingredient_id', 'LIKE', $request->ingredient_id)
                     ->get();
@@ -462,6 +475,7 @@ class RecipeController extends Controller
                 $recipe = Recipe::where('time', '<=', $request->time)
                 ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                 ->where('category_id', 'LIKE', $request->category_id2)
+                ->orWhere('category_id2', 'LIKE', $request->category_id2)
                 ->get();
                 return view('research.results', compact('recipe'));
 
@@ -512,6 +526,7 @@ class RecipeController extends Controller
                 
                 $recipe = Recipe::join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                 ->where('category_id', 'LIKE', $request->category_id1)
+                ->orWhere('category_id2', 'LIKE', $request->category_id1)
                 ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
                 ->where('ingredient_id', 'LIKE', $request->ingredient_id)
                 ->get();
@@ -522,6 +537,7 @@ class RecipeController extends Controller
 
                 $recipe = Recipe::join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                 ->where('category_id', 'LIKE', $request->category_id1)
+                ->orWhere('category_id2', 'LIKE', $request->category_id1)
                 ->get();
                 return view('research.results', compact('recipe'));
 
@@ -536,6 +552,7 @@ class RecipeController extends Controller
 
                 $recipe = Recipe::join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                 ->where('category_id', 'LIKE', $request->category_id2)
+                ->orWhere('category_id2', 'LIKE', $request->category_id2)
                 ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
                 ->where('ingredient_id', 'LIKE', $request->ingredient_id)
                 ->get();
@@ -547,6 +564,7 @@ class RecipeController extends Controller
                 //la request ha solo il campo category_id2
                 $recipe = Recipe::join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
                 ->where('category_id', 'LIKE', $request->category_id2)
+                ->orWhere('category_id2', 'LIKE', $request->category_id2)
                 ->get();
                 return view('research.results', compact('recipe'));
 
