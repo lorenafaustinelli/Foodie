@@ -9,6 +9,7 @@ use App\Category;
 use App\RecipeCategory;
 use App\RecipeIngredient;
 use App\Ingredient;
+use App\SavedRecipe;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
@@ -20,8 +21,7 @@ class RecipeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(){
         //
     } 
 
@@ -30,8 +30,7 @@ class RecipeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create(){
         return view('recipe.create');
     } 
 
@@ -65,8 +64,6 @@ class RecipeController extends Controller
             $recipe->photo2 = request()->file('photo2')->store('public/recipes');
         }
 
-
-
         /*
         $user_recipe = new UserRecipe();
         $user_recipe->user_id = $u_id;
@@ -91,9 +88,7 @@ class RecipeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {   
-
+    public function show($id){   
         //dichiarazioni
         $category_names = "";
         $recipe_ing = "";
@@ -119,14 +114,30 @@ class RecipeController extends Controller
 
     }
 
+    public function save($id){
+        $user = Auth::user()->id;
+
+        $recipe = Recipe::find($id);
+/*
+        $savedRecipe = new SavedRecipe();
+        //$savedRecipe = DB::table('saved_recipes')->update(array('user_id' => $user, 'recipe_id' => $recipe));
+        $savedRecipe->user_id = $user;
+        $savedRecipe->recipe_id = $recipe;
+        $savedRecipe->created_at = time();
+        $savedRecipe->save();*/
+
+        SavedRecipe::create(['user_id' => $user, 'recipe_id' => $recipe, 'created_at' => time()]);
+
+        return view('/recipe/show');
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id){
         //
     }
 
@@ -146,8 +157,7 @@ class RecipeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         $input = $request -> all(); 
         $recipe = RecipeController::find($id);
         $recipe->update($input);
@@ -161,8 +171,7 @@ class RecipeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id){
         $recipe = RecipeController::find($id);
         $recipe -> delete();
 
