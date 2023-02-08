@@ -10,6 +10,7 @@ use App\UserRecipe;
 use App\UnityOfMeasurement;
 use App\Recipe;
 use App\RecipeCategory;
+use App\SavedRecipe;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -39,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('measurements', UnityOfMeasurement::all());
             $view->with('recipes', Recipe::all());
             $view->with('recipe_categories', RecipeCategory::all());
-
+            $view->with('saved_recipes', SavedRecipe::all());
         });
     }
 }

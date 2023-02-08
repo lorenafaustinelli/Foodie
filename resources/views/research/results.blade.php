@@ -6,7 +6,7 @@
 
 @foreach($recipe as $recipe)
 
-<div class="grid-layout"> 
+    <div class="grid-layout"> 
        
     <div class="card" style="width: 18rem;">
         <!-- scorro poi le ricette corrispondenti agli id del for precedente -->
