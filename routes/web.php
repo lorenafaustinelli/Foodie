@@ -41,7 +41,7 @@ Route::get('/userPage', function(){
 //Prove Lisa
 Route::get('/recipe/create', 'RecipeController@create')->name('recipe.create');
 Route::post('/recipe/store', 'RecipeController@store')->name('recipe.store');
-Route::get('/recipe/save', 'RecipeController@save')->name('recipe.save');
+Route::get('/recipe/save/{id}', 'RecipeController@save')->name('recipe.save');
 
 //Prove Lorena
 Route::get('/recipe/show/{id}', 'RecipeController@show')->name('recipe.show');

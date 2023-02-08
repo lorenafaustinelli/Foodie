@@ -116,8 +116,6 @@ class RecipeController extends Controller
 
     public function save($id){
         $user = Auth::user()->id;
-
-        //$recipe = Recipe::find($id);
 /*
         $savedRecipe = new SavedRecipe();
         //$savedRecipe = DB::table('saved_recipes')->update(array('user_id' => $user, 'recipe_id' => $recipe));
@@ -128,7 +126,21 @@ class RecipeController extends Controller
 
         SavedRecipe::create(['user_id' => $user, 'recipe_id' => $id, 'created_at' => time(), 'updated_at' => time()]);
 
-        return view('/recipe/show');
+        $recipe = Recipe::find($id);
+
+        $recipe_category = DB::table('recipe_categories')->where('recipe_id', '=', $id)
+        ->join('categories', 'categories.id', "=", 'recipe_categories.category_id')
+        ->select('name_category')
+        ->get();
+
+        //bisogna fare join tra recipe ingredient e ingredient, passando solo gli elementi di recipe ingredient con l'id della ricetta
+        //parte ingredienti
+        $recipe_ing = DB::table('recipe_ingredients')->where('recipe_id', '=', $id)
+        ->join('ingredients', 'ingredients.id', "=", 'recipe_ingredients.ingredient_id')
+        ->select('name_ingredient', 'quantity', 'measure')
+        ->get();
+
+        return view('/recipe/show', compact('recipe', 'recipe_category', 'recipe_ing'));
     }
 
     /**
