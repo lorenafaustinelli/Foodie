@@ -92,6 +92,11 @@
                                     <a class="dropdown-item" href="{{ route('user.recipe') }}">
                                        Le mie ricette
                                     </a>
+
+                                    <!-- Visualizzare le ricette salvate -->
+                                    <a class="dropdown-item" href="">
+                                        Le ricette salvate
+                                    </a>
                                                                 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

@@ -8,7 +8,7 @@
     </div>
 
     <div class="Button">
-            <a class="btn btn-success" href="#" role="button" href="{{ route('recipe.save', $recipe)}}"> Salva ricetta </a>
+            <a class="btn btn-success" role="button" href="{{ route('recipe.save', $recipe->id)}}"> Salva ricetta </a>
     </div>
 
     <div class="Photo">

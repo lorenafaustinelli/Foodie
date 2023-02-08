@@ -117,12 +117,12 @@ class RecipeController extends Controller
     public function save($id){
         $user = Auth::user()->id;
 
-        $recipe = Recipe::find($id);
+        //$recipe = Recipe::find($id);
 /*
         $savedRecipe = new SavedRecipe();
         //$savedRecipe = DB::table('saved_recipes')->update(array('user_id' => $user, 'recipe_id' => $recipe));
         $savedRecipe->user_id = $user;
-        $savedRecipe->recipe_id = $recipe;
+        $savedRecipe->recipe_id = $id;
         $savedRecipe->created_at = time();
         $savedRecipe->save();*/
 

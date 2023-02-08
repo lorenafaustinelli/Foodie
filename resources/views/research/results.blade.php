@@ -21,7 +21,7 @@
         <div class="card-body">
             <a href="{{ route('recipe.show', $recipe)}}" class="card-link"> Vedi ricetta</a>
         </div>
-        
+         
     </div>
 
 @endforeach
