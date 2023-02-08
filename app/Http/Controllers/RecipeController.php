@@ -96,12 +96,18 @@ class RecipeController extends Controller
         $recipe = Recipe::find($id);  //where('id', $id);
 
         //parte categoria
-        //$category_id = RecipeCategory::where('recipe_id', '=', $id)->pluck('category_id');
 
-        $recipe_category = DB::table('recipe_categories')->where('recipe_id', '=', $id)
+        $recipe_category_id = DB::table('recipe_categories')->where('recipe_id', '=', $id)
         ->join('categories', 'categories.id', "=", 'recipe_categories.category_id')
-        ->select('name_category')
+        //->select('name_category')
         ->get();
+
+        $recipe_category_id2 = DB::table('recipe_categories')->where('recipe_id', '=', $id)
+        ->join('categories', 'categories.id', "=", 'recipe_categories.category_id2')
+        //->select('name_category')
+        ->get();
+
+        $recipe_category = $recipe_category_id->merge($recipe_category_id2);
 
         //bisogna fare join tra recipe ingredient e ingredient, passando solo gli elementi di recipe ingredient con l'id della ricetta
         //parte ingredienti
@@ -113,6 +119,7 @@ class RecipeController extends Controller
         return view('/recipe/show', compact('recipe', 'recipe_category', 'recipe_ing'));
 
     }
+
 
     /**
      * Show the form for editing the specified resource.
