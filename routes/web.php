@@ -43,6 +43,7 @@ Route::get('/recipe/create', 'RecipeController@create')->name('recipe.create');
 Route::post('/recipe/store', 'RecipeController@store')->name('recipe.store');
 Route::get('/saved_recipe/index', 'SavedRecipeController@index')->name('saved.index');
 Route::get('/saved_recipe/save/{id}', 'SavedRecipeController@save')->name('recipe.save');
+Route::get('/saved_recipe/destroy/{id}', 'SavedRecipeController@destroy')->name('recipe.destroy');
 
 //Prove Lorena
 Route::get('/recipe/show/{id}', 'RecipeController@show')->name('recipe.show');

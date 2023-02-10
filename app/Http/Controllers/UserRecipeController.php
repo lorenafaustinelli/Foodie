@@ -15,7 +15,7 @@ class UserRecipeController extends Controller
      */
     public function index()
     {   
-        $user_id = Auth::user()->id;
+        $user_id = Auth::id();
         $users_recipes = UserRecipe::where('user_id', '=', $user_id)->pluck('recipe_id');
         return view('user_recipe/index', compact('users_recipes'));
     }

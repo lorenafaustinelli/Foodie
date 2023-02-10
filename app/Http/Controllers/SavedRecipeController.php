@@ -38,21 +38,7 @@ class SavedRecipeController extends Controller
 
         SavedRecipe::create(['user_id' => $user, 'recipe_id' => $id, 'created_at' => time(), 'updated_at' => time()]);
 
-        $recipe = Recipe::find($id);
-
-        $recipe_category = DB::table('recipe_categories')->where('recipe_id', '=', $id)
-        ->join('categories', 'categories.id', "=", 'recipe_categories.category_id')
-        ->select('name_category')
-        ->get();
-
-        //bisogna fare join tra recipe ingredient e ingredient, passando solo gli elementi di recipe ingredient con l'id della ricetta
-        //parte ingredienti
-        $recipe_ing = DB::table('recipe_ingredients')->where('recipe_id', '=', $id)
-        ->join('ingredients', 'ingredients.id', "=", 'recipe_ingredients.ingredient_id')
-        ->select('name_ingredient', 'quantity', 'measure')
-        ->get();
-
-        return view('/recipe/show', compact('recipe', 'recipe_category', 'recipe_ing'));
+        return redirect()->back();
     }
 
     /**
@@ -106,8 +92,12 @@ class SavedRecipeController extends Controller
      * @param  \App\SavedRecipe  $savedRecipe
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SavedRecipe $savedRecipe)
-    {
-        //
+    public function destroy(Request $request)
+    {        
+        $id = $request->id;
+    
+        SavedRecipe::where('recipe_id', $id)->where('user_id', Auth::id())->delete();;
+
+        return redirect()->back();
     }
 }

@@ -4,12 +4,12 @@
 
 <div class="showrecipe">
     <div class ="Title">
-        <h1> {{$recipe->name_recipe}} <h1> 
+        <h1> {{$recipe->name_recipe }}<h1>
     </div>
 
     <div class="Button">
-        @if($saved_recipes->where('user_id', '=', Auth::user()->id)->where('recipe_id', '=', $recipe))
-            <a class="btn btn-success" role="button" href=""> Salvata </a>
+        @if($saved_recipes->where('user_id', Auth::id())->where('recipe_id', $recipe->id))
+            <a class="btn btn-success" role="button" href="{{ route('recipe.destroy', $recipe->id)}}"> Salvata </a>
         @else
             <a class="btn btn-success" role="button" href="{{ route('recipe.save', $recipe->id)}}"> Salva ricetta </a>
         @endif
