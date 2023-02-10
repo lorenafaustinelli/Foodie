@@ -44,8 +44,10 @@ Route::post('/recipe/store', 'RecipeController@store')->name('recipe.store');
 Route::get('/saved_recipe/index', 'SavedRecipeController@index')->name('saved.index');
 Route::get('/saved_recipe/save/{id}', 'SavedRecipeController@save')->name('recipe.save');
 
-//Prove Lorena
+//Recipe
+Route::get('/recipe/index', 'RecipeController@index')->name('recipes.index');
 Route::get('/recipe/show/{id}', 'RecipeController@show')->name('recipe.show');
+Route::get('recipe_destroy/{id}', 'RecipeController@destroy')->name('recipe.delete');
 
 //RecipeIngredient
 Route::get('/recipe_ingredient', 'RecipeIngredientController@index');
@@ -60,7 +62,7 @@ Route::post('/ingredient/store', 'IngredientController@store');
 
 //Category
 Route::get('/category/create', 'CategoryController@create')->name('add.category');
-Route::get('/category/index', 'CategoryController@index');
+Route::get('/category/index', 'CategoryController@index')->name('categories');
 Route::post('/category/store', 'CategoryController@store');
 
 //RecipeCategory
@@ -76,5 +78,3 @@ Route::get('search', 'RecipeController@search_recipe');
 Route::get('/advanced_search', 'RecipeController@advanced_search');
 Route::view('research/results', '/research/results')->name('research.results');
 
-//cancellazione 
-ROute::get('recipe_destroy/{id}', 'RecipeController@destroy')->name('recipe.delete');
