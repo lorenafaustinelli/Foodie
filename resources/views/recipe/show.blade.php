@@ -24,12 +24,12 @@
         <table id="RecipeShowIngredients" width="300">
         <tbody>
         </br>
-        <p> Numero di porzioni: <input type="number" size="1" id="portion" value="{{ $recipe->portion }}" min="1" max = "10" > </p>
+        <p> Numero di porzioni: <input type="number" size="1" id="portion" name="portion" value="{{ $recipe->portion }}" min="1" max = "20" > </p>
         @if($recipe_ing != '')
             @foreach ($recipe_ing as $i)
                 <tr>
 
-                <td>  {{ $i->name_ingredient }} </td> 
+                <td> {{ $i->name_ingredient }} </td> 
 
                 <td> {{ $i->quantity }} </td> 
 
@@ -65,13 +65,54 @@
        
 </div>
 
+<?php
+foreach($recipe_ing as $rp){
+    $quantity = $rp->quantity;
+}
+?>
+
 <script>
 $(document).ready(function() {
-    $(#portion).change(function(){
+    $(portion).change(function(e){
+        e.preventDefault();
 
-      var portion = $('.portion').val();
-      alert(portion);
-      console.log("hello muddafakka");
+        var data = {
+            'portion': $('#portion').val(),
+            recipe_ing : JSON.stringify(<?php echo $recipe_ing ?>), 
+            
+        }
+        
+        console.log(data);
+        $.ajaxSetup({
+
+            headers:{
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+          url: "{{route('recipe_ingredient.change.quantity')}}",
+          type:"POST",
+          data:data,
+          dataType: "json",
+          success:function(recipe_ing)
+          {
+            if(recipe_ing)
+            {
+                //$("#RecipeShowIngredients tbody").prepend('<tr><td>' + response.recipe_ingname_ingredient + '</td><td>' + response.recipe_ing.quantity +'</td><td>'+ response.recipe_ing.measure +'</td></tr>');
+                //console.log(recipe_ing);
+                $.each(JSON.parse(recipe_ing), function(key, value){
+
+                    $("#RecipeShowIngredients tbody").html('<tr><td>' + value[0] + '</td><td>' + value[0] +'</td><td>'+ value[0] +'</td></tr>');
+                    //for(var i = 0; i< value.length; i++){
+
+                      //  $("#RecipeShowIngredients tbody").prepend('<tr><td>' + value[i] + '</td><tr>');
+                    //}
+                })
+                
+            }
+          }
+        });
 
     });
   });
