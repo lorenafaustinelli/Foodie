@@ -82,7 +82,7 @@ $(document).ready(function() {
             
         }
         
-        console.log(data);
+        //console.log(data);
         $.ajaxSetup({
 
             headers:{
@@ -98,16 +98,14 @@ $(document).ready(function() {
           success:function(recipe_ing)
           {
             if(recipe_ing)
-            {
-                //$("#RecipeShowIngredients tbody").prepend('<tr><td>' + response.recipe_ingname_ingredient + '</td><td>' + response.recipe_ing.quantity +'</td><td>'+ response.recipe_ing.measure +'</td></tr>');
-                //console.log(recipe_ing);
+            {   
+                $("#RecipeShowIngredients tbody").html('');
+                console.log(recipe_ing);
                 $.each(JSON.parse(recipe_ing), function(key, value){
-
-                    $("#RecipeShowIngredients tbody").html('<tr><td>' + value[0] + '</td><td>' + value[0] +'</td><td>'+ value[0] +'</td></tr>');
-                    //for(var i = 0; i< value.length; i++){
-
-                      //  $("#RecipeShowIngredients tbody").prepend('<tr><td>' + value[i] + '</td><tr>');
-                    //}
+                    $("#RecipeShowIngredients tbody").append(
+                    $('<tr>')
+                        .html('<td>' + value.name_ingredient + '</td><td>' + value.quantity +'</td><td>'+ value.measure +'</td>')
+                    );
                 })
                 
             }
