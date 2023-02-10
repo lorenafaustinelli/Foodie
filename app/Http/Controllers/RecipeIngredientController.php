@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\RecipeIngredient;
+use App\Recipe;
 use Illuminate\Http\Request;
 use App\Ingredient;
 use Illuminate\Support\Facades\DB;
@@ -65,8 +66,49 @@ class RecipeIngredientController extends Controller
             'measure' => $request-> measure
         ];
 
-
         return response()->json($response);
+    }
+
+    //funzione per modificare la quantità degli ingredienti nella visualizzazione della ricetta
+    public function change_quantity(Request $request){
+
+        $portion = $request->portion;
+        $recipe_ing = json_decode($request->recipe_ing);
+
+        //scorro recipe_ing per salvarmi le quantità degli ingredienti
+        foreach($recipe_ing as $rp){
+            $name_ingredient = $rp -> name_ingredient;
+            $quantity[] = $rp -> quantity;
+            $measure = $rp -> measure;
+            $recipe_id = $rp -> recipe_id;
+            
+        }
+        //prendo dal db la quantità orifinale delle porzioni per poter effettuare i calcoli
+        $portion_or = Recipe::where('id', $recipe_id)
+        ->select('portion')
+        ->first(); 
+        
+        //essendo che portion_or è un oggetto con dentro un valore uso intval per estrarlo
+        $portion_o = intval($portion_or->portion);
+
+        //calcolo le quantità per la porzione richiesta dall'utente
+        foreach($quantity as $q){
+            $qu[] = ($q / $portion_o) * $portion;
+        }
+
+        //cambio i valori delle quantità nell'array originale
+        foreach($recipe_ing as $rp){
+            $rp->quantity = $qu;
+        }
+
+        $recipe_ing = json_encode($recipe_ing);
+        //$response = [
+            //'portion' => $request->portion,
+            //'recipe_ing' => $recipe_ing,
+        //];
+        
+        return response()->json($recipe_ing);
+
     }
 
     /**

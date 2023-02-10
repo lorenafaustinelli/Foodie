@@ -113,7 +113,7 @@ class RecipeController extends Controller
         //parte ingredienti
         $recipe_ing = DB::table('recipe_ingredients')->where('recipe_id', '=', $id)
         ->join('ingredients', 'ingredients.id', "=", 'recipe_ingredients.ingredient_id')
-        ->select('name_ingredient', 'quantity', 'measure')
+        ->select('name_ingredient', 'quantity', 'measure', 'recipe_id')
         ->get();
 
         return view('/recipe/show', compact('recipe', 'recipe_category', 'recipe_ing'));

@@ -51,6 +51,7 @@ Route::get('/recipe/show/{id}', 'RecipeController@show')->name('recipe.show');
 Route::get('/recipe_ingredient', 'RecipeIngredientController@index');
 Route::post('/recipe_ingredient/store', 'RecipeIngredientController@store')->name('recipe_ingredient.add');
 Route::get('/recipe_ingredient/create', 'RecipeIngredientController@create');
+Route::post('/recipe_ingredient/change_quantity', 'RecipeIngredientController@change_quantity')->name('recipe_ingredient.change.quantity');
 
 //Ingredient
 Route::get('/ingredient/create', 'IngredientController@create')->name('add.ingredient');
