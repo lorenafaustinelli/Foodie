@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([[
-
+            'id'         =>      '1',
             'name'       =>      'Lorena',
             'surname'    =>      'Faustinelli', 
             'email'      =>      'lorena@foodie.it',
@@ -26,7 +26,7 @@ class UsersTableSeeder extends Seeder
             'updated_at'  =>     date('Y-m-d h:i:s'),
             
         ], [
-
+            'id'        =>       '2',
             'name'      =>       'Lisa',
             'surname'   =>       'Giacobazzi', 
             'email'     =>       'lisa@foodie.it',
