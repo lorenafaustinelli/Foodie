@@ -29,7 +29,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     //aggiunto da lorena
-    public const LAYOUTS = '/ingredients';
+    public const WELCOME = '/';
 
 
 
