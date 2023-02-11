@@ -22,7 +22,11 @@ class RecipeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        //
+        
+        //ho usato DB::table per poter usare la funzione latest();
+        $recipe = DB::table('recipes')->latest()->get();
+
+        return view('/recipe/index', compact('recipe'));
     } 
 
     /**
@@ -138,6 +142,11 @@ class RecipeController extends Controller
         //$recipe = ;
         return $id;//$recipe;
     }
+
+    public function latest($column = 'created_at')
+    {
+    return $this->orderBy($column, 'desc');
+    } 
 
 
     /**
@@ -581,8 +590,10 @@ class RecipeController extends Controller
 
             
         } else {
-            //se l'utente non inserisce nessun campo ricarica la pagina di ricerca
-            return view('advanced.search');
+            //se l'utente non inserisce nessun campo vai a tutte le ricette
+
+            $recipe = DB::table('recipes')->latest()->get();
+            return view('/recipe/index', compact('recipe'));
         }
     
     } 

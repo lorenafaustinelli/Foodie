@@ -93,12 +93,14 @@ class RecipeIngredientController extends Controller
 
         //calcolo le quantità per la porzione richiesta dall'utente
         foreach($quantity as $q){
-            $qu[] = ($q / $portion_o) * $portion;
+            $qu[] = ceil(($q / $portion_o) * $portion);
         }
 
         //cambio i valori delle quantità nell'array originale
+        $i = 0;
         foreach($recipe_ing as $rp){
-            $rp->quantity = $qu;
+            $rp->quantity = $qu[$i];
+            $i = $i + 1;
         }
 
         $recipe_ing = json_encode($recipe_ing);

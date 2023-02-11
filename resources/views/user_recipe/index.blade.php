@@ -5,6 +5,7 @@
 
 <div class="container">
     <h1> Ricette create da {{ Auth::user()->name }} </h1> 
+    </br>
     <div class="grid-layout"> 
     @foreach($users_recipes as $ur) <!-- scorro gli id delle ricette scritte dall'utente --> 
         <div class="card" style="width: 18rem;">
