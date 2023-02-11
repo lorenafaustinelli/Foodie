@@ -16,8 +16,12 @@ class IngredientController extends Controller
     {
         $ingredients = Ingredient::all();
 
+<<<<<<< HEAD
         return view('/ingredient/index', compact('ingredients'));
 
+=======
+        return view('/ingredients', compact('ingredients'));
+>>>>>>> 3c8a733b2e85643098c09d2fdd37ba0f6d0c7670
     }
 
     /**
