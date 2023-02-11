@@ -84,7 +84,7 @@
                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
                                     <!-- Visualizzare il proprio profilo -->
-                                    <a class="dropdown-item" href="{{ route('userPage') }}">
+                                    <a class="dropdown-item" href="{{ route('user.index') }}">
                                         Il mio profilo
                                     </a>
                                     

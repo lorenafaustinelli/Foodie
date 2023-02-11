@@ -77,7 +77,7 @@ class RecipeController extends Controller
         $recipe_id = $recipe->id;
         
         //per abbinare la ricetta all'utente
-        $user_id = Auth::user()->id; 
+        $user_id = Auth::id(); 
         UserRecipe::create(['user_id' => $user_id, 'recipe_id' => $recipe_id]);
         
         //return redirect('recipe');

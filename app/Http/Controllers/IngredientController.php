@@ -17,7 +17,6 @@ class IngredientController extends Controller
         $ingredients = Ingredient::all();
 
         return view('/ingredients', compact('ingredients'));
-
     }
 
     /**
