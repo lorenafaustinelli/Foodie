@@ -19,7 +19,7 @@ class Admin
         //UTENTE
 
         //per layout
-        if(Auth::user()->admin=='false'){
+        if(Auth::user()->admin=='true'){
             return redirect(RouteServiceProvider::HOME);
         }
         
