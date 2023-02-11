@@ -18,9 +18,9 @@ class Admin
     {   
         //UTENTE
 
-        //per lista ingredienti
+        //per layout
         if(Auth::user()->admin=='false'){
-            return redirect(RouteServiceProvider::INGREDIENT);
+            return redirect(RouteServiceProvider::HOME);
         }
         
         return $next($request);

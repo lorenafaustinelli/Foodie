@@ -35,6 +35,16 @@ class UsersTableSeeder extends Seeder
             'created_at' =>       date('Y-m-d h:i:s'),
             'updated_at'  =>      date('Y-m-d h:i:s'),
 
+        ], [
+            'id'        =>       '3',
+            'name'      =>       'Bill',
+            'surname'   =>       'Gates', 
+            'email'     =>       'bill@foodie.it',
+            'admin'     =>        false,
+            'password'  =>        bcrypt('password'),
+            'created_at' =>       date('Y-m-d h:i:s'),
+            'updated_at'  =>      date('Y-m-d h:i:s'),
+
         ]
         ]);
     }
