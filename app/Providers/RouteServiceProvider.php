@@ -31,6 +31,15 @@ class RouteServiceProvider extends ServiceProvider
     //aggiunto da lorena
     public const WELCOME = '/';
 
+    /**
+     * The path to the "layout" route for your application.
+     *
+     * @var string
+     */
+    //aggiunto da lorena
+    public const USER = '/permission_denied';
+
+
 
 
     /**

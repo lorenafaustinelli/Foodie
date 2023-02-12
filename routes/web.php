@@ -46,13 +46,18 @@ Route::group(['middleware'=>['user']], function(){
     Route::get('/saved_recipe/index', 'SavedRecipeController@index')->name('saved.index');
     Route::get('/saved_recipe/save/{id}', 'SavedRecipeController@save')->name('recipe.save');
     Route::get('/saved_recipe/destroy/{id}', 'SavedRecipeController@destroy')->name('recipe.destroy');
-    Route::get('/user/userPage', 'UserController@index')->name('user.index');
+    Route::get('/user/userPage', 'UserController@show')->name('user.show'); 
     Route::get('/user/upPic', 'UserController@update')->name('user.update');
+
+    //User
+    Route::get('/user/index', 'UserController@index')->name('user.index')->middleware('admin');
+    Route::get('/user/destroy/{id}', 'UserController@destroy')->name('user.delete');
+
 
     //Recipe
     Route::get('/recipe/index', 'RecipeController@index')->name('recipes.index');
     Route::get('/recipe/show/{id}', 'RecipeController@show')->name('recipe.show');
-    Route::get('recipe_destroy/{id}', 'RecipeController@destroy')->name('recipe.delete');
+    Route::get('/recipe_destroy/{id}', 'RecipeController@destroy')->name('recipe.delete');
 
     //RecipeIngredient
     Route::get('/recipe_ingredient', 'RecipeIngredientController@index');
@@ -83,6 +88,8 @@ Route::group(['middleware'=>['user']], function(){
     Route::get('/advanced_search', 'RecipeController@advanced_search');
     Route::view('research/results', '/research/results')->name('research.results');
 
+    //Admin 
+    Route::view('/permission_denied', '/permission_denied')->name('permission_denied');
 
 
 });

@@ -140,6 +140,11 @@
                                 </a> 
                                 
                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="{{ route('user.index') }}">
+                                    {{__('Utenti')}}
+                                    </a>
+
                                     <a class="dropdown-item" href="{{ route('recipes.index') }}">
                                     {{__('Ricette')}}
                                     </a>
@@ -151,6 +156,7 @@
                                     <a class="dropdown-item" href="{{ route('categories') }}">
                                     {{ __('Categorie') }}
                                     </a>
+                                    
                                     
                                 </div>
                             </li>
