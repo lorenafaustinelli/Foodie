@@ -31,30 +31,21 @@ Route::group(['middleware'=>['user']], function(){
             'recipes' => $recipes   //passo le ricette alla view
         ]);
     })->name('home');
-    /*
-    Route::get('/userPage', function(){
-        $recipes = App\Recipe::all();
 
-        return view('userPage', [
-            'recipes' => $recipes
-        ]);
-    })->name('userPage');*/
-
-    //Prove Lisa
-    Route::get('/recipe/create', 'RecipeController@create')->name('recipe.create');
-    Route::post('/recipe/store', 'RecipeController@store')->name('recipe.store');
+    //SacedRecipe
     Route::get('/saved_recipe/index', 'SavedRecipeController@index')->name('saved.index');
     Route::get('/saved_recipe/save/{id}', 'SavedRecipeController@save')->name('recipe.save');
     Route::get('/saved_recipe/destroy/{id}', 'SavedRecipeController@destroy')->name('recipe.destroy');
-    Route::get('/user/userPage', 'UserController@show')->name('user.show'); 
-    Route::get('/user/upPic', 'UserController@update')->name('user.update');
 
     //User
+    Route::get('/user/userPage', 'UserController@show')->name('user.show'); 
+    Route::get('/user/upPic', 'UserController@update')->name('user.update');
     Route::get('/user/index', 'UserController@index')->name('user.index')->middleware('admin');
     Route::get('/user/destroy/{id}', 'UserController@destroy')->name('user.delete');
 
-
     //Recipe
+    Route::get('/recipe/create', 'RecipeController@create')->name('recipe.create');
+    Route::post('/recipe/store', 'RecipeController@store')->name('recipe.store');
     Route::get('/recipe/index', 'RecipeController@index')->name('recipes.index');
     Route::get('/recipe/show/{id}', 'RecipeController@show')->name('recipe.show');
     Route::get('/recipe_destroy/{id}', 'RecipeController@destroy')->name('recipe.delete');

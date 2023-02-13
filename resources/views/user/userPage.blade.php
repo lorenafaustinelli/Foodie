@@ -14,7 +14,6 @@
 				<a href="{{ route('user.update') }}" > 
 				<input type="file" name="image" >
 				<img data-toggle="tooltip" title="Update your profile picture! :)" src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="rounded-circle mb-3" style="width: 150px;" alt="Avatar" />
-				
 					<!--<br>   data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Update your profile picture!"
 					Questa è un'icona presa da bootstrap - non so se sia utile
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
