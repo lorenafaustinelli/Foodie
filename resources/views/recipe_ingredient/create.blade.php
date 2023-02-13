@@ -14,7 +14,7 @@
    <div class="row">
        <div class="card">
             <div class="card-header">
-               <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ingredientModal"> Aggiungi un ingrediente </a>
+              <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ingredientModal"> Aggiungi un ingrediente </a>
             </div> 
             <div class="card-body">
                 <table id="RecipeIngredientsTable" class="table">
@@ -26,7 +26,7 @@
                         </tr> 
                     </thead>
                     <tbody>
-                      <tr>  <!-- riferimenti per ajax - inserisce i testo qua -->
+                      <tr>  <!-- riferimenti per ajax - inserisce il testo qua -->
                         
                       </tr>
                     </tbody>

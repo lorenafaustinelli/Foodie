@@ -43,6 +43,11 @@
   box-sizing: border-box;
 }
 
+#drop_zone {
+  width: 450px;
+  height: 100px;
+}
+
 html {
   font-family: sans-serif;
   line-height: 1.15;

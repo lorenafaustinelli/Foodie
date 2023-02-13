@@ -32,7 +32,7 @@ Route::group(['middleware'=>['user']], function(){
         ]);
     })->name('home');
 
-    //SacedRecipe
+    //SavedRecipe
     Route::get('/saved_recipe/index', 'SavedRecipeController@index')->name('saved.index');
     Route::get('/saved_recipe/save/{id}', 'SavedRecipeController@save')->name('recipe.save');
     Route::get('/saved_recipe/destroy/{id}', 'SavedRecipeController@destroy')->name('recipe.destroy');
