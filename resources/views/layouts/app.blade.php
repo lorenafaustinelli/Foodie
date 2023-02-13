@@ -2,8 +2,6 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
 
-
-    <?php //use Illuminate\Http\Request;                 <form action="{{ url('search')}}" method="GET" role="search">  ?>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -76,7 +74,101 @@
                                 </li>
                             @endif
                         @else
+                        @if(Auth::user()->admin == "1")
                             <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a> 
+                                
+                               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                    <!-- Visualizzare il proprio profilo -->
+                                    <a class="dropdown-item" href="{{ route('user.index') }}">
+                                        Il mio profilo
+                                    </a>
+                                    
+                                    <!-- visualizzare le proprie ricette-->
+                                    <a class="dropdown-item" href="{{ route('user.recipe') }}">
+                                       Le mie ricette
+                                    </a>
+
+                                    <!-- Visualizzare le ricette salvate -->
+                                    <a class="dropdown-item" href="{{ route('saved.index')}}">
+                                        Le ricette salvate
+                                    </a>
+                                                                
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                                                    
+                                    <!--Per fare il logout:-->
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+
+                            <!-- menù per inserimento -->
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{__('Inserimento')}}
+                                </a> 
+                                
+                               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="{{ route('recipe.create') }}">
+                                    {{__('Ricetta')}}
+                                    </a>
+                                    
+                                    <a class="dropdown-item" href="{{ route('add.ingredient') }}">
+                                    {{ __('Ingrediente') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('add.category') }}">
+                                    {{ __('Categoria') }}
+                                    </a>
+                                    
+                                </div>
+                            </li>
+
+                            <!-- menù per visualizzare le varie entità -->
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{__('Modifica')}}
+                                </a> 
+                                
+                               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="{{ route('user.index') }}">
+                                    {{__('Utenti')}}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('recipes.index') }}">
+                                    {{__('Ricette')}}
+                                    </a>
+                                    
+                                    <a class="dropdown-item" href="{{ route('ingredients') }}">
+                                    {{ __('Ingredienti') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('categories') }}">
+                                    {{ __('Categorie') }}
+                                    </a>
+                                    
+                                    
+                                </div>
+                            </li>
+
+
+                            <!-- pagina ricerca avanzata-->
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('advanced.search') }}">{{__('Ricerca avanzata')}}</a> 
+                            </li>
+                        @else
+
+                        <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a> 
@@ -141,7 +233,6 @@
                                 </a> 
                                 
                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
                                     <a class="dropdown-item" href="{{ route('recipes.index') }}">
                                     {{__('Ricette')}}
                                     </a>
@@ -162,6 +253,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('advanced.search') }}">{{__('Ricerca avanzata')}}</a> 
                             </li>
+
+                        @endif
+
                         @endguest
                     </ul>
                 </div>

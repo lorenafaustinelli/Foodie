@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
+use App\Providers\RouteServiceProvider;
 
 use Closure;
 use Auth;
@@ -18,9 +19,9 @@ class Admin
     {   
         //UTENTE
 
-        //per lista ingredienti
+        //per layout
         if(Auth::user()->admin=='false'){
-            return redirect(RouteServiceProvider::INGREDIENT);
+            return redirect(RouteServiceProvider::USER);
         }
         
         return $next($request);

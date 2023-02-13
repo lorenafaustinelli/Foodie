@@ -14,23 +14,26 @@ class CategoriesTableSeeder extends Seeder
     {
      DB::table('categories')->insert([
         [
-
+        'id'              =>      '1',
         'name_category'   =>      'vegano', 
         
     ], [
-
+        'id'              =>      '2',
         'name_category'   =>      'vegetariano',
         
     ], [ 
-
+        'id'              =>      '3',
         'name_category'   =>      'carne',
          
     ], [
-
+        'id'              =>      '4',
         'name_category'   =>       'pesce',
     ], [
-        
+        'id'              =>      '5',
         'name_category'   =>       'dolci',
+    ], [
+        'id'              =>       '6',
+        'name_category'   =>        'pasta',
     ]
     ]);
 

@@ -22,6 +22,9 @@ class UnityOfMeasurementTableSeeder extends Seeder
         ], [    
             'name_measurement'   =>      '-',
              
+        ], [    
+            'name_measurement'   =>      'q.b.',
+             
         ]
         ]);
     }

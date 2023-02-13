@@ -14,65 +14,82 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Route::group(['middleware'=>['user']], function(){
+        
+    //Route::get('/home', 'HomeController@index')->name('home');  //assegnazione del nome - Route(home)
+    Route::get('/home', function () {
+        //prendo dal database le ricette scritte fin'ora, ordinate dall'ultima 
+        $recipes = App\Recipe::latest()->get();
 
-//Route::get('/home', 'HomeController@index')->name('home');  //assegnazione del nome - Route(home)
-Route::get('/home', function () {
-    //prendo dal database le ricette scritte fin'ora, ordinate dall'ultima 
-    $recipes = App\Recipe::latest()->get();
+        return view('home', [
+            'recipes' => $recipes   //passo le ricette alla view
+        ]);
+    })->name('home');
+    /*
+    Route::get('/userPage', function(){
+        $recipes = App\Recipe::all();
 
-    return view('home', [
-        'recipes' => $recipes   //passo le ricette alla view
-    ]);
-})->name('home');
+        return view('userPage', [
+            'recipes' => $recipes
+        ]);
+    })->name('userPage');*/
+
+    //Prove Lisa
+    Route::get('/recipe/create', 'RecipeController@create')->name('recipe.create');
+    Route::post('/recipe/store', 'RecipeController@store')->name('recipe.store');
+    Route::get('/saved_recipe/index', 'SavedRecipeController@index')->name('saved.index');
+    Route::get('/saved_recipe/save/{id}', 'SavedRecipeController@save')->name('recipe.save');
+    Route::get('/saved_recipe/destroy/{id}', 'SavedRecipeController@destroy')->name('recipe.destroy');
+    Route::get('/user/userPage', 'UserController@show')->name('user.show'); 
+    Route::get('/user/upPic', 'UserController@update')->name('user.update');
+
+    //User
+    Route::get('/user/index', 'UserController@index')->name('user.index')->middleware('admin');
+    Route::get('/user/destroy/{id}', 'UserController@destroy')->name('user.delete');
 
 
-//SavedRecipe
-Route::get('/saved_recipe/index', 'SavedRecipeController@index')->name('saved.index');
-Route::get('/saved_recipe/save/{id}', 'SavedRecipeController@save')->name('recipe.save');
-Route::get('/saved_recipe/destroy/{id}', 'SavedRecipeController@destroy')->name('recipe.destroy');
+    //Recipe
+    Route::get('/recipe/index', 'RecipeController@index')->name('recipes.index');
+    Route::get('/recipe/show/{id}', 'RecipeController@show')->name('recipe.show');
+    Route::get('/recipe_destroy/{id}', 'RecipeController@destroy')->name('recipe.delete');
 
-//User
-Route::get('/user/userPage', 'UserController@index')->name('user.index');
-Route::get('/user/upPic', 'UserController@update')->name('user.update');
+    //RecipeIngredient
+    Route::get('/recipe_ingredient', 'RecipeIngredientController@index');
+    Route::post('/recipe_ingredient/store', 'RecipeIngredientController@store')->name('recipe_ingredient.add');
+    Route::get('/recipe_ingredient/create', 'RecipeIngredientController@create');
+    Route::post('/recipe_ingredient/change_quantity', 'RecipeIngredientController@change_quantity')->name('recipe_ingredient.change.quantity');
 
-//Recipe
-Route::get('/recipe/create', 'RecipeController@create')->name('recipe.create');
-Route::post('/recipe/store', 'RecipeController@store')->name('recipe.store');
-Route::get('/recipe/index', 'RecipeController@index')->name('recipes.index');
-Route::get('/recipe/show/{id}', 'RecipeController@show')->name('recipe.show');
-Route::get('recipe_destroy/{id}', 'RecipeController@destroy')->name('recipe.delete');
+    //Ingredient
+    Route::get('/ingredient/create', 'IngredientController@create')->name('add.ingredient');
+    Route::get('/ingredient/index', 'IngredientController@index')->name('ingredients');
+    Route::post('/ingredient/store', 'IngredientController@store');
 
-//RecipeIngredient
-Route::get('/recipe_ingredient', 'RecipeIngredientController@index');
-Route::post('/recipe_ingredient/store', 'RecipeIngredientController@store')->name('recipe_ingredient.add');
-Route::get('/recipe_ingredient/create', 'RecipeIngredientController@create');
-Route::post('/recipe_ingredient/change_quantity', 'RecipeIngredientController@change_quantity')->name('recipe_ingredient.change.quantity');
+    //Category
+    Route::get('/category/create', 'CategoryController@create')->name('add.category');
+    Route::get('/category/index', 'CategoryController@index')->name('categories');
+    Route::post('/category/store', 'CategoryController@store');
 
-//Ingredient
-Route::get('/ingredient/create', 'IngredientController@create')->name('add.ingredient');
-Route::get('/ingredient/index', 'IngredientController@index')->name('ingredients');
-Route::post('/ingredient/store', 'IngredientController@store');
+    //RecipeCategory
+    Route::get('/recipe_category/create', 'RecipeCategoryController@create')->name('recipe_category.create');
+    Route::post('/recipe_category/store', 'RecipeCategoryController@store');
 
-//Category
-Route::get('/category/create', 'CategoryController@create')->name('add.category');
-Route::get('/category/index', 'CategoryController@index')->name('categories');
-Route::post('/category/store', 'CategoryController@store');
+    //UserRecipe
+    Route::get('/user_recipe/index', 'UserRecipeController@index')->name('user.recipe');
 
-//RecipeCategory
-Route::get('/recipe_category/create', 'RecipeCategoryController@create')->name('recipe_category.create');
-Route::post('/recipe_category/store', 'RecipeCategoryController@store');
+    //Research
+    Route::view('/research/advanced_search', '/research/advanced_search')->name('advanced.search');
+    Route::get('search', 'RecipeController@search_recipe'); 
+    Route::get('/advanced_search', 'RecipeController@advanced_search');
+    Route::view('research/results', '/research/results')->name('research.results');
 
-//UserRecipe
-Route::get('/user_recipe/index', 'UserRecipeController@index')->name('user.recipe');
+    //Admin 
+    Route::view('/permission_denied', '/permission_denied')->name('permission_denied');
 
-//Research
-Route::view('/research/advanced_search', '/research/advanced_search')->name('advanced.search');
-Route::get('search', 'RecipeController@search_recipe'); 
-Route::get('/advanced_search', 'RecipeController@advanced_search');
-Route::view('research/results', '/research/results')->name('research.results');
 
+});

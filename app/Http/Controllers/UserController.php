@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\User;
+use App\User;
+use App\Recipe;
+use App\UserRecipe;
+use App\SavedRecipe;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -14,8 +18,9 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('user/userPage');
+    {   
+        $users = DB::table('users')->latest()->get();
+        return view('/user/index', compact('users'));
     }
 
 
@@ -75,6 +80,20 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+
+        //parte user_recipe
+        $user = User::find($id);
+        
+        UserRecipe::where('user_id', $id)->delete();
+        
+        //parte saved_recipe
+        SavedRecipe::where('user_id', $id)->delete();
+        
+        //parte user
+        $user->delete();
+
+        return redirect()->back();
+        
     }
 }
