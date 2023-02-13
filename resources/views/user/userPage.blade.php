@@ -62,7 +62,7 @@
 	</div>
 </div> 
 
-{{-- <?php
+<script>
 	function dragOverHandler(ev) {
 		console.log('File(s) in drop zone');
 	
@@ -92,7 +92,7 @@
 		});
 		}
 	}
-?> --}}
+</script>
 
 
 <!--Possibilità di eliminare definitivamente il profilo-->

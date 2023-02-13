@@ -100,7 +100,7 @@ $(document).ready(function() {
             if(recipe_ing)
             {   
                 $("#RecipeShowIngredients tbody").html('');
-                console.log(recipe_ing);
+                //console.log(recipe_ing);
                 $.each(JSON.parse(recipe_ing), function(key, value){
                     $("#RecipeShowIngredients tbody").append(
                     $('<tr>')
