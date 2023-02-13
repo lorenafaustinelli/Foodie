@@ -176,7 +176,7 @@
                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
                                     <!-- Visualizzare il proprio profilo -->
-                                    <a class="dropdown-item" href="{{ route('user.index') }}">
+                                    <a class="dropdown-item" href="{{ route('user.show') }}">
                                         Il mio profilo
                                     </a>
                                     

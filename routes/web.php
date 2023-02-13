@@ -83,4 +83,5 @@ Route::group(['middleware'=>['user']], function(){
     Route::view('/permission_denied', '/permission_denied')->name('permission_denied');
 
 
+
 });

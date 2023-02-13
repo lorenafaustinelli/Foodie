@@ -24,7 +24,7 @@ class RecipeController extends Controller
     public function index(){
         
         //ho usato DB::table per poter usare la funzione latest();
-        $recipe = DB::table('recipes')->latest()->get();
+        $recipe = Recipe::orderBy('name_recipe')->get();
 
         return view('/recipe/index', compact('recipe'));
     } 

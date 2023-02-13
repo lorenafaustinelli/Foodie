@@ -7,7 +7,7 @@
     </br>
     <div class="grid-layout"> 
     @foreach($recipe as $recipe)
-        <div class="card" style="width: 18rem;">
+        <div class="card card text-center" style="width: 18rem;">
             <!-- scorro poi le ricette corrispondenti agli id del for precedente -->
             
                 <img src="{{ Storage::url($recipe->photo) }}" class="card-img-top" width="250px" height="180px" alt="foto ricetta">
