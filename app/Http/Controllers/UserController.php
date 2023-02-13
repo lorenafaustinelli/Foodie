@@ -66,10 +66,16 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
+        $request->validate([
+            'picture' => 'required'
+        ]);
         $id = Auth::id();
-        User::where('id', $id)->update('picture', $request);
 
-        return redirect()->back();
+        $image = request()->file('picture')->store('public/users');
+        User::where('id', $id)->update('picture', $image);
+
+        //return redirect()->back();
+        return view('user/userPage');
     }
 
     /**
