@@ -74,7 +74,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary add_ingredient" > Aggiungi </button>
+				<button href="{{ route('user.update') }}" type="button" class="btn btn-primary add_ingredient" > Aggiungi </button>
 			</div>
 		</div>
 	</div>
@@ -83,7 +83,7 @@
 <script>
         var dropzone = new Dropzone('#file-upload', {
             previewTemplate: document.querySelector('#preview-template').innerHTML,
-            parallelUploads: 3,
+            parallelUploads: 1,
             thumbnailHeight: 150,
             thumbnailWidth: 150,
             maxFilesize: 5,
@@ -108,7 +108,7 @@
             maxSteps = 60,
             timeBetweenSteps = 100,
             bytesPerStep = 100000;
-        dropzone.uploadFiles = function (files) {
+            dropzone.uploadFiles = function (files) {
             var self = this;
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
