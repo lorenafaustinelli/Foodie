@@ -43,7 +43,7 @@
   box-sizing: border-box;
 }
 
-.drop_zone {
+#drop_zone {
   width: 450px;
   height: 100px;
 }

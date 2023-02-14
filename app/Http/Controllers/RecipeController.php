@@ -600,7 +600,5 @@ class RecipeController extends Controller
             return view('/recipe/index', compact('recipe'));
         }
     
-    } 
-
-    
+    }    
 }
