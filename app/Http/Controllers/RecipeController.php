@@ -162,12 +162,31 @@ class RecipeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id){
-        $input = $request -> all(); 
-        $recipe = RecipeController::find($id);
-        $recipe->update($input);
 
-        //return redirect()->back();
-        view('/recipe_ingredient/edit')->with('id', $recipe->id);
+        $input = $request -> all(); 
+        $recipe = Recipe::find($id);
+        //if($request->photo){
+         //$input->photo = $request()->file('photo')->store('public/recipes');
+        //}
+        $recipe->update($input);
+        
+        
+        $recipe_ingredient = RecipeIngredient::where('recipe_id', $id)->get();
+        foreach($recipe_ingredient as $ri){
+            $ing_id[] = $ri->ingredient_id;
+        }
+
+        foreach($ing_id as $ing_id){
+            $ing_names[] = app('App\Http\Controllers\IngredientController')->name_ingredient($ing_id);
+        }
+
+        $i = 0;
+        foreach($recipe_ingredient as $ri){
+            $ri->ingredient_name = $ing_names[$i];
+            $i = $i + 1;
+        }
+
+        return view('/recipe_ingredient/edit', compact('recipe_ingredient'))->with('id', $id);
     }
 
     /**

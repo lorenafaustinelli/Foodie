@@ -130,9 +130,11 @@ class RecipeIngredientController extends Controller
      * @param  \App\RecipeIngredient  $recipeIngredient
      * @return \Illuminate\Http\Response
      */
-    public function edit(RecipeIngredient $recipeIngredient)
-    {
-        //
+    public function edit($id)
+    {   
+        $recipe_ingredient = RecipeIngredient::where('recipe_id', $id)->get();
+        return view('recipe_ingredient.edit', compact('recipe_ingredient'));
+
     }
 
     /**
@@ -142,9 +144,31 @@ class RecipeIngredientController extends Controller
      * @param  \App\RecipeIngredient  $recipeIngredient
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RecipeIngredient $recipeIngredient)
+    public function update(Request $request, $id)
     {
-        //
+        /*$input = $request -> all(); 
+        $recipe_ingredient = RecipeIngredient::find($id);
+        $recipe_ingredient ->update($input);
+
+        return view('/recipe_category/edit')->with('id', $id); */
+
+        $recipe_ingredient->recipe_id = $request-> recipe_id;
+        $recipe_ingredient->ingredient_id = $request-> ingredient_id;
+        $recipe_ingredient->quantity = $request-> quantity;
+        $recipe_ingredient->measure = $request-> measure;
+
+        $recipe_ingredient->save();
+     
+        $ing_name = Ingredient::where('id', '=', $request->ingredient_id)
+        ->value('name_ingredient');
+
+        $response = [
+            'ing_name' => $ing_name,
+            'quantity' => $request-> quantity,
+            'measure' => $request-> measure
+        ];
+
+        return response()->json($response);
     }
 
     /**
@@ -153,10 +177,12 @@ class RecipeIngredientController extends Controller
      * @param  \App\RecipeIngredient  $recipeIngredient
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RecipeIngredient $recipeIngredient)
+    public function destroy($id)
     {
-        $recipeIngredient->delete();
-        return redirect('/');
+        $recipe_ingredient = RecipeIngredient::find($id);
+        $recipe_ingredient->delete();
+        
+        return redirect()->back();
     }
 
     

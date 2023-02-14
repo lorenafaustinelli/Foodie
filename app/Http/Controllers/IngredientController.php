@@ -124,11 +124,10 @@ class IngredientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function name_ingredient(Integer $id)
+    public function name_ingredient($id)
     {
-        foreach($ingredients->where('id', $id) as $ingredient)
-        $name = $ingredient->$name_ingredient; 
-        return $name;
+        $ingredient = Ingredient::find($id);
+        return $ingredient->name_ingredient;
     }
 
     

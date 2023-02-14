@@ -14,6 +14,7 @@ class CreateRecipeIngredientsTable extends Migration
     public function up()
     {
         Schema::create('recipe_ingredients', function (Blueprint $table) {
+            $table->id();
             $table->bigInteger('recipe_id')->unsigned();
             $table->bigInteger('ingredient_id')->unsigned();
             $table->integer('quantity')->nullable();
