@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\RecipeCategory;
 use Illuminate\Http\Request;
+use App\Recipe;
+use App\Ingredient;
+use App\Category;
 
-class CategoryController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,28 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        //
+    }
 
-        return view('category/index', compact('categories')); 
+    public function recipe_index_admin(){
+
+        $recipe = Recipe::orderBy('name_recipe')->get();
+
+        return view('/admin/recipe_index', compact('recipe'));
+    }
+
+    public function ingredient_index_admin(){
+
+        $ingredients = Ingredient::orderBy('name_ingredient')->get();
+
+        return view('/admin/ingredient_index', compact('ingredients'));
+    }
+
+    public function category_index_admin(){
+
+        $categories = Category::orderBy('name_category')->get();
+
+        return view('/admin/category_index', compact('categories'));
     }
 
     /**
@@ -27,7 +47,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('category.create');
+        //
     }
 
     /**
@@ -38,24 +58,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name_category' => 'required'
-        ]);
-
-        $category = new Category();
-        $category->name_category = request('name_category');
-        
-        $category->save();
-        return view('/category/index');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($id)
     {
         //
     }
@@ -63,10 +75,10 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
         //
     }
@@ -75,35 +87,22 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-        $input = $request -> all(); 
-        $category->name_category = $input['name_category'];
-        $recipe->update($input);
-
-        $category->save();
-        return redirect('category');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $category = Category::find($id);
-
-        //parte recipe_category
-        
-        RecipeCategory::where('category_id', $id);
-
-        $category->delete();
-        return redirect()->back();
+        //
     }
-
 }

@@ -133,7 +133,7 @@
                                 </div>
                             </li>
 
-                            <!-- menù per visualizzare le varie entità -->
+                            <!-- menù per modificare le varie entità -->
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{__('Modifica')}}
@@ -145,15 +145,15 @@
                                     {{__('Utenti')}}
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('recipes.index') }}">
+                                    <a class="dropdown-item" href="{{ route('recipe_index.adm') }}">
                                     {{__('Ricette')}}
                                     </a>
                                     
-                                    <a class="dropdown-item" href="{{ route('ingredients') }}">
+                                    <a class="dropdown-item" href="{{ route('ingredient_index.adm') }}">
                                     {{ __('Ingredienti') }}
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('categories') }}">
+                                    <a class="dropdown-item" href="{{ route('category_index.adm') }}">
                                     {{ __('Categorie') }}
                                     </a>
                                     
