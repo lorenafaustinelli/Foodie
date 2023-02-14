@@ -67,8 +67,7 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        $id = Auth::id();
-        $user = User::where('id', $id)->first();
+        $user = Auth::user();
         if($request->hasfile('piture')){
             $destination = 'public/users'.$user->picture; 
             if(File::exists($destination)){
@@ -80,6 +79,17 @@ class UserController extends Controller
             $file->move('public/users', $filename);
             $user->picture = $filename;
         }
+        
+        if($request['email']){
+            $email = $request['email'];
+            $user->email = "$email";
+        }
+        
+        if($request['nome'] && $request['cognome']){
+            $user->name = $request['nome'];
+            $user->surname = $request['surname'];
+        }
+
         $user->save();
         /* $user->picture = $request;
 
