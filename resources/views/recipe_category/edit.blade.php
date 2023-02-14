@@ -15,7 +15,7 @@
   <h2> Associa almeno una categoria alla tua ricetta </h2>
 
   <form action="/recipe_category/store" method="POST" enctype="multipart/form-data">
-    {{ csrf_field() }}
+    {{ csrf_field() }} 
     <div class="row">
       <div class="card">
         <div class="card-body">

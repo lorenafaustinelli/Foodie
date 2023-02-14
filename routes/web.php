@@ -58,8 +58,6 @@ Route::group(['middleware'=>['user']], function(){
     Route::get('/recipe/edit/{id}', 'RecipeController@edit')->name('recipe.edit');
     Route::post('/recipe/update', 'RecipeController@update')->name('recipe.update');
     
-
-
     //RecipeIngredient
     Route::get('/recipe_ingredient', 'RecipeIngredientController@index');
     Route::post('/recipe_ingredient/store', 'RecipeIngredientController@store')->name('recipe_ingredient.add');
