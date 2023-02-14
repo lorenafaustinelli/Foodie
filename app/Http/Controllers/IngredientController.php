@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Ingredient;
+use App\RecipeIngredient;
 use Illuminate\Http\Request;
 
 class IngredientController extends Controller
@@ -94,9 +95,18 @@ class IngredientController extends Controller
      * @param  \App\Ingredient  $ingredient
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ingredient $ingredient)
+    public function destroy($id)
     {
-        //
+        $ingredient = Ingredient::find($id);
+
+        //parte recipe_ingredients
+        RecipeIngredients::where('ingredient_id', $id); 
+
+        //parte ingredient
+        $ingredient->delete();
+
+        return redirect()->back();
+        
     }
 
     /**

@@ -52,7 +52,9 @@ Route::group(['middleware'=>['user']], function(){
     Route::get('/recipe/index', 'RecipeController@index')->name('recipes.index');
     Route::get('/recipe/show/{id}', 'RecipeController@show')->name('recipe.show');
     Route::get('/recipe_destroy/{id}', 'RecipeController@destroy')->name('recipe.delete');
-
+    Route::get('/recipe/edit/{id}', 'RecipeController@edit')->name('recipe.edit');
+    Route::post('/recipe/update', 'RecipeController@update')->name('recipe.update');
+    
     //RecipeIngredient
     Route::get('/recipe_ingredient', 'RecipeIngredientController@index');
     Route::post('/recipe_ingredient/store', 'RecipeIngredientController@store')->name('recipe_ingredient.add');
@@ -63,11 +65,13 @@ Route::group(['middleware'=>['user']], function(){
     Route::get('/ingredient/create', 'IngredientController@create')->name('add.ingredient');
     Route::get('/ingredient/index', 'IngredientController@index')->name('ingredients');
     Route::post('/ingredient/store', 'IngredientController@store');
+    Route::get('/ingredient/destroy/{id}', 'IngredientController@destroy')->name('ingredient.delete')->middleware('admin');
 
     //Category
     Route::get('/category/create', 'CategoryController@create')->name('add.category');
     Route::get('/category/index', 'CategoryController@index')->name('categories');
     Route::post('/category/store', 'CategoryController@store');
+    Route::get('/category/destroy/{id}', 'CategoryController@destroy')->name('category.delete')->middleware('admin');
 
     //RecipeCategory
     Route::get('/recipe_category/create', 'RecipeCategoryController@create')->name('recipe_category.create');
@@ -84,6 +88,9 @@ Route::group(['middleware'=>['user']], function(){
 
     //Admin 
     Route::view('/permission_denied', '/permission_denied')->name('permission_denied');
+    Route::get('/admin/recipe_index', 'AdminController@recipe_index_admin')->name('recipe_index.adm')->middleware('admin');
+    Route::get('/admin/ingredient_index', 'AdminController@ingredient_index_admin')->name('ingredient_index.adm')->middleware('admin');
+    Route::get('/admin/category_index', 'AdminController@category_index_admin')->name('category_index.adm')->middleware('admin');
 
 
 

@@ -132,7 +132,10 @@ class RecipeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id){
-        //
+        
+        $recipe = Recipe::find($id);
+
+        return view('recipe.edit', compact('recipe'));
     }
 
     /**
@@ -161,7 +164,8 @@ class RecipeController extends Controller
         $recipe = RecipeController::find($id);
         $recipe->update($input);
 
-        return redirect('recipe');
+        //return redirect()->back();
+        view('/recipe_ingredient/edit')->with('id', $recipe->id);
     }
 
     /**
