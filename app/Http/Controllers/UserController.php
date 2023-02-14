@@ -7,8 +7,9 @@ use App\User;
 use App\Recipe;
 use App\UserRecipe;
 use App\SavedRecipe;
-use Auth;
+use Auth; 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class UserController extends Controller
 {
@@ -66,13 +67,24 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        $request->validate([
-            'picture' => 'required'
-        ]);
         $id = Auth::id();
+        $user = User::where('id', $id)->first();
+        if($request->hasfile('piture')){
+            $destination = 'public/users'.$user->picture; 
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+            $file = $request->file('picture');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('public/users', $filename);
+            $user->picture = $filename;
+        }
+        $user->save();
+        /* $user->picture = $request;
 
         $image = request()->file('picture')->store('public/users');
-        User::where('id', $id)->update('picture', $image);
+        User::where('id', $id)->update('picture', $image); */
 
         //return redirect()->back();
         return view('user/userPage');

@@ -57,7 +57,7 @@
 				@csrf
 				<div class="modal-body">
 						<label class="form-label" for="customFile">Default file input example</label>
-						<input type="file" class="form-control" id="customFile" />
+						<input type="file" class="form-control" id="customFile" name="picture" />
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
