@@ -11,7 +11,7 @@ class RecipesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('recipes')->insert([[
+        DB::table('recipes')->insert([[ 
 
             'id'           => '1',
             'name_recipe' => 'Crepes',

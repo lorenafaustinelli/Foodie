@@ -86,8 +86,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-
-
         //parte user_recipe
         $user = User::find($id);
         
@@ -99,7 +97,7 @@ class UserController extends Controller
         //parte user
         $user->delete();
 
-        return redirect()->back();
-        
+        //return redirect()->back();
+        return view('/home');
     }
 }

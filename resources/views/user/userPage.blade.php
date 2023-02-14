@@ -33,8 +33,13 @@
 		</div>
 		<div class="col-2"> <!-- Barra laterale -->
 			<div class="d-flex" style="height: 750px;">
-				<div class="vr"></div>
-			</div>
+				<div class="vr"> </div>
+				<div class="text-center">
+					<a href="{{ route('logout') }}"><p style="padding-left: 0px;">Logout</a></a>
+					<!--Possibilità di eliminare definitivamente il profilo-->
+					<a href="{{ route('user.delete', Auth::id())}}"><p style="padding-left: 20px;">Elimina definitivamente</a></a>
+				</div>
+				</div>
 		</div>
 	</div>
 </div>
@@ -48,24 +53,19 @@
 				<h1 class="modal-title fs-5" id="exampleModalLabel">Aggiungi:</h1>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
-			<div class="modal-body">
-				<form method="POST" action="{{ route('user.update')}}">
-					<label class="form-label" for="customFile">Default file input example</label>
-					<input type="file" class="form-control" id="customFile" />
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-				<button type="submit" class="btn btn-primary" > Aggiungi </button>
-			</div>
+			<form action="{{ route('user.update') }}" method="POST">
+				@csrf
+				<div class="modal-body">
+						<label class="form-label" for="customFile">Default file input example</label>
+						<input type="file" class="form-control" id="customFile" />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary" > Aggiungi </button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div> 
 
-
-
-
-<!--Possibilità di eliminare definitivamente il profilo-->
-<!--Conteggio delle ricette scritte-->
-<!--Numero delle ricette salvate da altri-->
 @endsection

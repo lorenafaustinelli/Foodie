@@ -34,9 +34,7 @@ Route::group(['middleware'=>['user']], function(){
 
     //Prove drag and drop
     Route::get('/user/userPage', 'UserController@show')->name('user.show'); 
-    //Route::get('upload-ui', [FileUploadController::class, 'dropzoneUi' ]);
-    //Route::post('file-upload', [FileUploadController::class, 'dropzoneFileUpload' ])->name('dropzoneFileUpload');
-    Route::get('/user/upPic', 'UserController@update')->name('user.update');
+    Route::post('/user/upPic', 'UserController@update')->name('user.update');
 
     //SavedRecipe
     Route::get('/saved_recipe/index', 'SavedRecipeController@index')->name('saved.index');
@@ -44,7 +42,6 @@ Route::group(['middleware'=>['user']], function(){
     Route::get('/saved_recipe/destroy/{id}', 'SavedRecipeController@destroy')->name('recipe.destroy');
 
     //User
-
 
     Route::get('/user/index', 'UserController@index')->name('user.index')->middleware('admin');
     Route::get('/user/destroy/{id}', 'UserController@destroy')->name('user.delete');

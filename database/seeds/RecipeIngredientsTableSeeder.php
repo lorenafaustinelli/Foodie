@@ -64,7 +64,7 @@ class RecipeIngredientsTableSeeder extends Seeder
 
             'recipe_id' => '2',
             'ingredient_id' => '5',
-            'quantity' => '',
+            'quantity' => '0',
             'measure' => 'q.b.'
             
         ], [
@@ -78,7 +78,7 @@ class RecipeIngredientsTableSeeder extends Seeder
 
             'recipe_id' => '2',
             'ingredient_id' => '11',
-            'quantity' => '',
+            'quantity' => '0',
             'measure' => 'q.b.'
             
         ]
