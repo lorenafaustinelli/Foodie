@@ -34,17 +34,26 @@
 		<div class="col-2"> <!-- Barra laterale -->
 			<div class="d-flex" style="height: 750px;">
 				<div class="vr"> </div>
+				<p style="padding-left: 30px;">
 				<div class="text-center">
-					<a href="{{ route('logout') }}"><p style="padding-left: 0px;">Logout</a></a>
-					<!--Possibilità di eliminare definitivamente il profilo-->
-					<a href="{{ route('user.delete', Auth::id())}}"><p style="padding-left: 20px;">Elimina definitivamente</a></a>
+					<br><br> <br> <br><br><br><br> <br>
+					<!-- Modifica nome -->
+					<a href="#" data-bs-toggle="modal" data-bs-target="#nameModal" class="text-success"> <strong> Modifica il nome </strong></a> <br><br><br>
+					<!-- Modifica email -->
+					<a href="#" data-bs-toggle="modal" data-bs-target="#emailModal" class="text-success"> <strong> Modifica l'email </strong></a> <br><br><br>
+					<!-- Logout -->
+					<a href="{{ route('logout') }}" class="text-success"> <strong>Logout</strong> </a> <br> <br><br>
+					<!-- Possibilità di eliminare definitivamente il profilo -->
+					<a href="{{ route('user.delete', Auth::id())}}" class="text-success"> <h6 class="mb-2"> <strong>Elimina l'account</strong> </h6> </a>
+					
 				</div>
+				</a>
 				</div>
 		</div>
 	</div>
 </div>
 
-<!-- Modal -->
+<!-- Modals -->
 
 <div class="modal fade" id="pictureModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
@@ -58,6 +67,51 @@
 				<div class="modal-body">
 						<label class="form-label" for="customFile">Default file input example</label>
 						<input type="file" class="form-control" id="customFile" name="picture" />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary" > Aggiungi </button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div> 
+
+<div class="modal fade" id="nameModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="exampleModalLabel">Aggiungi:</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<form action="{{ route('user.update') }}" method="POST">
+				@csrf
+				<div class="modal-body">
+					<label class="form-label" for="customFile"> Vuoi cambiare nome? </label>
+					<input type="string" class="form-control" id="name"  placeholder="Inserisci il tuo nuovo nome">
+					<input type="string" class="form-control" id="surname"  placeholder="Inserisci il tuo nuovo cognome">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary" > Aggiungi </button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div> 
+
+<div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="exampleModalLabel">Aggiungi:</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<form action="{{ route('user.update') }}" method="POST">
+				@csrf
+				<div class="modal-body">
+						<label class="form-label" for="customFile"> Hai una nuova email? </label>
+						<input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Inserisci la tua nuova email">
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
