@@ -15,7 +15,7 @@ class IngredientController extends Controller
      */
     public function index()
     {
-        $ingredients = Ingredient::all();
+        $ingredients = Ingredient::orderBy('name_ingredient')->get();
 
         return view('/ingredient/index', compact('ingredients'));
 
@@ -52,7 +52,10 @@ class IngredientController extends Controller
         }
 
         $ingredient->save();
-        return view('/ingredient/index');
+
+        $ingredients = Ingredient::orderBy('name_ingredient')->get();
+        
+        return view('/ingredient/index', compact('ingredients'));
     }
 
     /**
@@ -72,9 +75,10 @@ class IngredientController extends Controller
      * @param  \App\Ingredient  $ingredient
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ingredient $ingredient)
+    public function edit($id)
     {
-        //
+        $ingredient = Ingredient::find($id);
+        return view('/ingredient/edit', compact('ingredient'));
     }
 
     /**
@@ -84,9 +88,14 @@ class IngredientController extends Controller
      * @param  \App\Ingredient  $ingredient
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ingredient $ingredient)
+    public function update(Request $request, $id)
     {
-        //
+        $input = $request->all(); 
+        $ingredient = Ingredient::find($id);
+        $ingredient->update($input);
+
+        $ingredients = Ingredient::orderBy('name_ingredient')->get();
+        return view('/admin/ingredient_index', compact('ingredients'));
     }
 
     /**
@@ -100,12 +109,13 @@ class IngredientController extends Controller
         $ingredient = Ingredient::find($id);
 
         //parte recipe_ingredients
-        RecipeIngredients::where('ingredient_id', $id); 
+        RecipeIngredient::where('ingredient_id', $id); 
 
         //parte ingredient
         $ingredient->delete();
 
-        return redirect()->back();
+        $ingredients = Ingredient::orderBy('name_ingredient')->get();
+        return view('/admin/ingredient_index', compact('ingredients'));
         
     }
 

@@ -4,10 +4,10 @@
 
 
 <div class="container">
-<h1> Nuova Categoria </h1> 
+<h1> Modifica Categoria </h1> 
 </br>
 
-    <form action="/category/store" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="row">
             <div class="card">
@@ -19,7 +19,7 @@
 
                                 <div class="form-group">
                                     <label for="name_category" class="form-label">Nome</label>
-                                    <input type="text" class="form-control" name="name_category">
+                                    <input type="text" value="{{ $category->name_category }}"class="form-control" name="name_category">
                                 </div>
                             </tr>
                         </thead>
@@ -29,7 +29,7 @@
         </div>
         </br>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button type="submit" class="btn btn-primary"> Salva </button>
+            <button type="submit" class="btn btn-primary"> Modifica </button>
         </div>
     </form>
 

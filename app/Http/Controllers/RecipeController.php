@@ -22,8 +22,7 @@ class RecipeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        
-        //ho usato DB::table per poter usare la funzione latest();
+
         $recipe = Recipe::orderBy('name_recipe')->get();
 
         return view('/recipe/index', compact('recipe'));
@@ -79,10 +78,13 @@ class RecipeController extends Controller
         //per abbinare la ricetta all'utente
         $user_id = Auth::id(); 
         UserRecipe::create(['user_id' => $user_id, 'recipe_id' => $recipe_id]);
+
+        //passo gli ingredienti a recipe_ingredient.create
+        $ingredients = Ingredient::orderBy('name_ingredient')->get();
         
         //return redirect('recipe');
         //questa viene passato l'id della ricetta per aggiungerlo alla tabella RecipeIngredient nella pagina successiva
-        return view('/recipe_ingredient/create')->with('id', $recipe->id);//compact('id'));//)->with('$recipe_id');
+        return view('/recipe_ingredient/create', compact('ingredients'))->with('id', $recipe->id);//compact('id'));//)->with('$recipe_id');
     }
 
    

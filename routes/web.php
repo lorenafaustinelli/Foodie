@@ -66,12 +66,18 @@ Route::group(['middleware'=>['user']], function(){
     Route::get('/ingredient/index', 'IngredientController@index')->name('ingredients');
     Route::post('/ingredient/store', 'IngredientController@store');
     Route::get('/ingredient/destroy/{id}', 'IngredientController@destroy')->name('ingredient.delete')->middleware('admin');
+    Route::get('/ingredient/edit/{id}', 'IngredientController@edit')->name('ingredient.edit');
+    Route::post('/ingredient/update/{id}', 'IngredientController@update')->name('ingredient.update');
+
 
     //Category
     Route::get('/category/create', 'CategoryController@create')->name('add.category');
     Route::get('/category/index', 'CategoryController@index')->name('categories');
     Route::post('/category/store', 'CategoryController@store');
     Route::get('/category/destroy/{id}', 'CategoryController@destroy')->name('category.delete')->middleware('admin');
+    Route::get('/category/edit/{id}', 'CategoryController@edit')->name('category.edit');
+    Route::post('/category/update/{id}', 'CategoryController@update')->name('category.update');
+
 
     //RecipeCategory
     Route::get('/recipe_category/create', 'RecipeCategoryController@create')->name('recipe_category.create');

@@ -17,7 +17,7 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
 
-        return view('category/index', compact('categories')); 
+        return view('/category/index', compact('categories')); 
     }
 
     /**
@@ -46,7 +46,9 @@ class CategoryController extends Controller
         $category->name_category = request('name_category');
         
         $category->save();
-        return view('/category/index');
+
+        $categories = Category::orderBy('name_category')->get();
+        return view('/category/index', compact('categories'));
     }
 
     /**
@@ -66,9 +68,10 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        //
+        $category = Category::find($id);
+        return view('/category/edit', compact('category'));
     }
 
     /**
@@ -78,14 +81,14 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
         $input = $request -> all(); 
-        $category->name_category = $input['name_category'];
-        $recipe->update($input);
+        $category = Category::find($id);
+        $category->update($input);
 
-        $category->save();
-        return redirect('category');
+        $categories = Category::orderBy('name_category')->get();
+        return view('/admin/category_index', compact('categories'));
     }
 
     /**

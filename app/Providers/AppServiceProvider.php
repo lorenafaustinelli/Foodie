@@ -33,9 +33,9 @@ class AppServiceProvider extends ServiceProvider
     {   
         //per rendere visibile da tutte le pagine la variabile ingredients
         view()->composer('*',function($view) {
-            $view->with('ingredients', Ingredient::all());
+            //$view->with('ingredients', Ingredient::all());
             $view->with('recipe_ingredients', RecipeIngredient::all());
-            $view->with('categories', Category::all());
+            //$view->with('categories', Category::all());
             $view->with('user_recipes', UserRecipe::all());
             $view->with('measurements', UnityOfMeasurement::all());
             $view->with('recipes', Recipe::all());
