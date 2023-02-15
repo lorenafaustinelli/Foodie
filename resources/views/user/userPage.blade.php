@@ -66,7 +66,7 @@
 				@csrf
 				<div class="modal-body">
 						<label class="form-label" for="customFile">Default file input example</label>
-						<input type="file" class="form-control" id="customFile" name="picture" />
+						<input type="file" class="form-control" id="picture" name="picture" />
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -88,8 +88,8 @@
 				@csrf
 				<div class="modal-body">
 					<label class="form-label" for="customFile"> Vuoi cambiare nome? </label>
-					<input type="string" class="form-control" id="name"  placeholder="Inserisci il tuo nuovo nome">
-					<input type="string" class="form-control" id="surname"  placeholder="Inserisci il tuo nuovo cognome">
+					<input type="string" class="form-control" id="name" name="name" placeholder="Inserisci il tuo nuovo nome">
+					<input type="string" class="form-control" id="surname" name="surname" placeholder="Inserisci il tuo nuovo cognome">
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -111,7 +111,7 @@
 				@csrf
 				<div class="modal-body">
 						<label class="form-label" for="customFile"> Hai una nuova email? </label>
-						<input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Inserisci la tua nuova email">
+						<input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Inserisci la tua nuova email">
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

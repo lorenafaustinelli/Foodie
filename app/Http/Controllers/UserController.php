@@ -67,8 +67,14 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
+        $input = $request->all();
         $user = Auth::user();
-        if($request->hasfile('piture')){
+        if($request->picture){
+            $request()->file('picture')->store('public/users');
+        }
+        $user->update($input);
+
+        /*if($request->hasfile('piture')){
             $destination = 'public/users'.$user->picture; 
             if(File::exists($destination)){
                 File::delete($destination);
@@ -90,7 +96,8 @@ class UserController extends Controller
             $user->surname = $request['surname'];
         }
 
-        $user->save();
+        $user->save(); */
+
         /* $user->picture = $request;
 
         $image = request()->file('picture')->store('public/users');

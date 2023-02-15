@@ -148,9 +148,8 @@ class RecipeController extends Controller
         return $id;//$recipe;
     }
 
-    public function latest($column = 'created_at')
-    {
-    return $this->orderBy($column, 'desc');
+    public function latest($column = 'created_at'){
+        return $this->orderBy($column, 'desc');
     } 
 
 
