@@ -33,7 +33,7 @@
                         <td>  {{ $rp->ingredient_name}}</td>
                         <td>  {{ $rp->quantity }}      </td>
                         <td>  {{ $rp->measure }}       </td>
-                        <td> <a href="{{ route('ingredient.edit', $rp->id) }}"  class="text-decoration-none"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                        <td> <a class="text-decoration-none" data-bs-toggle="modal" data-target-id="{{ $rp->ingredient_name }}" data-target-id="{{ $rp->id }}"data-target-id="{{ $rp->ingredient_id }}" data-target-rec_id="{{ $rp->quantity }}" data-target-id="{{ $rp->measure }}"  data-bs-target="#updateModal"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                     <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                     </svg> </a> </td>
@@ -50,7 +50,7 @@
 </div>
 
 
-<!-- Modal -->
+<!-- Modal di inserimento -->
 <div class="modal fade" id="ingredientModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -61,9 +61,11 @@
       <div class="modal-body">
 
         <form id="ingredientform">
-
-        <input type ="hidden" id="recipe_id" class="recipe_id form-control" value="{{ $id }}" >
-        
+        @foreach($recipe_ingredient as $rp)
+          @if($loop->first)
+        <input type ="hidden" id="recipe_id" class="recipe_id form-control" value="{{ $rp->recipe_id }}" >
+          @endif
+        @endforeach
         <div class="form-group">
             <label for="seleziona ingrediente"> </label>
             <select id="ingredient_id" class="ingredient_id form-control" name="ingredient_id">
@@ -81,7 +83,7 @@
         <div class="form-group">
             <label for="Unità di misura:"> </label>
             <select id="measure" class="measure form-control" name="measure">
-                @foreach ($measurements as $measurement)
+                @foreach($measurements as $measurement)
                   <option value="{{ $measurement->name_measurement }}"> {{$measurement->name_measurement }} </option>
                 @endforeach
             </select>
@@ -95,10 +97,74 @@
         <button type="button" class="btn btn-primary add_ingredient" > Aggiungi </button>
       </div>
 
-      
     </div>
   </div>
 </div> 
+
+
+
+
+
+<!-- Modal di modifica-->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modifica:</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <form action="{{ route('recipe_ingredient.update') }}" method="POST" id ="update_form "enctype="multipart/form-data">
+        <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+        <div class="modal-body">
+          
+          @foreach($recipe_ingredient as $rp)
+            @if($loop->first)
+          <input type ="hidden" id="recipe_id" class="form-control" value="{{ $rp->recipe_id }}" >
+            @endif
+          @endforeach
+
+          <input type ="hidden" id="id" class="form-control" value="{{ $rp->id }}" >
+
+          <div class="form-group">
+              <label for="seleziona ingrediente"> </label>
+              <select id="ingredient_id" class="form-control" name="ingredient_id">
+              <option value="{{ $rp->ingredient_id }}"> {{ $rp->ingredient_name }} </option>
+                  @foreach ($ingredients as $ingredient)
+                    <option value="{{ $ingredient->id }}"> {{$ingredient->name_ingredient }} </option>
+                  @endforeach
+              </select>
+          </div> 
+
+          <div class="form-group">
+            <label for="quantity"> </label>
+            <input type="number" value ="{{$rp->quantity}}" id="quantity" min="1" max="5000" class="form-control" placeholder="Quantità:">
+          </div>
+
+          <div class="form-group">
+              <label for="Unità di misura:"> </label>
+              <select id="measure" class="form-control" name="measure">
+              <option value="{{ $rp->measure }}"> {{ $rp->measure }} </option>
+                  @foreach ($measurements as $measurement)
+                    <option value="{{ $measurement->name_measurement }}"> {{$measurement->name_measurement }} </option>
+                  @endforeach
+              </select>
+          </div> 
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+          <button type="submit"class="btn btn-primary" > Modifica </button>
+        </div>
+      </form> 
+    </div>
+  </div>
+</div>
+
+
+
+
 <br>
 <br>
 <?php 
@@ -141,49 +207,15 @@
               $("#RecipeIngredientsTable tbody").prepend('<tr><td>' + response.ing_name + '</td><td>' + data.quantity +'</td><td>'+ response.measure +'</td></tr>');
               $("#ingredientform")[0].reset();
               $("#ingredientModal").modal('hide');
-              //console.log(response);
-            }
-          }
-        });
-    });
 
-    $(document).on('click', '.add_ingredient', function(e){
-      e.preventDefault();
-      //console.log("hello muddafakka");   ahahahah
-      
-      var data = {
-        'recipe_id': $('.recipe_id').val(),
-        'ingredient_id': $('.ingredient_id').val(),
-        'quantity': $('.quantity').val(),
-        'measure': $('.measure').val(),
-      }
-      $.ajaxSetup({
-
-        headers:{
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      });
-
-      $.ajax({
-          url: "{{route('recipe_ingredient.add')}}",
-          type:"POST",
-          data:data,
-          dataType: "json",
-          success:function(response)
-          {
-            if(response)
-            {
-              $("#RecipeIngredientsTable tbody").prepend('<tr><td>' + response.ing_name + '</td><td>' + data.quantity +'</td><td>'+ response.measure +'</td></tr>');
-              $("#ingredientform")[0].reset();
-              $("#ingredientModal").modal('hide');
               //console.log(response);
             }
           }
         });
     });
   });
-  
 
+  
 </script>
 
 @endsection

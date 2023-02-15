@@ -166,11 +166,11 @@ class RecipeController extends Controller
 
         $input = $request -> all(); 
         $recipe = Recipe::find($id);
-        //if($request->photo){
-         //$input->photo = $request()->file('photo')->store('public/recipes');
-        //}
         $recipe->update($input);
-        
+        if($request->photo){
+            $path = request()->file('photo')->store('public/recipe');
+            $recipe->update(['photo'=>$path]);
+        }
         
         $recipe_ingredient = RecipeIngredient::where('recipe_id', $id)->get();
         foreach($recipe_ingredient as $ri){

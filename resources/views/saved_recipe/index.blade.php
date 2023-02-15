@@ -4,6 +4,7 @@
 
 <div class="container">
     <h1> Ricette salvate da {{ Auth::user()->name }} </h1>
+    </br>
     <div class="grid-layout"> 
     @foreach($saved_recipes->where('user_id', '=', Auth::user()->id) as $us) <!-- Scorro tutte le ricette salvate dall'utente-->
             @foreach($recipes->where('id', '=', $us->recipe_id) as $recipe) <!-- Prendo da recipe le ricette --> 

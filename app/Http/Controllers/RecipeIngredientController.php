@@ -144,31 +144,32 @@ class RecipeIngredientController extends Controller
      * @param  \App\RecipeIngredient  $recipeIngredient
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        /*$input = $request -> all(); 
-        $recipe_ingredient = RecipeIngredient::find($id);
-        $recipe_ingredient ->update($input);
+        $input = $request -> all(); 
+        $recipe_ingredient = RecipeIngredient::find($request->recipe_id);
+        $recipe_ingredient->update($input);
 
-        return view('/recipe_category/edit')->with('id', $id); */
-
-        $recipe_ingredient->recipe_id = $request-> recipe_id;
-        $recipe_ingredient->ingredient_id = $request-> ingredient_id;
-        $recipe_ingredient->quantity = $request-> quantity;
-        $recipe_ingredient->measure = $request-> measure;
-
-        $recipe_ingredient->save();
+        $id = $recipe_ingredient->recipe_id;
      
-        $ing_name = Ingredient::where('id', '=', $request->ingredient_id)
-        ->value('name_ingredient');
+        $recipe_ing = RecipeIngredient::where('recipe_id', $request-> recipe_id);
 
-        $response = [
-            'ing_name' => $ing_name,
-            'quantity' => $request-> quantity,
-            'measure' => $request-> measure
-        ];
+        foreach($recipe_ing as $ri){
+            $ing_id[] = $ri->ingredient_id;
+        }
 
-        return response()->json($response);
+        foreach($ing_id as $ing_id){
+            $ing_names[] = app('App\Http\Controllers\IngredientController')->name_ingredient($ing_id);
+        }
+
+        $i = 0;
+        foreach($recipe_ing as $ri){
+            $ri->ingredient_name = $ing_names[$i];
+            $i = $i + 1;
+        }
+
+        return view('/recipe_ingredient/edit', compact('recipe_ing'))->with('id', $id);
+
     }
 
     /**

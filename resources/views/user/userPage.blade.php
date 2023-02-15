@@ -105,7 +105,6 @@
 			<form action="{{ route('user.update') }}" method="POST" enctype="multipart/form-data">
 				@csrf
 				<div class="modal-body">
-						<label class="form-label" for="customFile">Default file input example</label>
 						<input type="file" class="form-control" id="picture" name="picture" />
 				</div>
 				<div class="modal-footer">
