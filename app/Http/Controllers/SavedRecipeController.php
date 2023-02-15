@@ -37,6 +37,12 @@ class SavedRecipeController extends Controller
         $user = Auth::user()->id;
 
         SavedRecipe::create(['user_id' => $user, 'recipe_id' => $id, 'created_at' => time(), 'updated_at' => time()]);
+        $recipe = Recipe::find($id);
+        $n = $recipe->n_saved;
+        $n = $n + 1; 
+        //$recipe->update(['n_saved' => $n]);
+        $recipe->n_saved = $n;
+        $recipe->save();
 
         return redirect()->back();
     }
@@ -96,7 +102,12 @@ class SavedRecipeController extends Controller
     {        
         $id = $request->id;
     
-        SavedRecipe::where('recipe_id', $id)->where('user_id', Auth::id())->delete();;
+        SavedRecipe::where('recipe_id', $id)->where('user_id', Auth::id())->delete();
+        $recipe = Recipe::find($id);
+        $n = $recipe->n_saved;
+        $n = $n - 1;
+        $recipe->n_saved = $n;
+        $recipe->save();
 
         return redirect()->back();
     }
