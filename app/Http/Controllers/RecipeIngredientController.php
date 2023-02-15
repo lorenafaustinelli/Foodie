@@ -146,13 +146,18 @@ class RecipeIngredientController extends Controller
      */
     public function update(Request $request)
     {
-        $input = $request -> all(); 
-        $recipe_ingredient = RecipeIngredient::find($request->recipe_id);
-        $recipe_ingredient->update($input);
+        //$input = $request -> all(); 
+        //$recipe_ingredient = RecipeIngredient::find($request->recipe_id);
+        //$recipe_ingredient->update($input);
 
-        $id = $recipe_ingredient->recipe_id;
+        $recipe_id = $request->recipe_id;
+
+        $recipe_ingredient = RecipeIngredient::where('recipe_id', $recipe_id)->get();
+        //$recipe_ingr = json_decode($request->recipe_ing);
+
+        //$id = $recipe_ingredient->recipe_id;
      
-        $recipe_ing = RecipeIngredient::where('recipe_id', $request-> recipe_id);
+        /*$recipe_ing = RecipeIngredient::where('recipe_id', $request-> recipe_id);
 
         foreach($recipe_ing as $ri){
             $ing_id[] = $ri->ingredient_id;
@@ -167,8 +172,15 @@ class RecipeIngredientController extends Controller
             $ri->ingredient_name = $ing_names[$i];
             $i = $i + 1;
         }
+        */
+        //return view('/recipe_ingredient/edit', compact('recipe_ing'))->with('id', $id);
+        //$response = [
+          //  'ok' => "ok"
+        //];
 
-        return view('/recipe_ingredient/edit', compact('recipe_ing'))->with('id', $id);
+        $recipe_ing = json_encode($recipe_ingredient);
+        
+        return response()->json($recipe_ing);
 
     }
 

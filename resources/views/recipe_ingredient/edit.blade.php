@@ -33,7 +33,7 @@
                         <td>  {{ $rp->ingredient_name}}</td>
                         <td>  {{ $rp->quantity }}      </td>
                         <td>  {{ $rp->measure }}       </td>
-                        <td> <a class="text-decoration-none" data-bs-toggle="modal" data-target-id="{{ $rp->ingredient_name }}" data-target-id="{{ $rp->id }}"data-target-id="{{ $rp->ingredient_id }}" data-target-rec_id="{{ $rp->quantity }}" data-target-id="{{ $rp->measure }}"  data-bs-target="#updateModal"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                        <td> <a class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#updateModal"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                     <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                     </svg> </a> </td>
@@ -114,15 +114,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
-      <form action="{{ route('recipe_ingredient.update') }}" method="POST" id ="update_form "enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
         <div class="modal-body">
           
-          @foreach($recipe_ingredient as $rp)
-            @if($loop->first)
-          <input type ="hidden" id="recipe_id" class="form-control" value="{{ $rp->recipe_id }}" >
-            @endif
-          @endforeach
+          <input type ="hidden" id="recipe_id" class="form-control" value="{{ <?php echo $id ?> }}" >
+            
 
           <input type ="hidden" id="id" class="form-control" value="{{ $rp->id }}" >
 
@@ -155,9 +151,8 @@
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-          <button type="submit"class="btn btn-primary" > Modifica </button>
+          <button type="button" class="btn btn-primary recipe_ing" > Modifica </button>
         </div>
-      </form> 
     </div>
   </div>
 </div>
@@ -212,6 +207,57 @@
             }
           }
         });
+    });
+  });
+
+  
+  $(document).ready(function() {
+    $(document).on('click', '.recipe_ing', function(u){
+      u.preventDefault();
+      console.log("hello muddafakka");  
+      
+      //FUNZIONE DI UPDATE
+      
+      var data = {
+
+        recipe_ing : JSON.stringify(<?php echo $recipe_ingredient ?>), 
+        'id'      :$('.id').val(),
+        'recipe_id': $('.recipe_id').val(),
+        'ingredient_id': $('.ingredient_id').val(),
+        'quantity': $('.quantity').val(),
+        'measure': $('.measure').val(),
+      }
+      $.ajaxSetup({
+
+        headers:{
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+
+      $.ajax({
+          url: "{{route('recipe_ingredient.update')}}",
+          type:"POST",
+          data:data,
+          dataType: "json",
+          success:function(response)
+          {
+            if(response)
+            {
+              $("#RecipeIngredientsTable tbody").html('');
+              console.log(response);
+               $.each(JSON.parse(response), function(key, value){
+                  $("#RecipeIngredientsTable").append(
+                  $('<tr>')
+                     .html('<td>' + value.ingredient_id + '</td><td>' + value.quantity +'</td><td>'+ value.measure +'</td>')
+                  );
+              })
+              $("#updateform")[0].reset();
+              $("#updateModal").modal('hide');
+
+              
+            }
+          }
+        }); 
     });
   });
 
