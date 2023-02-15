@@ -8,7 +8,7 @@
     </div>
 
     <div class="Button">
-        @if($saved_recipes->where('user_id', Auth::id())->where('recipe_id', $recipe->id))
+        @if($saved_recipes->where('user_id', Auth::id())->where('recipe_id', $recipe->id)->count() > 0)
             <a class="btn btn-success" role="button" href="{{ route('recipe.destroy', $recipe->id)}}"> Salvata </a>
         @else
             <a class="btn btn-success" role="button" href="{{ route('recipe.save', $recipe->id)}}"> Salva ricetta </a>

@@ -7,8 +7,8 @@
 	<div class="row">
 		<div class="col-10">
 			@if(Auth::user()->picture) <!-- Se l'utente ha gia scelto un'immagine profilo-->
-				<a href="{{ route('user.update') }}"> <!-- La recuperiamo e la visualizziamo-->
-					<img src="{{ Storage::url(Auth::user()->picture) }}" class="rounded-circle mb-3" style="width: 150px;" alt="Avatar" />
+				<a href="#" data-bs-toggle="modal" data-bs-target="#pictureModal"> <!-- La recuperiamo e la visualizziamo-->
+					<img data-toggle="tooltip" title="Click to update your profile picture! :)" src="{{ Storage::url(Auth::user()->picture) }}" class="rounded-circle mb-3" style="width: 150px;" alt="Avatar" />
 				</a>
 			@else <!-- Altrimenti si visualizza un'immagine predefinita -->
 				<a href="#" data-bs-toggle="modal" data-bs-target="#pictureModal">
@@ -22,33 +22,33 @@
 							<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
 						</svg>-->
 				</a>
-
-				<script>
-					$(document).ready(function(){
-					  $('[data-toggle="tooltip"]').tooltip();   
-					});
-				</script>
 			@endif
+			<script>
+				$(document).ready(function(){
+				  $('[data-toggle="tooltip"]').tooltip();   
+				});
+			</script>
 			<h5 class="mb-2"><strong>{{ Auth::user()->name}} {{Auth::user()->surname}}</strong></h5>
 		</div>
 		<div class="col-2"> <!-- Barra laterale -->
 			<div class="d-flex" style="height: 750px;">
 				<div class="vr"> </div>
 				<p style="padding-left: 30px;">
-				<div class="text-center">
-					<br><br> <br> <br><br><br><br> <br>
-					<!-- Modifica nome -->
-					<a href="#" data-bs-toggle="modal" data-bs-target="#nameModal" class="text-success"> <strong> Modifica il nome </strong></a> <br><br><br>
-					<!-- Modifica email -->
-					<a href="#" data-bs-toggle="modal" data-bs-target="#emailModal" class="text-success"> <strong> Modifica l'email </strong></a> <br><br><br>
-					<!-- Logout -->
-					<a href="{{ route('logout') }}" class="text-success"> <strong>Logout</strong> </a> <br> <br><br>
-					<!-- Possibilità di eliminare definitivamente il profilo -->
-					<a href="{{ route('user.delete', Auth::id())}}" class="text-success"> <h6 class="mb-2"> <strong>Elimina l'account</strong> </h6> </a>
-					
+				<div class="button">
+					<div class="text-center">
+						<br><br> <br> <br><br><br><br> <br>
+						<!-- Modifica nome -->
+						<a class="btn btn-success" role="button" href="#" data-bs-toggle="modal" data-bs-target="#nameModal"> <strong> Modifica il nome </strong></a> <br><br><br>
+						<!-- Modifica email -->
+						<a class="btn btn-success" role="button" href="#" data-bs-toggle="modal" data-bs-target="#emailModal"> <strong> Modifica l'email </strong></a> <br><br><br>
+						<!-- Logout -->
+						<a class="btn btn-success" role="button" href="{{ route('logout') }}"> <strong>Logout</strong> </a> <br> <br><br>
+						<!-- Possibilità di eliminare definitivamente il profilo -->
+						<a class="btn btn-success" role="button" href="{{ route('user.delete', Auth::id())}}"> <strong>Elimina l'account</strong> </a>
+					</div>
 				</div>
 				</a>
-				</div>
+			</div>
 		</div>
 	</div>
 </div>
