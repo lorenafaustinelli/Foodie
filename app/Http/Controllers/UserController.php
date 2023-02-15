@@ -44,7 +44,9 @@ class UserController extends Controller
      */
     public function show()
     {
-        return view('user/userPage');
+        $user_id = Auth::id();
+        $users_recipes = UserRecipe::where('user_id', '=', $user_id)->pluck('recipe_id');
+        return view('user/userPage', compact('users_recipes'));
     }
 
     /**
@@ -69,44 +71,14 @@ class UserController extends Controller
     {
         $user = User::find(Auth::id());
         $input = $request->all();
+        
         $user->update($input);
         if($request->picture){
             $path = request()->file('picture')->store('public/users');
             $user->update(['picture'=>$path]);
         }
         
-
-        /*if($request->hasfile('piture')){
-            $destination = 'public/users'.$user->picture; 
-            if(File::exists($destination)){
-                File::delete($destination);
-            }
-            $file = $request->file('picture');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extension;
-            $file->move('public/users', $filename);
-            $user->picture = $filename;
-        }
-        
-        if($request['email']){
-            $email = $request['email'];
-            $user->email = "$email";
-        }
-        
-        if($request['nome'] && $request['cognome']){
-            $user->name = $request['nome'];
-            $user->surname = $request['surname'];
-        }
-
-        $user->save(); */
-
-        /* $user->picture = $request;
-
-        $image = request()->file('picture')->store('public/users');
-        User::where('id', $id)->update('picture', $image); */
-
-        //return redirect()->back();
-        return view('user/userPage');
+        return redirect()->back();
     }
 
     /**

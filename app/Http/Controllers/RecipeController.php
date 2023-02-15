@@ -67,6 +67,8 @@ class RecipeController extends Controller
             $recipe->photo2 = request()->file('photo2')->store('public/recipes');
         }
 
+        $recipe->n_saved = 0;
+
         /*
         $user_recipe = new UserRecipe();
         $user_recipe->user_id = $u_id;
@@ -620,5 +622,5 @@ class RecipeController extends Controller
             return view('/recipe/index', compact('recipe'));
         }
     
-    }    
+    }   
 }
