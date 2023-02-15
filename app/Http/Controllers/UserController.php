@@ -68,11 +68,11 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $input = $request->all();
-        $user = Auth::user();
-        if($request->picture){
-            $request()->file('picture')->store('public/users');
-        }
+        $user = User::find(Auth::id());
         $user->update($input);
+        if($request->picture){
+            $user->picture = request()->file('picture')->store('public/users');
+        }
 
         /*if($request->hasfile('piture')){
             $destination = 'public/users'.$user->picture; 
