@@ -21,6 +21,7 @@ class RecipesTableSeeder extends Seeder
             'photo'       => 'public/recipes/crepes.jpg',
             'created_at'  => date('Y-m-d h:i:s'), 
             'updated_at'  => date('Y-m-d h:i:s'),
+            'n_saved'     => '0',
             
         ], [
             'id'           => '2',
@@ -31,6 +32,7 @@ class RecipesTableSeeder extends Seeder
             'photo'       => 'public/recipes/pasta.jpg',
             'created_at'  => date('Y-m-d h:i:s'), 
             'updated_at'  => date('Y-m-d h:i:s'),
+            'n_saved'     => '0',
 
         ]
         ]);
