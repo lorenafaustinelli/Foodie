@@ -14,7 +14,7 @@
 				<a href="#" data-bs-toggle="modal" data-bs-target="#pictureModal">
 					<!--<a href="{{ route('user.update') }}" > 
 					<input type="file" name="image" >-->
-					<img data-toggle="tooltip" title="Click to update your profile picture! :)" src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="rounded-circle mb-3" style="width: 150px;" alt="Avatar" />
+					<img data-toggle="tooltip" title="Click to update your profile picture! :)" src="{{ Storage::url('public/users/default.jpg') }}" class="rounded-circle mb-3" style="width: 150px;" alt="Avatar" />
 						<!--<br>   data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Update your profile picture!"
 						Questa è un'icona presa da bootstrap - non so se sia utile
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -72,18 +72,18 @@
 		<div class="col-2"> <!-- Barra laterale -->
 			<div class="d-flex" style="height: 750px;">
 				<div class="vr"> </div>
-				<p style="padding-left: 30px;">
+				<p style="padding-left: 45px;">
 				<div class="button">
 					<div class="text-center">
 						<br><br> <br> <br><br><br><br> <br>
 						<!-- Modifica nome -->
-						<a class="btn btn-success" role="button" href="#" data-bs-toggle="modal" data-bs-target="#nameModal"> <strong> Modifica il nome </strong></a> <br><br><br>
+						<a class="btn btn-outline-success" role="button" href="#" data-bs-toggle="modal" data-bs-target="#nameModal">  Modifica il nome </a> <br><br><br>
 						<!-- Modifica email -->
-						<a class="btn btn-success" role="button" href="#" data-bs-toggle="modal" data-bs-target="#emailModal"> <strong> Modifica l'email </strong></a> <br><br><br>
+						<a class="btn btn-outline-success" role="button" href="#" data-bs-toggle="modal" data-bs-target="#emailModal">  Modifica l'email </a> <br><br><br>
 						<!-- Logout -->
-						<a class="btn btn-success" role="button" href="{{ route('logout') }}"> <strong>Logout</strong> </a> <br> <br><br>
+						<a class="btn btn-outline-success" role="button" href="{{ route('logout') }}"> Logout </a> <br> <br><br>
 						<!-- Possibilità di eliminare definitivamente il profilo -->
-						<a class="btn btn-success" role="button" href="{{ route('user.delete', Auth::id())}}"> <strong>Elimina l'account</strong> </a>
+						<a class="btn btn-outline-success" role="button" href="{{ route('user.delete', Auth::id())}}"> Elimina l'account </a>
 					</div>
 				</div>
 				</a>
