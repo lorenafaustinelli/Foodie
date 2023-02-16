@@ -109,4 +109,10 @@ class CategoryController extends Controller
         return redirect()->back();
     }
 
+    public function name_category($id)
+    {
+        $category = Category::find($id);
+        return $category->name_category;
+    }
+
 }

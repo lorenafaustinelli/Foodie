@@ -73,9 +73,21 @@ class RecipeCategoryController extends Controller
      * @param  \App\RecipeCategory  $recipeCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(RecipeCategory $recipeCategory)
+    public function edit($id)
     {
-        //
+        
+    
+        //$id = id della ricetta non del recipe_ingredient
+        $recipe_cat = RecipeCategory::where('recipe_id', $id)->get();
+        //$recipe_cat = RecipeCategory::find($id);
+
+        $recipe_cat->cat_name1 = app('App\Http\Controllers\CategoryController')->name_category($recipe_cat->category_id);
+        $recipe_cat->cat_name2 = app('App\Http\Controllers\CategoryController')->name_category($recipe_cat->category_id2);
+        
+
+        return view('recipe_category.edit', compact('recipe_cat'))->with('id', $id);
+
+    
     }
 
     /**

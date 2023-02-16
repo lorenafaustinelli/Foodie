@@ -1,40 +1,45 @@
 @extends('layouts.app')
 
 @section('content')
-<?php var_dump($recipe_ing );?>
+
 
 <div class="container">
   <h2> Modifica ingrediente </h2>
 
-  <form action="{{route('recipe_ingredient.update', $id)}}" method="POST" enctype="multipart/form-data">
+  <form action="{{route('recipe_ingredient.update', $recipe_ing->id)}}" method="POST" enctype="multipart/form-data">
     {{ csrf_field() }}
     <div class="row">
       <div class="card">
         <div class="card-body">
 
               <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-                
-              <input type ="hidden" name = "recipe_id" id="recipe_id" />
-
               
                 <div class="form-group">
                 <select class="form-control" name="ingredient_id">
+                <option value="{{ $recipe_ing->ingredient_id }}"> {{ $recipe_ing->name_ingredient }} </option>  
                 @foreach ($ingredients as $ing)
-                  <option value="{{ $ing->id }}"> {{$ing->name_ingredient }} </option>
+                  @if($recipe_ing->ingridient_id != $ing->id)
+                    <option value="{{ $ing->id }}"> {{$ing->name_ingredient }} </option>
+                  @else
+                  @endif
                 @endforeach
                 </select>
                 </div>
 
                 <div class="form-group">
                 <label for="quantity"> </label>
-                <input type="number"id="quantity" min="1" max="5000" class="quantity form-control" placeholder="Quantità:">
+                <input type="number" value ="{{ $recipe_ing->quantity }}" name="quantity" min="1" max="5000" class="quantity form-control" placeholder="Quantità:">
                 </div>
 
                 <div class="form-group">
                     <label for="Unità di misura:"> </label>
-                    <select id="measure" class="measure form-control" name="measure">
+                    <select name="measure" class="measure form-control" name="measure">
+                    <option value="{{ $recipe_ing->measure }}"> {{$recipe_ing->measure }} </option>                      
                         @foreach ($measurements as $measurement)
-                        <option value="{{ $measurement->name_measurement }}"> {{$measurement->name_measurement }} </option>
+                          @if($recipe_ing->measure != $measurement->name_measurement)
+                            <option value="{{ $measurement->name_measurement }}"> {{$measurement->name_measurement }} </option>
+                          @else
+                          @endif
                         @endforeach
                     </select>
                 </div> 
