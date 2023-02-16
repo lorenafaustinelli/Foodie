@@ -132,8 +132,20 @@ class RecipeIngredientController extends Controller
      */
     public function edit($id)
     {   
+        //$id = id della ricetta non del recipe_ingredient
         $recipe_ingredient = RecipeIngredient::where('recipe_id', $id)->get();
-        return view('recipe_ingredient.edit', compact('recipe_ingredient'));
+        return view('recipe_ingredient.edit', compact('recipe_ingredient'))->with('id', $id);
+
+    }
+
+    public function single_edit($id)
+    {   
+        //$id = id del recipe_ingredient
+        $recipe_ing = RecipeIngredient::where('id', $id)->get();
+        //$ingr_name = Ingredient::where('id', '=', $recipe_ingredient->ingredient_id)
+        //->value('name_ingredient');
+
+        return view('recipe_ingredient.single_edit', compact('recipe_ing'))->with('id', $id);
 
     }
 
@@ -144,15 +156,20 @@ class RecipeIngredientController extends Controller
      * @param  \App\RecipeIngredient  $recipeIngredient
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $input = $request -> all(); 
-        $recipe_ingredient = RecipeIngredient::find($request->recipe_id);
-        $recipe_ingredient->update($input);
+        //$input = $request -> all(); 
+        //$recipe_ingredient = RecipeIngredient::find($request->recipe_id);
+        //$recipe_ingredient->update($input);
 
-        $id = $recipe_ingredient->recipe_id;
+        $recipe_id = $request->recipe_id;
+
+        $recipe_ingredient = RecipeIngredient::where('recipe_id', $recipe_id)->get();
+        //$recipe_ingr = json_decode($request->recipe_ing);
+
+        //$id = $recipe_ingredient->recipe_id;
      
-        $recipe_ing = RecipeIngredient::where('recipe_id', $request-> recipe_id);
+        /*$recipe_ing = RecipeIngredient::where('recipe_id', $request-> recipe_id);
 
         foreach($recipe_ing as $ri){
             $ing_id[] = $ri->ingredient_id;
@@ -167,8 +184,13 @@ class RecipeIngredientController extends Controller
             $ri->ingredient_name = $ing_names[$i];
             $i = $i + 1;
         }
-
-        return view('/recipe_ingredient/edit', compact('recipe_ing'))->with('id', $id);
+        */
+        //return view('/recipe_ingredient/edit', compact('recipe_ing'))->with('id', $id);
+        //$response = [
+          //  'ok' => "ok"
+        //];
+        
+        return view('recipe_ingredient.edit', compact('recipe_ingredient'))->with('id', $id);
 
     }
 
@@ -180,10 +202,29 @@ class RecipeIngredientController extends Controller
      */
     public function destroy($id)
     {
-        $recipe_ingredient = RecipeIngredient::find($id);
-        $recipe_ingredient->delete();
+        $recipe_ing = RecipeIngredient::find($id);
+        $recipe_id = $recipe_ing->recipe_id;
+        $recipe_ing->delete();
+
+        $recipe_ingredient = RecipeIngredient::where('recipe_id', $recipe_id)->get();
         
-        return redirect()->back();
+        foreach($recipe_ingredient as $ri){
+            $ing_id[] = $ri->ingredient_id;
+        }
+
+        foreach($ing_id as $ing){
+            $ing_names[] = app('App\Http\Controllers\IngredientController')->name_ingredient($ing);
+        }
+
+        $i = 0;
+        foreach($recipe_ingredient as $ri){
+            $ri->ingredient_name = $ing_names[$i];
+            $i = $i + 1;
+        }
+
+       
+        
+        return view('recipe_ingredient.edit', compact('recipe_ingredient'))->with('id', $recipe_id);
     }
 
     
