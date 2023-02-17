@@ -39,8 +39,11 @@
 					@foreach($users_recipes as $ur) <!-- scorro gli id delle ricette scritte dall'utente -->
 						@if($loop->index < 3) 
 							<div class="card text-center" style="width: 15rem;">
+								<?php
+									$recipes = DB::table('recipes')->orderBy('n_saved','DESC')->get();
+								?>
 								<!-- scorro poi le ricette corrispondenti agli id del for precedente -->
-								@foreach($recipes->where('id', '=', $ur)->sortBy('n_saved') as $recipe)
+								@foreach($recipes->where('id', '=', $ur)->sortByDesc('n_saved') as $recipe)
 									<img src="{{ Storage::url($recipe->photo) }}" class="card-img-top" width="250px" height="180px" alt="foto ricetta">
 									<div class="card-body">
 										<a href="{{ route('recipe.show', $ur)}}" class="card-link">{{ $recipe->name_recipe }}</a>
