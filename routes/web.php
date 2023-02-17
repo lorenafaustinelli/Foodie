@@ -58,7 +58,7 @@ Route::group(['middleware'=>['user']], function(){
     //RecipeIngredient
     Route::get('/recipe_ingredient', 'RecipeIngredientController@index');
     Route::post('/recipe_ingredient/store', 'RecipeIngredientController@store')->name('recipe_ingredient.add');
-    Route::get('/recipe_ingredient/create', 'RecipeIngredientController@create');
+    Route::get('/recipe_ingredient/create', 'RecipeIngredientController@create')->name('recipe_ingredient.create');
     Route::get('/recipe_ingredient/destroy/{id}', 'RecipeIngredientController@destroy')->name('recipe_ingredient.delete');
     Route::get('/recipe_ingredient/edit/{id}', 'RecipeIngredientController@edit')->name('recipe_ingredient.edit');
     Route::post('/recipe_ingredient/update/{id}', 'RecipeIngredientController@update')->name('recipe_ingredient.update');

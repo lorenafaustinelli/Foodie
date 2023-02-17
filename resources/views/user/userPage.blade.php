@@ -36,14 +36,15 @@
 				</br>
 				<div class="grid-layout"> 
 					<script> $i = 0 </script>
-					@foreach($users_recipes as $ur) <!-- scorro gli id delle ricette scritte dall'utente -->
+					
+					@foreach($recipe as $r)
 						@if($loop->index < 3) 
 							<div class="card text-center" style="width: 15rem;">
 								<!-- scorro poi le ricette corrispondenti agli id del for precedente -->
-								@foreach($recipe->where('id', '=', $ur) as $r)
+								
 									<img src="{{ Storage::url($r->photo) }}" class="card-img-top" width="250px" height="180px" alt="foto ricetta">
 									<div class="card-body">
-										<a href="{{ route('recipe.show', $ur)}}" class="card-link">{{ $r->name_recipe }}</a>
+										<a href="{{ route('recipe.show', $r->id )}}" class="card-link">{{ $r->name_recipe }}</a>
 									</div>
 									<ul class="list-group list-group-flush">
 										<li class="list-group-item"> 
@@ -60,12 +61,13 @@
 											</a>
 										</li> 
 									</ul>
-								@endforeach 							
+															
 							</div>
 						@else
 							@break
 						@endif
-					@endforeach
+					@endforeach 
+					
 				</div> 
 			    </div>
 		</div>

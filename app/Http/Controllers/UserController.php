@@ -45,10 +45,13 @@ class UserController extends Controller
     public function show()
     {
         $user_id = Auth::id();
-        $users_recipes = UserRecipe::where('user_id', '=', $user_id)->pluck('recipe_id');
-        $recipe = Recipe::orderBy('n_saved')->get();
-        return view('user/userPage', compact('users_recipes', 'recipe'));
+        $recipe = DB::table('user_recipes')->where('user_id', '=', $user_id)
+        ->join('recipes', 'recipes.id', "=", 'user_recipes.recipe_id')
+        ->orderBy('n_saved', 'desc')->get();
+        
+        return view('user/userPage', compact('recipe'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
