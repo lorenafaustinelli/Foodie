@@ -47,6 +47,7 @@ class UserController extends Controller
         $user_id = Auth::id();
         $users_recipes = UserRecipe::where('user_id', '=', $user_id)->pluck('recipe_id');
         $recipe = Recipe::orderBy('n_saved')->get();
+        //$recipe = Recipe::get()->sortByDesc('n_saved');
         return view('user/userPage', compact('users_recipes', 'recipe'));
     }
 
