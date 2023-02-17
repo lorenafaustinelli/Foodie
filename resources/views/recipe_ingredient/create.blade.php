@@ -11,7 +11,7 @@
 
 
 <div class="container">
-  <h1> Modifica Ingredienti </h1>
+  <h1> Aggiungi gli ingredienti </h1>
    <div class="row">
        <div class="card">
             <div class="card-header">
@@ -29,7 +29,7 @@
                         </tr> 
                     </thead>
                     <tbody>
-                    @if($recipe_ingredient ?? '')
+                    
                       @foreach($recipe_ingredient ?? '' as $rp)
                       <tr>  
                         <td>  {{ $rp->ingredient_name}}</td>
@@ -44,8 +44,6 @@
                     </svg> </a> </td>
                       </tr>
                       @endforeach
-                    @else
-                    @endif
                     </tbody>
                 </table>
             </div>
@@ -67,14 +65,11 @@
         @csrf
 
         <div class="modal-body">
-
-          <form id="ingredientform">
-
-            <input type ="hidden" name="recipe_id" class="recipe_id form-control" value="{{ $id }}" >
+          <input type ="hidden" name="recipe_id" class="recipe_id form-control" value="{{ $id }}" >
 
           <div class="form-group">
               <label for="seleziona ingrediente"> </label>
-              <select name="ingredient_id" class="ingredient_id form-control" name="ingredient_id">
+              <select name="ingredient_id" class="ingredient_id form-control" >
                   @foreach ($ingredients as $ingredient)
                     <option value="{{ $ingredient->id }}"> {{$ingredient->name_ingredient }} </option>
                   @endforeach
@@ -112,12 +107,19 @@
   <!-- oggetti di sessione che vengono mandati da una pagina all'altra -->
   <?php 
   //per passare l'id della ricetta alla pagina delle categorie
-  session()->put('id', $id); ?>
+  {{ session()->put('id', $id); }} ?>
 
   <div class="d-grid gap-2 col-6 mx-auto"> 
-
-    <a class="btn btn-primary" href="{{ route('recipe_category.create', $id) }}" role="button">Prosegui</a>
+  @foreach($recipe_ingredient as $rp)
+  @if($loop->first)
+    <a class="btn btn-primary" href="{{ route('recipe_category.create', $rp->recipe_id) }}" role="button">Prosegui</a>
+    @endif
+  @endforeach
   </div>
+
+  <?php 
+  //per passare l'id della ricetta alla pagina delle categorie
+  {{ session()->put('id', $id); }} ?>
 
   
 

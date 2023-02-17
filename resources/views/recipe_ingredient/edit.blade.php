@@ -28,7 +28,7 @@
                         </tr> 
                     </thead>
                     <tbody>
-                      @foreach($recipe_ingredient as $rp)
+                    @foreach($recipe_ingredient ?? '' as $rp)
                       <tr>  
                         <td>  {{ $rp->ingredient_name}}</td>
                         <td>  {{ $rp->quantity }}      </td>
@@ -59,7 +59,7 @@
         <h1 class="modal-title fs-5" id="exampleModalLabel">Aggiungi:</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="{{ route('recipe_ingredient.add') }}" method="POST" enctype="multipart/form-data">
+      <form action="{{ route('recipe_ingredient.add_u') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="modal-body">

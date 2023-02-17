@@ -3,49 +3,42 @@
 @section('content')
 <?php 
   //recupero id della ricetta che sto creando
-  {{ $id = session()->get('id'); }}
+ {{ $id = session()->get('id');}}
 
   
-  //var_dump($id);
+  var_dump($id);
 ?>
 
 <div class="container">
   <h1> Ultimo step! </h1>
+  <h2>Associa almeno una categoria alla tua ricetta </h2>
 
-  <h2> Associa almeno una categoria alla tua ricetta </h2>
-
-  <form action="/recipe_category/store" method="POST" enctype="multipart/form-data">
-    {{ csrf_field() }}
+  <form action="{{route('recipe_category.add')}}" method="POST" enctype="multipart/form-data">
+  @csrf
     <div class="row">
       <div class="card">
         <div class="card-body">
-          <table id="RecipeCategoriesTable" class="table">
-            <thead>
-              <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 
-              <input type ="hidden" name = "recipe_id" id="recipe_id" value="{{ $id }}"/>
+          <input type ="hidden" name="recipe_id" class="form-control" value="{{ $recipe->id }}" >
 
-              <tr>
-                <div class="form-group">
-                <select id="category_id" class="form-control" name="category_id">
+          <div class="form-group">
+                <select name="category_id" class="form-control" >
                 @foreach ($categories as $category)
                   <option value="{{ $category->id }}"> {{$category->name_category }} </option>
                 @endforeach
                 </select>
-                </div>
+          </div> 
 
-                <div class="form-group">
-                <select id="category_id2" class="form-control" name="category_id2">
-                <option value="" selected> </option>
-                @foreach ($categories as $category)
-                  <option value="{{ $category->id }}"> {{$category->name_category }} </option>
-                @endforeach
+          <div class="form-group">
+              <select name="category_id2" class="form-control" >
+              <option value=""> </option>
+              @foreach ($categories as $category)
+                <option value="{{ $category->id }}"> {{$category->name_category }} </option>
+              @endforeach
+              
+              </select>
+          </div> 
 
-                </select>
-                </div> 
-              </tr>
-            </thead>
-          </table>
         </div>
       </div>
     </div>

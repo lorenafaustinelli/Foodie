@@ -86,7 +86,7 @@ class RecipeController extends Controller
         
         //return redirect('recipe');
         //questa viene passato l'id della ricetta per aggiungerlo alla tabella RecipeIngredient nella pagina successiva
-        return redirect()->route('recipe_ingredient.create')->with('id', $recipe->id);//compact('id'));//)->with('$recipe_id');
+        return redirect()->route('recipe_ingredient.create', $recipe_id)->with('id', $recipe->id);//compact('id'));//)->with('$recipe_id');
         //return redirect()->route('recipe_ingredient.edit', $recipe_id);
     }
 

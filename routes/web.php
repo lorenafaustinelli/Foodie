@@ -58,7 +58,8 @@ Route::group(['middleware'=>['user']], function(){
     //RecipeIngredient
     Route::get('/recipe_ingredient', 'RecipeIngredientController@index');
     Route::post('/recipe_ingredient/store', 'RecipeIngredientController@store')->name('recipe_ingredient.add');
-    Route::get('/recipe_ingredient/create', 'RecipeIngredientController@create')->name('recipe_ingredient.create');
+    Route::post('/recipe_ingredient/store_u', 'RecipeIngredientController@store_u')->name('recipe_ingredient.add_u');
+    Route::get('/recipe_ingredient/create/{id}', 'RecipeIngredientController@create')->name('recipe_ingredient.create');
     Route::get('/recipe_ingredient/destroy/{id}', 'RecipeIngredientController@destroy')->name('recipe_ingredient.delete');
     Route::get('/recipe_ingredient/edit/{id}', 'RecipeIngredientController@edit')->name('recipe_ingredient.edit');
     Route::post('/recipe_ingredient/update/{id}', 'RecipeIngredientController@update')->name('recipe_ingredient.update');
@@ -84,10 +85,10 @@ Route::group(['middleware'=>['user']], function(){
 
 
     //RecipeCategory
-    Route::get('/recipe_category/create', 'RecipeCategoryController@create')->name('recipe_category.create');
+    Route::get('/recipe_category/create/{id}', 'RecipeCategoryController@create')->name('recipe_category.create');
     Route::get('/recipe_category/edit/{id}', 'RecipeCategoryController@edit')->name('recipe_category.edit');
     Route::post('/recipe_category/update/{id}', 'RecipeCategoryController@update')->name('recipe_category.update');
-    Route::post('/recipe_category/store', 'RecipeCategoryController@store');
+    Route::post('/recipe_category/store', 'RecipeCategoryController@store')->name('recipe_category.add');
 
     //UserRecipe
     Route::get('/user_recipe/index', 'UserRecipeController@index')->name('user.recipe');

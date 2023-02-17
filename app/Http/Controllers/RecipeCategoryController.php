@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\RecipeCategory;
 use App\Category;
+use App\Recipe;
 use Illuminate\Http\Request;
 
 class RecipeCategoryController extends Controller
@@ -25,9 +26,10 @@ class RecipeCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('recipe_category.create');
+        $recipe = Recipe::find($id);
+        return view('recipe_category.create', compact('recipe'))->with('id', $id);
     }
 
     /**
@@ -49,12 +51,14 @@ class RecipeCategoryController extends Controller
         $recipe_category->recipe_id = $request-> recipe_id;
         $recipe_category->category_id = $request->category_id;
         $recipe_category->category_id2 = $request->category_id2;
-        
+
 
         $recipe_category->save();
 
         return view('/home');
     }
+
+    
 
     /**
      * Display the specified resource.
