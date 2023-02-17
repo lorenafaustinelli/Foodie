@@ -9,10 +9,10 @@
     <div class="grid-layout"> 
     @foreach($users as $user) <!-- scorro gli id delle ricette scritte dall'utente --> 
         <div class="card card text-center" style="width: 15rem;">
-            @if(Auth::user()->picture)
-                <img src="{{ Storage::url((Auth::user()->picture)) }}" class="card-img-top" width="250px" height="180px" alt="foto ricetta">
-                @else
-                <img data-toggle="tooltip" src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="card-img-top" width="250px" height="180px" alt="foto ricetta" alt="Avatar" />
+            @if($user->picture)
+                <img src="{{ Storage::url(($user->picture)) }}" class="card-img-top" width="250px" height="180px" alt="foto utente">
+            @else
+            <img data-toggle="tooltip" src="{{ Storage::url('public/users/default.jpg') }}" class="card-img-top" width="250px" height="180px"  alt="Avatar" />
             @endif
                 <div class="card-body">
                     <p>{{ $user->name }} {{ $user->surname }} </p>

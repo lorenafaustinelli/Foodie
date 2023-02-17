@@ -86,7 +86,7 @@ Route::group(['middleware'=>['user']], function(){
     //RecipeCategory
     Route::get('/recipe_category/create', 'RecipeCategoryController@create')->name('recipe_category.create');
     Route::get('/recipe_category/edit/{id}', 'RecipeCategoryController@edit')->name('recipe_category.edit');
-    Route::get('/recipe_category/update/{id}', 'RecipeCategoryController@update')->name('recipe_category.update');
+    Route::post('/recipe_category/update/{id}', 'RecipeCategoryController@update')->name('recipe_category.update');
     Route::post('/recipe_category/store', 'RecipeCategoryController@store');
 
     //UserRecipe
