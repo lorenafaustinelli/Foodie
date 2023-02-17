@@ -5,7 +5,7 @@
 <div class="container">
   <h1> Modifica categoria </h1>
 
-  <form action="/recipe_category/store" method="POST" enctype="multipart/form-data">
+  <form action="{{route('recipe_category.update', $recipe_cat->id)}}" method="POST" enctype="multipart/form-data">
     {{ csrf_field() }} 
     <div class="row">
       <div class="card">
@@ -19,7 +19,7 @@
               <tr>
                 <div class="form-group">
                 <select id="category_id" class="form-control" name="category_id">
-                <option value="{{ $recipe_cat->category_id }}"> {{$category->cat_name1 }} </option>
+                <option value="{{ $recipe_cat->category_id }}"> {{$recipe_cat->cat_name1 }} </option>
                 @foreach ($categories as $category)
                   <option value="{{ $category->id }}"> {{$category->name_category }} </option>
                 @endforeach
@@ -28,19 +28,11 @@
 
                 <div class="form-group">
                 <select id="category_id2" class="form-control" name="category_id2">
-                @if($recipe_cat->category_id2 == '')
-                  <option value="" selected> </option>
+                <option value="{{ $recipe_cat->category_id2 }}"> {{$recipe_cat->cat_name2 }} </option>
                   @foreach ($categories as $category)
                   <option value="{{ $category->id }}"> {{$category->name_category }} </option>
                   @endforeach
-
-                @else
-                  <option value="" selected> </option>
-                  @foreach ($categories as $category)
-                  <option value="{{ $recipe_cat->category_id2 }}"> {{$category->cat_name2 }} </option>
-                  @endforeach
-
-                @endif
+                  <option value="">  </option>
 
                 </select>
                 </div> 
@@ -53,7 +45,7 @@
     </br>
     </br>
     <div class="d-grid gap-2 col-6 mx-auto"> 
-      <button type="submit" class="btn btn-primary">Concludi</button>
+      <button type="submit" class="btn btn-primary">Concludi modifiche</button>
     </div>
   </form>
 </div> 

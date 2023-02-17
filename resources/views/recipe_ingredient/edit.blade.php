@@ -66,7 +66,9 @@
 
           <form id="ingredientform">
           @foreach ($recipe_ingredient as $ri)
-          <input type ="hidden" name="recipe_id" class="recipe_id form-control" value="{{ $ri->recipe_id }}" >
+            @if($loop->first)
+              <input type ="hidden" name="recipe_id" class="recipe_id form-control" value="{{ $ri->recipe_id }}" >
+            @endif
           @endforeach
 
           <div class="form-group">

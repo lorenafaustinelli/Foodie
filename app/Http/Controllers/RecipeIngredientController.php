@@ -29,9 +29,46 @@ class RecipeIngredientController extends Controller
      */
     public function create()
     {
+        //return view('/home', compact('recipe_ingredient'))
         return view('recipe_ingredient.create');
+        //return view('recipe_ingredient.create');
         
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store_u(Request $request)
+    {
+        $request->validate([
+            'recipe_id' => 'required',
+            'ingredient_id' => 'required',
+            'quantity' => 'required',
+            'measure' => 'required'
+        ]);
+
+        $recipe_ingredient = new RecipeIngredient();
+        $recipe_ingredient->recipe_id = $request-> recipe_id;
+        $recipe_ingredient->ingredient_id = $request-> ingredient_id;
+        $recipe_ingredient->quantity = $request-> quantity;
+        $recipe_ingredient->measure = $request-> measure;
+        $recipe_ingredient->save();
+
+        $recipe_id = $recipe_ingredient->recipe_id;
+     
+       $recipe_ingredient = RecipeIngredient::where('recipe_id', $recipe_id)->get();
+
+        
+        
+        //return view('/home', compact('recipe_ingredient'))->with('id', $recipe_id);
+        return redirect()->route('recipe_ingredient.edit', $recipe_id);
+        //return redirect()->back();
+
+    } 
+
 
     /**
      * Store a newly created resource in storage.
@@ -62,10 +99,12 @@ class RecipeIngredientController extends Controller
         
         
         //return view('/home', compact('recipe_ingredient'))->with('id', $recipe_id);
-        return redirect()->route('recipe_ingredient.edit', $recipe_id);
+        return redirect()->route('recipe_ingredient.create', compact('recipe_ingredient')->with('id', $recipe_id));
         //return redirect()->back();
 
-    } 
+    }
+
+
     
     
     //funzione per modificare la quantità degli ingredienti nella visualizzazione della ricetta

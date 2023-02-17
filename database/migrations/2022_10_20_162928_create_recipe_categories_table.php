@@ -14,6 +14,7 @@ class CreateRecipeCategoriesTable extends Migration
     public function up()
     {
         Schema::create('recipe_categories', function (Blueprint $table) {
+            $table->id();
             $table->bigInteger('recipe_id')->unsigned();
             $table->bigInteger('category_id')->unsigned();
             $table->bigInteger('category_id2')->unsigned()->nullable(); 

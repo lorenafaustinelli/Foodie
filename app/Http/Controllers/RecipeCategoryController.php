@@ -77,12 +77,16 @@ class RecipeCategoryController extends Controller
     {
         
     
-        //$id = id della ricetta non del recipe_ingredient
+        //$id = id della ricetta non del recipe_category
         $recipe_cat = RecipeCategory::where('recipe_id', $id)->get();
-        //$recipe_cat = RecipeCategory::find($id);
 
-        $recipe_cat->cat_name1 = app('App\Http\Controllers\CategoryController')->name_category($recipe_cat->category_id);
-        $recipe_cat->cat_name2 = app('App\Http\Controllers\CategoryController')->name_category($recipe_cat->category_id2);
+        foreach($recipe_cat as $recipe_cat){
+            $recipe_cat->cat_name1 = app('App\Http\Controllers\CategoryController')->name_category($recipe_cat->category_id);
+            if($recipe_cat->category_id2 != ""){
+                $recipe_cat->cat_name2 = app('App\Http\Controllers\CategoryController')->name_category($recipe_cat->category_id2);
+                
+            }
+        }
         
 
         return view('recipe_category.edit', compact('recipe_cat'))->with('id', $id);
@@ -97,9 +101,13 @@ class RecipeCategoryController extends Controller
      * @param  \App\RecipeCategory  $recipeCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RecipeCategory $recipeCategory)
+    public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $recipe_category = RecipeCategory::find($id);
+        $recipe_category->update($input);
+
+        return redirect()->route('recipes.index');
     }
 
     /**
