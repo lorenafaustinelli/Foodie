@@ -173,6 +173,28 @@ sup {
   top: -0.5em;
 }
 
+.l {
+  color: #2d995b;
+  font-variant: small-caps;
+  text-decoration: none;
+  background-color: transparent;
+}
+.l:hover{
+  color: #2d995b;
+  text-decoration: underline;
+}
+
+.lb {
+  color: #3490dc;
+  font-variant: small-caps;
+  text-decoration: none;
+  background-color: transparent;
+}
+.lb:hover{
+  color: #3490dc;
+  text-decoration: underline;
+}
+
 a {
   color: #3490dc;
   text-decoration: none;

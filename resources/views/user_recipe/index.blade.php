@@ -13,7 +13,7 @@
             
             <img src="{{ Storage::url($r->photo) }}" class="card-img-top" width="250px" height="180px" alt="foto ricetta">
             <div class="card-body">
-                <a href="{{ route('recipe.show', $r->id )}}" class="card-link">{{ $r->name_recipe }}</a>
+                <a href="{{ route('recipe.show', $r->id )}}"  class = "lb">{{ $r->name_recipe }}</a>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"> <a href="{{ route('recipe.edit', $r->id) }}">
