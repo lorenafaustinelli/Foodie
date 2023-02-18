@@ -11,6 +11,7 @@
 
         <!-- Styles -->
         <style>
+            
             html, body {
                 background-color: #fff;
                 color: #636b6f;
@@ -57,13 +58,10 @@
                 text-decoration: none;
                 text-transform: uppercase;
             }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
         </style>
     </head>
     <body>
+        <div class="background-image">
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))       <!-- se sei loggato allora -->
                 <div class="top-right links">
@@ -76,14 +74,21 @@
                     @endauth
                 </div>
             @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Foodie
-                </div>
-
-            </div>
+            
+        </div>
+            
         </div>
     </body>
+    <style>
+         .background-image{
+                background-image: url({{Storage::url('public/background.jpg')}});
+                background-size: cover;
+                background-repeat: no-repeat;
+                width: 1690px;
+                height: 100vh;
+
+            }
+        </style>
+
 </html>
 
