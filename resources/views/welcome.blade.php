@@ -84,9 +84,8 @@
                 background-image: url({{Storage::url('public/background.jpg')}});
                 background-size: cover;
                 background-repeat: no-repeat;
-                width: 1690px;
-                height: 100vh;
-
+                width: 100%;
+                height: 100%;
             }
         </style>
 
