@@ -36,12 +36,9 @@
 				</br>
 				<div class="grid-layout"> 
 					<script> $i = 0 </script>
-					
 					@foreach($recipe as $r)
 						@if($loop->index < 3) 
 							<div class="card text-center" style="width: 15rem;">
-								<!-- scorro poi le ricette corrispondenti agli id del for precedente -->
-								
 									<img src="{{ Storage::url($r->photo) }}" class="card-img-top" width="250px" height="180px" alt="foto ricetta">
 									<div class="card-body">
 										<a href="{{ route('recipe.show', $r->id )}}" class="card-link">{{ $r->name_recipe }}</a>
