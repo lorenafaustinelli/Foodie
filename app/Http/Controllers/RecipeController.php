@@ -61,11 +61,7 @@ class RecipeController extends Controller
         $recipe->portion = request('portion');
         $recipe->instruction = request('instruction');
         $recipe->created_at = time();
-
         $recipe->photo = request()->file('photo')->store('public/recipes');
-        if($request->photo2){
-            $recipe->photo2 = request()->file('photo2')->store('public/recipes');
-        }
 
         $recipe->n_saved = 0;
 

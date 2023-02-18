@@ -8,7 +8,7 @@
     <div class="grid-layout"> 
     @foreach($saved_recipes->where('user_id', '=', Auth::user()->id) as $us) <!-- Scorro tutte le ricette salvate dall'utente-->
             @foreach($recipes->where('id', '=', $us->recipe_id) as $recipe) <!-- Prendo da recipe le ricette --> 
-                    <div class="card" style="width: 18rem;">
+                    <div class="card card text-center" style="width: 15rem;">
                         <img src="{{ Storage::url($recipe->photo) }}" class="card-img-top" width="250px" height="180px" alt="foto ricetta">
                         <div class="card-body">
                             <a href="{{ route('recipe.show', $us->recipe_id)}}" class="card-link">{{ $recipe->name_recipe }}</a>
