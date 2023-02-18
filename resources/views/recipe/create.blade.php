@@ -6,8 +6,7 @@
 <div class="container">
 
 <h1> Iniziamo con alcune informazioni sulla ricetta: <h1>
-
-
+    </br>
     <form action="/recipe/store" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="row">
@@ -38,10 +37,6 @@
 
                                 <div class="form-group">
                                     <input type="file" name="photo" class="form-control" placeholder="Foto:">
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="file" name="photo2" class="form-control" placeholder="Foto:">
                                 </div>
                             </tr>
                         </thead>

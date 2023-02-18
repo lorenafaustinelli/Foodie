@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\UserRecipe;
+use Illuminate\Support\Facades\DB;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -16,8 +17,11 @@ class UserRecipeController extends Controller
     public function index()
     {   
         $user_id = Auth::id();
-        $users_recipes = UserRecipe::where('user_id', '=', $user_id)->pluck('recipe_id');
-        return view('user_recipe/index', compact('users_recipes'));
+        $recipe = DB::table('user_recipes')->where('user_id', '=', $user_id)
+        ->join('recipes', 'recipes.id', "=", 'user_recipes.recipe_id')->get();
+        
+        return view('user_recipe/index', compact('recipe'));
+
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\RecipeCategory;
 use App\Category;
+use App\Recipe;
 use Illuminate\Http\Request;
 
 class RecipeCategoryController extends Controller
@@ -25,9 +26,10 @@ class RecipeCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('recipe_category.create');
+        $recipe = Recipe::find($id);
+        return view('recipe_category.create', compact('recipe'))->with('id', $id);
     }
 
     /**
@@ -49,12 +51,14 @@ class RecipeCategoryController extends Controller
         $recipe_category->recipe_id = $request-> recipe_id;
         $recipe_category->category_id = $request->category_id;
         $recipe_category->category_id2 = $request->category_id2;
-        
+
 
         $recipe_category->save();
 
         return view('/home');
     }
+
+    
 
     /**
      * Display the specified resource.
@@ -79,17 +83,27 @@ class RecipeCategoryController extends Controller
     
         //$id = id della ricetta non del recipe_category
         $recipe_cat = RecipeCategory::where('recipe_id', $id)->get();
+        $recipe = Recipe::find($id);
+        if($recipe_cat->isEmpty()){
 
-        foreach($recipe_cat as $recipe_cat){
-            $recipe_cat->cat_name1 = app('App\Http\Controllers\CategoryController')->name_category($recipe_cat->category_id);
-            if($recipe_cat->category_id2 != ""){
-                $recipe_cat->cat_name2 = app('App\Http\Controllers\CategoryController')->name_category($recipe_cat->category_id2);
-                
+            return view('recipe_category.edit', compact('recipe_cat', 'recipe'))->with('id', $id);
+
+        } else {
+
+            foreach($recipe_cat as $recipe_cat){
+
+                $recipe_cat->cat_name1 = app('App\Http\Controllers\CategoryController')->name_category($recipe_cat->category_id);
+
+                if($recipe_cat->category_id2 != ""){
+
+                    $recipe_cat->cat_name2 = app('App\Http\Controllers\CategoryController')->name_category($recipe_cat->category_id2);
+                    
+                }
             }
         }
         
 
-        return view('recipe_category.edit', compact('recipe_cat'))->with('id', $id);
+        return view('recipe_category.edit', compact('recipe_cat', 'recipe'))->with('id', $id);
 
     
     }

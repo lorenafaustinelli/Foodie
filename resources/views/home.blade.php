@@ -13,7 +13,10 @@
                     @foreach ($recipes as $recipe)
                             <h3> <a href="{{ route('recipe.show', $recipe)}}" class="card-link"> {{ $recipe->name_recipe }} </a></h3>
                             <img src="{{ Storage::url($recipe->photo) }}" class="card-img-top"  alt="foto ricetta">
-                            <p>{{ $recipe->instruction }}</p>
+                            </br>
+                            <button type="button" class="btn btn-success" disabled data-bs-toggle="button"> Categoria 1</button> <button type="button" class="btn btn-success" disabled data-bs-toggle="button"> Categoria 2</button>
+                            </br>
+                            </br>
                     @endforeach
                 </div>
             </div>
