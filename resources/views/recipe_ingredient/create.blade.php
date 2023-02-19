@@ -108,11 +108,12 @@
   <?php 
   //per passare l'id della ricetta alla pagina delle categorie
   {{ session()->put('id', $id); }} ?>
+  <div class="d-grid gap-2 d-md-block">
+    <a class="btn btn-primary" href="{{ redirect()->back() }}" type="button">Indietro</a>
+  </div>
 
-  <div class="d-grid gap-2 col-6 mx-auto"> 
-
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end"> 
     <a class="btn btn-primary" href="{{ route('recipe_category.create', $recipe->id) }}" role="button">Prosegui</a>
-
   </div>
 
 

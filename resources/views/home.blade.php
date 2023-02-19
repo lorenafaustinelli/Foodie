@@ -10,7 +10,7 @@
                     @foreach ($recipe as $recipe)
                     <div class="card" style="width: 40rem;">
                         <div class="card-header text-center">
-                        <h3> <a href="{{ route('recipe.show', $recipe)}}" class = "l"> {{ $recipe->name_recipe }} </a> </h3>
+                        <h3> <a href="{{ route('recipe.show', $recipe->id)}}" class = "l"> {{ $recipe->name_recipe }} </a> </h3>
                         </div>
                         <div class="card-body">
                             <img src="{{ Storage::url($recipe->photo) }}" class="card-img-top"  alt="foto ricetta">

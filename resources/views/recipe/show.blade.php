@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-
+<button class="btn btn-success"> Indietro </button>
 <div class="showrecipe">
     <div class ="Title">
-        <h1> {{$recipe->name_recipe }}<h1>
+        <h1> {{ $recipe->name_recipe }}<h1>
     </div>
 
     <div class="Button">
@@ -66,7 +66,7 @@
     @endif
 
 
-       
+    
 </div>
 
 <?php

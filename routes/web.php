@@ -32,9 +32,6 @@ Route::group(['middleware'=>['user']], function(){
         //]);
     //})->name('home');
 
-    //Prove drag and drop
-    Route::get('/user/userPage', 'UserController@show')->name('user.show'); 
-    Route::post('/user/upPic', 'UserController@update')->name('user.update');
 
     //SavedRecipe
     Route::get('/saved_recipe/index', 'SavedRecipeController@index')->name('saved.index');
@@ -42,9 +39,10 @@ Route::group(['middleware'=>['user']], function(){
     Route::get('/saved_recipe/destroy/{id}', 'SavedRecipeController@destroy')->name('recipe.destroy');
 
     //User
-
     Route::get('/user/index', 'UserController@index')->name('user.index')->middleware('admin');
     Route::get('/user/destroy/{id}', 'UserController@destroy')->name('user.delete');
+    Route::get('/user/userPage', 'UserController@show')->name('user.show'); 
+    Route::post('/user/upPic', 'UserController@update')->name('user.update');
 
     //Recipe
     Route::get('/recipe/create', 'RecipeController@create')->name('recipe.create');

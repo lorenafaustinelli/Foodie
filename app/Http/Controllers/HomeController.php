@@ -26,8 +26,8 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        $recipe = Recipe::orderBy('recipes.created_at', 'desc')->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+    {   
+        $recipe = Recipe::orderBy('recipes.created_at', 'desc')//->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
         ->get();
 
         return view('home', compact('recipe'));

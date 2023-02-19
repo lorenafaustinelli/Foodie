@@ -3,14 +3,15 @@
 
 @section('content')
 
-<div class="container">
-
+<div class="container_recipe">
+<div class="up">
 <h1> Iniziamo con alcune informazioni sulla ricetta: <h1>
-    </br>
+</div>
+    <div class="recipe">
     <form action="/recipe/store" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="row">
-            <div class="card">
+            <div class="card" style="width: 72rem;">
                 <div class="card-body">
                     <table id="RecipeTable" class="table">
                         <thead> 
@@ -45,10 +46,17 @@
             </div>
         </div>
         </br>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button type="submit" class="btn btn-primary"> Continua </button>
+</div>
+<div class="bottom">
+        <div class="button1">
+            <a class="btn btn-primary" href="{{ url()->previous() }}" data-inline="true" type="button">Indietro</a>
+        </div> 
+        
+        <div class="button2">
+            <button type="submit" class="btn btn-primary" data-inline="true"> Continua </button>
         </div>
     </form>
+</div>
 
 
 </div>
