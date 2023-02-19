@@ -6,12 +6,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">            
-            <div class="card">
-                <div class="card-header">{{ __('Home') }}</div>
-                <div class="card-body">
                     <!-- Stampo le ricette nella home -->
-                    @foreach ($recipes as $recipe)
-                    <div class="card">
+                    @foreach ($recipe as $recipe)
+                    <div class="card" style="width: 40rem;">
                         <div class="card-header text-center">
                         <h3> <a href="{{ route('recipe.show', $recipe)}}" class = "l"> {{ $recipe->name_recipe }} </a> </h3>
                         </div>
@@ -23,14 +20,10 @@
                         </ul>   
                         
                     </div>
-</br>
-</br>
+                    </br>
+                    </br>
                     @endforeach
                     
-                </div>
-                </br>
-                    </br>
-            </div>
         </div>
     </div>
 </div>
