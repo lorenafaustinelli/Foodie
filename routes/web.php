@@ -61,6 +61,7 @@ Route::group(['middleware'=>['user']], function(){
     Route::post('/recipe_ingredient/store_u', 'RecipeIngredientController@store_u')->name('recipe_ingredient.add_u');
     Route::get('/recipe_ingredient/create/{id}', 'RecipeIngredientController@create')->name('recipe_ingredient.create');
     Route::get('/recipe_ingredient/destroy/{id}', 'RecipeIngredientController@destroy')->name('recipe_ingredient.delete');
+    Route::get('/recipe_ingredient/destroy_u/{id}', 'RecipeIngredientController@destroy_u')->name('recipe_ingredient.delete_u');
     Route::get('/recipe_ingredient/edit/{id}', 'RecipeIngredientController@edit')->name('recipe_ingredient.edit');
     Route::post('/recipe_ingredient/update/{id}', 'RecipeIngredientController@update')->name('recipe_ingredient.update');
     Route::post('/recipe_ingredient/change_quantity', 'RecipeIngredientController@change_quantity')->name('recipe_ingredient.change.quantity');

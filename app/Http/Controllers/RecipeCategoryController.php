@@ -79,11 +79,10 @@ class RecipeCategoryController extends Controller
      */
     public function edit($id)
     {
-        
-    
         //$id = id della ricetta non del recipe_category
         $recipe_cat = RecipeCategory::where('recipe_id', $id)->get();
         $recipe = Recipe::find($id);
+        
         if($recipe_cat->isEmpty()){
 
             return view('recipe_category.edit', compact('recipe_cat', 'recipe'))->with('id', $id);
@@ -118,7 +117,11 @@ class RecipeCategoryController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->all();
-        $recipe_category = RecipeCategory::find($id);
+        $recipe_cat = RecipeCategory::where('recipe_id', $id)->get();
+        foreach($recipe_cat as $rc){
+            $recipe_category_id = $rc->id;
+        }
+        $recipe_category = RecipeCategory::find($recipe_category_id);
         $recipe_category->update($input);
 
         return redirect()->route('recipes.index');

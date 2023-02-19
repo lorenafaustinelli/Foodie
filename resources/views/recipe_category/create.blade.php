@@ -5,8 +5,7 @@
   //recupero id della ricetta che sto creando
  {{ $id = session()->get('id');}}
 
-  
-  var_dump($id);
+
 ?>
 
 <div class="container">

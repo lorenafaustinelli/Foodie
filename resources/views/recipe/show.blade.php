@@ -28,7 +28,7 @@
         <table id="RecipeShowIngredients" width="300">
         <tbody>
         </br>
-        <p> Numero di porzioni: <input type="number" size="1" id="portion" name="portion" value="{{ $recipe->portion }}" min="1" max = "20" > </p>
+        <p> <strong> Numero di porzioni: </strong> <input type="number" size="1" id="portion" name="portion" value="{{ $recipe->portion }}" min="1" max = "20" > </p>
         @if($recipe_ing != '')
             @foreach ($recipe_ing as $i)
                 <tr>
@@ -53,8 +53,8 @@
     @if($recipe_category != '')
 
        
-        <p> Categoria: @foreach($recipe_category as $cat)  {{ $cat->name_category }} @endforeach </p> 
-        <p> Tempo di preparazione: {{ $recipe->time }} minuti </p>
+        <p> <strong> Categoria: </strong> @foreach($recipe_category as $cat)  {{ $cat->name_category }} @endforeach </p> 
+        <p> <strong> Tempo di preparazione: </strong> {{ $recipe->time }} minuti </p>
         <h5> Preparazione </h5> {{ $recipe->instruction }}</p> </div> <!-- tenere </div> qui perchè sennò si disallinea testo -->
             
     @else

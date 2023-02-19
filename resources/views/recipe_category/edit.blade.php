@@ -14,42 +14,47 @@
             <thead>
               <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 
-              <input type ="hidden" name = "recipe_id" id="recipe_id" value="{{ $id }}"/>
+              <input type ="hidden" name = "recipe_id" value="{{ $recipe->id }}"/>
 
               <tr>
                 <div class="form-group">
-                <select id="category_id" class="form-control" name="category_id">
-                @if(!$recipe_cat->isEmpty())
-                  <option value="{{ $recipe_cat->category_id }}"> {{$recipe_cat->cat_name1 }} </option>
-                  @foreach ($categories as $category)
-                    <option value="{{ $category->id }}"> {{$category->name_category }} </option>
-                  @endforeach
-                @else
-                  <option value=""></option>
-                  @foreach ($categories as $category)
-                    <option value="{{ $category->id }}"> {{$category->name_category }} </option>
-                  @endforeach
-                @endif
-                </select>
+                  <select class="form-control" name="category_id">
+                    @if($recipe_cat->count() > 0)
+                      <option value="{{ $recipe_cat->category_id }}"> {{$recipe_cat->cat_name1 }} </option>
+                      @foreach ($categories as $category)
+                        <option value="{{ $category->id }}"> {{$category->name_category }} </option>
+                      @endforeach
+                    @else
+                      <option value=""></option>
+                      @foreach ($categories as $category)
+                        <option value="{{ $category->id }}"> {{$category->name_category }} </option>
+                      @endforeach
+                    @endif
+                  </select>
                 </div>
                 
                 <div class="form-group">
-                <select id="category_id2" class="form-control" name="category_id2">
-                @if(!$recipe_cat->isEmpty())
-                  @if($recipe_cat->category_id2)
-                  <option value="{{ $recipe_cat->category_id2 }}"> {{$recipe_cat->cat_name2 }} </option>
+                  <select class="form-control" name="category_id2">
+                  @if($recipe_cat->count() > 0)
+                    @if($recipe_cat->category_id2)
+                    <option value="{{ $recipe_cat->category_id2 }}"> {{$recipe_cat->cat_name2 }} </option>
                     @foreach ($categories as $category)
                     <option value="{{ $category->id }}"> {{$category->name_category }} </option>
                     @endforeach
                     <option value="">  </option>
+                    @else
+                    <option value="">  </option>
+                    @foreach ($categories as $category)
+                      <option value="{{ $category->id }}"> {{$category->name_category }} </option>
+                    @endforeach
+                    @endif
+                  @else
+                    <option value="">  </option>
+                    @foreach ($categories as $category)
+                      <option value="{{ $category->id }}"> {{$category->name_category }} </option>
+                    @endforeach
                   @endif
-                @else
-                  <option value="">  </option>
-                  @foreach ($categories as $category)
-                    <option value="{{ $category->id }}"> {{$category->name_category }} </option>
-                  @endforeach
-                @endif
-                </select>
+                  </select>
                 </div> 
               </tr>
             </thead>
