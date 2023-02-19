@@ -8,11 +8,15 @@
     </div>
 
     <div class="Button">
-        @if($saved_recipes->where('user_id', Auth::id())->where('recipe_id', $recipe->id)->count() > 0)
-            <a class="btn btn-success" role="button" href="{{ route('recipe.destroy', $recipe->id)}}"> Salvata </a>
-        @else
-            <a class="btn btn-success" role="button" href="{{ route('recipe.save', $recipe->id)}}"> Salva ricetta </a>
+        @foreach($user_id as $id) <!-- Per estrarre il valore dall'array, non è un vero ciclo, avrà sempre un solo giro-->
+        @if($id != Auth::id()) <!-- Senza il foreach mi dava Object of class Illuminate\Support\Collection could not be converted to int -->
+            @if($saved_recipes->where('user_id', Auth::id())->where('recipe_id', $recipe->id)->count() > 0)
+                <a class="btn btn-success" role="button" href="{{ route('recipe.destroy', $recipe->id)}}"> Salvata </a>
+            @else
+                <a class="btn btn-success" role="button" href="{{ route('recipe.save', $recipe->id)}}"> Salva ricetta </a>
+            @endif
         @endif
+        @endforeach
     </div>
 
     <div class="Photo">

@@ -121,7 +121,9 @@ class RecipeController extends Controller
         ->select('name_ingredient', 'quantity', 'measure', 'recipe_id')
         ->get();
 
-        return view('/recipe/show', compact('recipe', 'recipe_category', 'recipe_ing'));
+        $user_id = DB::table('user_recipes')->where('recipe_id', '=', $id)->pluck('user_id');
+
+        return view('/recipe/show', compact('recipe', 'recipe_category', 'recipe_ing', 'user_id'));
 
     }
 
