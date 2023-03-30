@@ -172,6 +172,7 @@ class RecipeController extends Controller
         }
         
         $recipe_ingredient = RecipeIngredient::where('recipe_id', $id)->get();
+        
         foreach($recipe_ingredient as $ri){
             $ing_id[] = $ri->ingredient_id;
         }

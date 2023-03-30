@@ -15,6 +15,8 @@
             @else
                 <a class="btn btn-success" role="button" href="{{ route('recipe.save', $recipe->id)}}"> Salva ricetta </a>
             @endif
+        @else
+            <a class="btn btn-success" role="button" href="{{ route('recipe.edit', $recipe->id) }}"> Modifica </a>
         @endif
         @endforeach
     </div>
