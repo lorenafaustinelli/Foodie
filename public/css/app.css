@@ -11054,4 +11054,38 @@ a.text-dark:focus {
   grid-area: Button;
 }
 
+.container_recipe {  display: grid;
+  grid-template-columns: 0.4fr 2.2fr 0.4fr;
+  grid-template-rows: 0.4fr 1.6fr 1.1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    ". up ."
+    ". recipe ."
+    ". bottom .";
+}
 
+.bottom {  display: grid;
+  grid-template-columns: 0.5fr 2fr 0.5fr;
+  grid-template-rows: 0.7fr 0.7fr 1.6fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "button1 . button2"
+    ". . ."
+    ". . .";
+  grid-area: bottom;
+}
+
+.button1 { grid-area: button1; }
+
+.button2 { grid-area: button2; }
+
+.up {
+  align-self: center;
+  grid-area: up;
+}
+
+.recipe {
+  grid-area: recipe;
+}

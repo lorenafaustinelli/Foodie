@@ -4,8 +4,8 @@
 
 <div class="container">
 
-<h1> Informazioni generali: <h1>
-
+<h1> Modifica le informazioni generali della ricetta <h1>
+</br>
     <form action="{{route('recipe.update', $recipe->id)}}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="row">
@@ -37,9 +37,6 @@
                                     <input type="file" name="photo" class="form-control" placeholder="Foto:" >
                                 </div>
 
-                                <div class="form-group">
-                                    <input type="file" name="photo2" class="form-control" placeholder="Foto:">
-                                </div>
                             </tr>
                         </thead>
                     </table>

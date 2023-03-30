@@ -30,25 +30,29 @@ class RecipeIngredientController extends Controller
     public function create($id)
     {   
         $recipe_ingredient = RecipeIngredient::where('recipe_id', $id)->get();
+        $recipe = Recipe::find($id);
 
         if($recipe_ingredient->isEmpty()){
-            return view('/recipe_ingredient/create', compact('recipe_ingredient'))->with('id', $id);
+
+            return view('/recipe_ingredient/create', compact('recipe_ingredient', 'recipe'))->with('id', $id);
+
         }else{
-        foreach($recipe_ingredient  as $ri){
-            $ing_id[] = $ri->ingredient_id;
-        }
 
-        foreach($ing_id as $ing_id){
-            $ing_names[] = app('App\Http\Controllers\IngredientController')->name_ingredient($ing_id);
-        }
+            foreach($recipe_ingredient  as $ri){
+                $ing_id[] = $ri->ingredient_id;
+            }
 
-        $i = 0;
-        foreach($recipe_ingredient as $ri){
-            $ri->ingredient_name = $ing_names[$i];
-            $i = $i + 1;
-        }
+            foreach($ing_id as $ing_id){
+                $ing_names[] = app('App\Http\Controllers\IngredientController')->name_ingredient($ing_id);
+            }
 
-        return view('/recipe_ingredient/create', compact('recipe_ingredient'))->with('id', $id);
+            $i = 0;
+            foreach($recipe_ingredient as $ri){
+                $ri->ingredient_name = $ing_names[$i];
+                $i = $i + 1;
+            }
+
+            return view('/recipe_ingredient/create', compact('recipe_ingredient', 'recipe'))->with('id', $id);
         }    
     }
 
@@ -75,13 +79,14 @@ class RecipeIngredientController extends Controller
         $recipe_ingredient->save();
 
         $recipe_id = $recipe_ingredient->recipe_id;
+        $recipe = Recipe::find($recipe_id);
      
-       $recipe_ingredient = RecipeIngredient::where('recipe_id', $recipe_id)->get();
+        $recipe_ingredient = RecipeIngredient::where('recipe_id', $recipe_id)->get();
 
         
         
         //return view('/home', compact('recipe_ingredient'))->with('id', $recipe_id);
-        return redirect()->route('recipe_ingredient.edit', $recipe_id);
+        return redirect()->route('recipe_ingredient.edit', $recipe_id)->with('recipe', $recipe);
         //return redirect()->back();
 
     } 
@@ -185,27 +190,29 @@ class RecipeIngredientController extends Controller
     {   
         //$id = id della ricetta non del recipe_ingredient
         $recipe_ingredient = RecipeIngredient::where('recipe_id', $id)->get();
+        $recipe = Recipe::find($id); 
+
         if($recipe_ingredient->isEmpty()){
 
-            return view('recipe_ingredient.edit', compact('recipe_ingredient'))->with('id', $id);
+            return view('recipe_ingredient.edit', compact('recipe_ingredient', 'recipe'));
 
         } else{
 
-        foreach($recipe_ingredient  as $ri){
-            $ing_id[] = $ri->ingredient_id;
-        }
+            foreach($recipe_ingredient  as $ri){
+                $ing_id[] = $ri->ingredient_id;
+            }
 
-        foreach($ing_id as $ing_id){
-            $ing_names[] = app('App\Http\Controllers\IngredientController')->name_ingredient($ing_id);
-        }
+            foreach($ing_id as $ing_id){
+                $ing_names[] = app('App\Http\Controllers\IngredientController')->name_ingredient($ing_id);
+            }
 
-        $i = 0;
-        foreach($recipe_ingredient as $ri){
-            $ri->ingredient_name = $ing_names[$i];
-            $i = $i + 1;
-        }
+            $i = 0;
+            foreach($recipe_ingredient as $ri){
+                $ri->ingredient_name = $ing_names[$i];
+                $i = $i + 1;
+            }
 
-        return view('recipe_ingredient.edit', compact('recipe_ingredient'))->with('id', $id);
+            return view('recipe_ingredient.edit', compact('recipe_ingredient', 'recipe'))->with('id', $id);
         }
 
     }
@@ -237,6 +244,7 @@ class RecipeIngredientController extends Controller
         $recipe_ingredient->update($input);
 
         $recipe_id = $recipe_ingredient->recipe_id;
+        $recipe = Recipe::find($recipe_id);
         
         return redirect()->route('recipe_ingredient.edit', $recipe_id);
 
@@ -254,25 +262,66 @@ class RecipeIngredientController extends Controller
         $recipe_id = $recipe_ing->recipe_id;
         $recipe_ing->delete();
 
+        $recipe = Recipe::find($recipe_id);
         $recipe_ingredient = RecipeIngredient::where('recipe_id', $recipe_id)->get();
-        
-        foreach($recipe_ingredient as $ri){
-            $ing_id[] = $ri->ingredient_id;
-        }
 
-        foreach($ing_id as $ing){
-            $ing_names[] = app('App\Http\Controllers\IngredientController')->name_ingredient($ing);
-        }
+        if($recipe_ingredient->isEmpty()){
 
-        $i = 0;
-        foreach($recipe_ingredient as $ri){
-            $ri->ingredient_name = $ing_names[$i];
-            $i = $i + 1;
-        }
+            return view('/recipe_ingredient/create', compact('recipe', 'recipe_ingredient'))->with('id', $id);
 
+        } else{
+
+            foreach($recipe_ingredient  as $ri){
+                $ing_id[] = $ri->ingredient_id;
+            }
+
+            foreach($ing_id as $ing_id){
+                $ing_names[] = app('App\Http\Controllers\IngredientController')->name_ingredient($ing_id);
+            }
+
+            $i = 0;
+            foreach($recipe_ingredient as $ri){
+                $ri->ingredient_name = $ing_names[$i];
+                $i = $i + 1;
+            }
+
+            return view('/recipe_ingredient/create', compact('recipe_ingredient', 'recipe'))->with('id', $id);
+        }
        
-        
-        return redirect()->back();//route('recipe_ingredient.edit', $recipe_id);
+    }
+
+    public function destroy_u($id)
+    {
+        $recipe_ing = RecipeIngredient::find($id);
+        $recipe_id = $recipe_ing->recipe_id;
+        $recipe_ing->delete();
+
+        $recipe = Recipe::find($recipe_id);
+        $recipe_ingredient = RecipeIngredient::where('recipe_id', $recipe_id)->get();
+
+        if($recipe_ingredient->isEmpty()){
+
+            return view('/recipe_ingredient/edit', compact('recipe', 'recipe_ingredient'))->with('id', $id);
+
+        } else{
+
+            foreach($recipe_ingredient  as $ri){
+                $ing_id[] = $ri->ingredient_id;
+            }
+
+            foreach($ing_id as $ing_id){
+                $ing_names[] = app('App\Http\Controllers\IngredientController')->name_ingredient($ing_id);
+            }
+
+            $i = 0;
+            foreach($recipe_ingredient as $ri){
+                $ri->ingredient_name = $ing_names[$i];
+                $i = $i + 1;
+            }
+
+            return view('/recipe_ingredient/edit', compact('recipe_ingredient', 'recipe'))->with('id', $id);
+        }
+       
     }
 
     

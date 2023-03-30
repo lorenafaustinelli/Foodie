@@ -65,7 +65,7 @@
         @csrf
 
         <div class="modal-body">
-          <input type ="hidden" name="recipe_id" class="recipe_id form-control" value="{{ $id }}" >
+          <input type ="hidden" name="recipe_id" class="recipe_id form-control" value="{{ $recipe->id }}" >
 
           <div class="form-group">
               <label for="seleziona ingrediente"> </label>
@@ -108,18 +108,15 @@
   <?php 
   //per passare l'id della ricetta alla pagina delle categorie
   {{ session()->put('id', $id); }} ?>
-
-  <div class="d-grid gap-2 col-6 mx-auto"> 
-  @foreach($recipe_ingredient as $rp)
-  @if($loop->first)
-    <a class="btn btn-primary" href="{{ route('recipe_category.create', $rp->recipe_id) }}" role="button">Prosegui</a>
-    @endif
-  @endforeach
+  <div class="d-grid gap-2 d-md-block">
+    <a class="btn btn-primary" href="{{ redirect()->back() }}" type="button">Indietro</a>
   </div>
 
-  <?php 
-  //per passare l'id della ricetta alla pagina delle categorie
-  {{ session()->put('id', $id); }} ?>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end"> 
+    <a class="btn btn-primary" href="{{ route('recipe_category.create', $recipe->id) }}" role="button">Prosegui</a>
+  </div>
+
+
 
   
 

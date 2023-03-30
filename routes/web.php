@@ -22,19 +22,16 @@ Route::get('/', function () {
 
 Route::group(['middleware'=>['user']], function(){
         
-    //Route::get('/home', 'HomeController@index')->name('home');  //assegnazione del nome - Route(home)
-    Route::get('/home', function () {
+    Route::get('/home', 'HomeController@index')->name('home');  //assegnazione del nome - Route(home)
+    //Route::get('/home', function () {
         //prendo dal database le ricette scritte fin'ora, ordinate dall'ultima 
-        $recipes = App\Recipe::latest()->get();
+       // $recipes = App\Recipe::latest()->get();
 
-        return view('home', [
-            'recipes' => $recipes   //passo le ricette alla view
-        ]);
-    })->name('home');
+        //return view('home', [
+          //  'recipes' => $recipes   //passo le ricette alla view
+        //]);
+    //})->name('home');
 
-    //Prove drag and drop
-    Route::get('/user/userPage', 'UserController@show')->name('user.show'); 
-    Route::post('/user/upPic', 'UserController@update')->name('user.update');
 
     //SavedRecipe
     Route::get('/saved_recipe/index', 'SavedRecipeController@index')->name('saved.index');
@@ -42,9 +39,10 @@ Route::group(['middleware'=>['user']], function(){
     Route::get('/saved_recipe/destroy/{id}', 'SavedRecipeController@destroy')->name('recipe.destroy');
 
     //User
-
     Route::get('/user/index', 'UserController@index')->name('user.index')->middleware('admin');
     Route::get('/user/destroy/{id}', 'UserController@destroy')->name('user.delete');
+    Route::get('/user/userPage', 'UserController@show')->name('user.show'); 
+    Route::post('/user/upPic', 'UserController@update')->name('user.update');
 
     //Recipe
     Route::get('/recipe/create', 'RecipeController@create')->name('recipe.create');
@@ -61,6 +59,7 @@ Route::group(['middleware'=>['user']], function(){
     Route::post('/recipe_ingredient/store_u', 'RecipeIngredientController@store_u')->name('recipe_ingredient.add_u');
     Route::get('/recipe_ingredient/create/{id}', 'RecipeIngredientController@create')->name('recipe_ingredient.create');
     Route::get('/recipe_ingredient/destroy/{id}', 'RecipeIngredientController@destroy')->name('recipe_ingredient.delete');
+    Route::get('/recipe_ingredient/destroy_u/{id}', 'RecipeIngredientController@destroy_u')->name('recipe_ingredient.delete_u');
     Route::get('/recipe_ingredient/edit/{id}', 'RecipeIngredientController@edit')->name('recipe_ingredient.edit');
     Route::post('/recipe_ingredient/update/{id}', 'RecipeIngredientController@update')->name('recipe_ingredient.update');
     Route::post('/recipe_ingredient/change_quantity', 'RecipeIngredientController@change_quantity')->name('recipe_ingredient.change.quantity');
