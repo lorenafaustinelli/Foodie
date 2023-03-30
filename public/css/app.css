@@ -11089,3 +11089,32 @@ a.text-dark:focus {
 .recipe {
   grid-area: recipe;
 }
+
+/* parte index ingredienti */
+.ingredient_index {  display: grid;
+  grid-template-columns: 0.4fr 3.1fr 0.4fr; 
+  grid-template-rows: 0.3fr 2.5fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    ". . ."
+    ". headers ."
+    ". table_ing .";
+}
+
+.headers {  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "title . button";
+  grid-area: headers;
+}
+
+.title { grid-area: title; }
+
+.button { grid-area: button; }
+
+.table_ing { grid-area: table_ing; }
+

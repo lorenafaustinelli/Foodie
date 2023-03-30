@@ -104,6 +104,10 @@ Route::group(['middleware'=>['user']], function(){
     Route::get('/admin/ingredient_index', 'AdminController@ingredient_index_admin')->name('ingredient_index.adm')->middleware('admin');
     Route::get('/admin/category_index', 'AdminController@category_index_admin')->name('category_index.adm')->middleware('admin');
 
+    //Ticket
+    Route::post('/ticket/store', 'TicketController@store')->name('ticket.store');
+    Route::get('/user/ticket', 'TicketController@index')->name('ticket.index');
+
 
 
 });

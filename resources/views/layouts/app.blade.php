@@ -86,6 +86,10 @@
                                     <a class="dropdown-item" href="{{ route('user.show') }}">
                                         Il mio profilo
                                     </a>
+
+                                    <a class="dropdown-item" href="{{ route('user.show') }}">
+                                        Richieste
+                                    </a>
                                     
                                     <!-- visualizzare le proprie ricette-->
                                     <a class="dropdown-item" href="{{ route('user.recipe') }}">
@@ -94,7 +98,7 @@
 
                                     <!-- Visualizzare le ricette salvate -->
                                     <a class="dropdown-item" href="{{ route('saved.index')}}">
-                                        Le ricette salvate
+                                        Ricette salvate
                                     </a>
                                                                 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -187,7 +191,11 @@
 
                                     <!-- Visualizzare le ricette salvate -->
                                     <a class="dropdown-item" href="{{ route('saved.index')}}">
-                                        Le ricette salvate
+                                        Ricette salvate
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('ticket.index')}}">
+                                        Le mie richieste
                                     </a>
                                                                 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -203,27 +211,9 @@
                                 </div>
                             </li>
 
-                            <!-- menù per inserimento -->
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{__('Inserimento')}}
-                                </a> 
-                                
-                               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
-                                    <a class="dropdown-item" href="{{ route('recipe.create') }}">
-                                    {{__('Ricetta')}}
-                                    </a>
-                                    
-                                    <a class="dropdown-item" href="{{ route('add.ingredient') }}">
-                                    {{ __('Ingrediente') }}
-                                    </a>
-
-                                    <a class="dropdown-item" href="{{ route('add.category') }}">
-                                    {{ __('Categoria') }}
-                                    </a>
-                                    
-                                </div>
+                            <!-- inserimento ricetta -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('recipe.create') }}">{{__('Nuova Ricetta')}}</a> 
                             </li>
 
                             <!-- menù per visualizzare le varie entità -->
@@ -269,3 +259,6 @@
     
 </body>
 </html>
+
+
+
