@@ -86,10 +86,6 @@
                                     <a class="dropdown-item" href="{{ route('user.show') }}">
                                         Il mio profilo
                                     </a>
-
-                                    <a class="dropdown-item" href="{{ route('user.show') }}">
-                                        Richieste
-                                    </a>
                                     
                                     <!-- visualizzare le proprie ricette-->
                                     <a class="dropdown-item" href="{{ route('user.recipe') }}">
@@ -147,6 +143,11 @@
 
                                     <a class="dropdown-item" href="{{ route('user.index') }}">
                                     {{__('Utenti')}}
+                                    </a>
+
+
+                                    <a class="dropdown-item" href="{{ route('ticket_index.adm') }}">
+                                    {{__('Richieste')}} 
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('recipe_index.adm') }}">

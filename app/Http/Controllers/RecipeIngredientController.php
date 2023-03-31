@@ -57,7 +57,7 @@ class RecipeIngredientController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store inserito nell'update degli ingredienti di una ricetta
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

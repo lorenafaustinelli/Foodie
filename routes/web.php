@@ -107,6 +107,9 @@ Route::group(['middleware'=>['user']], function(){
     //Ticket
     Route::post('/ticket/store', 'TicketController@store')->name('ticket.store');
     Route::get('/user/ticket', 'TicketController@index')->name('ticket.index');
+    Route::get('/admin/ticket', 'TicketController@admin_index')->name('ticket_index.adm');
+    Route::get('/ticket/{id}/status', 'TicketController@change_status')->name('ticket.status');
+
 
 
 

@@ -19,10 +19,22 @@ class TicketController extends Controller
         $user_id = Auth::id(); 
         $tickets = Ticket::where('user_id', '=', $user_id)->orderBy('tickets.created_at', 'desc')->get();
         if($tickets->isEmpty()){
-            return view('user/ticket');
+            $tickets = '';
+            return view('user/ticket', compact('tickets'));
         }
 
-        return view('user/ticket', compact('tickets'));
+        return view('/user/ticket', compact('tickets'));
+    }
+
+    public function admin_index()
+    {
+        $tickets = Ticket::orderBy('tickets.created_at', 'desc')->get();
+        if($tickets->isEmpty()){
+            $tickets = '';
+            return view('admin/ticket', compact('tickets'));
+        }
+
+        return view('admin/ticket', compact('tickets'));
     }
 
     /**
@@ -46,7 +58,7 @@ class TicketController extends Controller
         $ticket = new Ticket();
         $ticket->user_id = $request->user_id;
         $ticket->text = $request->text;
-        $ticket->status = false; 
+        //Quando è a 0 la richiesta è aperta, a 1 è chiusa
 
         $ticket->save();
         return response()->json($ticket);
@@ -54,7 +66,21 @@ class TicketController extends Controller
 
     //funzione per cambiare stato di un ticket
     public function change_status($id){
-        //in input ho id di un ticket
+        
+        $ticket = Ticket::find($id);
+        
+        if($ticket->status == true){
+            //Quando la richiesta è aperta chiudila
+            $ticket->update(['status' => false]);
+
+        }else{
+            //quando la richiesta è chiusa aprila
+            $ticket->update(['status' => true]);
+
+        }
+
+        return redirect()->route('ticket_index.adm');
+
 
     }
 

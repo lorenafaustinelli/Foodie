@@ -113,6 +113,8 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         return $category->name_category;
+
+        
     }
 
 }

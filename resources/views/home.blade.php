@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">            
@@ -16,7 +15,7 @@
                             <img src="{{ Storage::url($recipe->photo) }}" class="card-img-top"  alt="foto ricetta">
                         </div>
                         <ul class="list-group list-group-flush align-items-center">
-                            <li class="list-group-item"> <button type="button" class="btn btn-success" disabled data-bs-toggle="button"> Categoria 1</button> <button type="button" class="btn btn-success" disabled data-bs-toggle="button"> Categoria 2</button></li>
+                            <li class="list-group-item"> <button type="button" class="btn btn-success" disabled data-bs-toggle="button"> {{ $recipe->name_category1 }}</button> <button type="button" class="btn btn-success" disabled data-bs-toggle="button"> {{ $recipe->name_category2 }}</button></li>
                         </ul>   
                         
                     </div>
