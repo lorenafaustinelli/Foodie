@@ -72,6 +72,38 @@ class IngredientsTableSeeder extends Seeder
             'id'              =>      '13',
             'name_ingredient'   =>      'burro',
             'variation'         =>      '', 
+        ], [   
+            'id'              =>      '14',
+            'name_ingredient'   =>      'acqua',
+            'variation'         =>      '', 
+        ], [   
+            'id'              =>      '15',
+            'name_ingredient'   =>      'pollo',
+            'variation'         =>      '', 
+        ], [   
+            'id'              =>      '16',
+            'name_ingredient'   =>      'zucchero',
+            'variation'         =>      '', 
+        ], [   
+            'id'              =>      '17',
+            'name_ingredient'   =>      'salsa di soia',
+            'variation'         =>      '', 
+        ], [   
+            'id'              =>      '18',
+            'name_ingredient'   =>      'succo di limone',
+            'variation'         =>      '', 
+        ], [   
+            'id'              =>      '19',
+            'name_ingredient'   =>      'amido di mais',
+            'variation'         =>      '', 
+        ], [   
+            'id'              =>      '20',
+            'name_ingredient'   =>      'scorza di limone',
+            'variation'         =>      '', 
+        ], [   
+            'id'              =>      '21',
+            'name_ingredient'   =>      'cipolla',
+            'variation'         =>      '', 
         ]
         ]);
     }

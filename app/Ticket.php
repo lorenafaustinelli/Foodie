@@ -9,6 +9,6 @@ class Ticket extends Model
     protected $table = 'tickets';
 
     protected $fillable = [
-        'user_id', 'text', 'status',
+        'user_id', 'text', 'type', 'status', 'result',
     ];
 }

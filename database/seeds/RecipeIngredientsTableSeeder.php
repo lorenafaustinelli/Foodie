@@ -82,6 +82,62 @@ class RecipeIngredientsTableSeeder extends Seeder
             'quantity' => '0',
             'measure' => 'q.b.'
             
+        ], [
+            'id' => '11',
+            'recipe_id' => '3',
+            'ingredient_id' => '14',
+            'quantity' => '200',
+            'measure' => 'ml'
+            
+        ], [
+            'id' => '12',
+            'recipe_id' => '3',
+            'ingredient_id' => '15',
+            'quantity' => '600',
+            'measure' => 'gr'
+            
+        ], [
+            'id' => '13',
+            'recipe_id' => '3',
+            'ingredient_id' => '20',
+            'quantity' => '10',
+            'measure' => 'gr'
+            
+        ], [
+            'id' => '14',
+            'recipe_id' => '3',
+            'ingredient_id' => '9',
+            'quantity' => '10',
+            'measure' => 'gr'
+            
+        ], [
+            'id' => '15',
+            'recipe_id' => '3',
+            'ingredient_id' => '17',
+            'quantity' => '10',
+            'measure' => 'gr'
+            
+        ], [
+            'id' => '16',
+            'recipe_id' => '3',
+            'ingredient_id' => '18',
+            'quantity' => '100',
+            'measure' => 'ml'
+            
+        ], [
+            'id' => '17',
+            'recipe_id' => '3',
+            'ingredient_id' => '19',
+            'quantity' => '20',
+            'measure' => 'gr'
+            
+        ], [
+            'id' => '18',
+            'recipe_id' => '3',
+            'ingredient_id' => '8',
+            'quantity' => '50',
+            'measure' => 'gr'
+            
         ]
         ]);
 

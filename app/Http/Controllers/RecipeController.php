@@ -121,11 +121,10 @@ class RecipeController extends Controller
         ->get();
 
         $user_id = DB::table('user_recipes')->where('recipe_id', '=', $id)->pluck('user_id');
+        $saved_recipes = SavedRecipe::all();
 
-        return view('/recipe/show', compact('recipe', 'recipe_category', 'recipe_ing', 'user_id'));
-
+        return view('/recipe/show', compact('recipe', 'recipe_category', 'recipe_ing', 'user_id', 'saved_recipes'));
     }
-
 
     /**
      * Show the form for editing the specified resource.

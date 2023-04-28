@@ -22,9 +22,17 @@ class SavedRecipeController extends Controller
      */
     public function index()
     {
-        $user_id = Auth::user()->id;
-        $saved_recipes = SavedRecipe::where('user_id', '=', $user_id)->pluck('recipe_id');
-        return view('saved_recipe/index', compact('saved_recipes'));
+        $user_id = Auth::id(); 
+
+        $recipe = SavedRecipe::where('user_id', '=', $user_id)->join('recipes', 'recipes.id', '=', 'saved_recipes.recipe_id')->get();
+
+        if($recipe->isEmpty()){
+
+            $recipe = '';
+            return view('saved_recipe/index', compact('recipe'));
+
+        }
+        return view('saved_recipe/index', compact('recipe'));
     }
 
     /**

@@ -34,6 +34,12 @@ class CategoriesTableSeeder extends Seeder
     ], [
         'id'              =>       '6',
         'name_category'   =>        'pasta',
+    ], [
+        'id'              =>       '7',
+        'name_category'   =>        'primi',
+    ], [
+        'id'              =>       '8',
+        'name_category'   =>        'secondi',
     ]
     ]);
 

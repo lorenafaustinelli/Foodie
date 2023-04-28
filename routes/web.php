@@ -81,6 +81,7 @@ Route::group(['middleware'=>['user']], function(){
     Route::get('/category/destroy/{id}', 'CategoryController@destroy')->name('category.delete')->middleware('admin');
     Route::get('/category/edit/{id}', 'CategoryController@edit')->name('category.edit')->middleware('admin');
     Route::post('/category/update/{id}', 'CategoryController@update')->name('category.update')->middleware('admin');
+    Route::get('/category/show/{id}', 'CategoryController@show')->name('category.show');
 
 
     //RecipeCategory
@@ -108,7 +109,8 @@ Route::group(['middleware'=>['user']], function(){
     Route::post('/ticket/store', 'TicketController@store')->name('ticket.store');
     Route::get('/user/ticket', 'TicketController@index')->name('ticket.index');
     Route::get('/admin/ticket', 'TicketController@admin_index')->name('ticket_index.adm');
-    Route::get('/ticket/{id}/status', 'TicketController@change_status')->name('ticket.status');
+    Route::get('/ticket/{id}/status', 'TicketController@change_status')->name('ticket.status'); //versione old da non usare
+    Route::post('/ticket/{id}/update', 'TicketController@update')->name('ticket.update');
 
 
 

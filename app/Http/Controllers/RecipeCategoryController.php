@@ -55,7 +55,8 @@ class RecipeCategoryController extends Controller
 
         $recipe_category->save();
 
-        return view('/home');
+        return redirect()->route('home');
+
     }
 
     
@@ -66,7 +67,7 @@ class RecipeCategoryController extends Controller
      * @param  \App\RecipeCategory  $recipeCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(RecipeCategory $recipeCategory)
+    public function show($id)
     {
         //
     }

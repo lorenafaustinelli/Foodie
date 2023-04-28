@@ -17,7 +17,9 @@ class CreateTicketsTable extends Migration
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->string('text');
+            $table->string('type');
             $table->boolean('status')->default(0);
+            $table->string('result')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

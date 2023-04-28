@@ -61,13 +61,26 @@
         </style>
     </head>
     <body>
+    <style> 
+    .links > a {
+        color: #ffffff;
+        padding: 0 25px;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: .1rem;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: bold;
+    } 
+    </style>
         <div class="background-image">
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))       <!-- se sei loggato allora -->
                 <div class="top-right links">
                     @auth                   <!-- mostro il tasto home -->
                         <a href="/home">Home</a>
-                    @else                   <!-- altrimenti i tasti login e register -->
+                    @else  
+                        <!-- altrimenti i tasti login e register -->
                         <a href="/login">Login</a>
 
                         <a href="/register">Register</a>

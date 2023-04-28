@@ -34,6 +34,17 @@ class RecipesTableSeeder extends Seeder
             'updated_at'  => date('Y-m-d h:i:s'),
             'n_saved'     => '0',
 
+        ], [
+            'id'           => '3',
+            'name_recipe' => 'Pollo al limone',
+            'time'        => '30',
+            'portion'     => '4',
+            'instruction' => 'Per realizzare il pollo al limone per prima cosa grattugiate la scorza del limone e spremetene il succo e filtratelo. Occupatevi poi della pulizia del petto di pollo: dividete a metà il petto, eliminate le parti più grasse e tagliatelo prima a striscioline poi a bocconcini più piccoli. Ora passate il pollo nella farina e mescolate per farla aderire. Ponete un tegame sul fuoco, versate l’olio di oliva e scaldatelo; quando sarà ben caldo versate  i bocconcini di pollo e lasciateli dorare a fiamma media per circa 5 minuti, rigirandoli di tanto in tanto fino a quando saranno ben rosolati. Toglietele dal fuoco e tenetele da parte. Preparate la salsa:in una ciotola versate amido e acqua. Unite anche lo zucchero, la salsa di soia e il succo di limone. Nella stessa padella in cui avete rosolato il pollo versate il liquido ottenuto, lasciate addensare per 1 minuto mescolando con la frusta e versate anche il pollo. Mescolate lentamente e lasciate andare sul fuoco per 3-4 minuti. A fine cottura profumate con la scorza di limone e origano fresco. Servite il pollo al limone ben caldo. ',
+            'photo'       => 'public/recipes/pollo.jpg',
+            'created_at'  => date('Y-m-d h:i:s'), 
+            'updated_at'  => date('Y-m-d h:i:s'),
+            'n_saved'     => '0',
+
         ]
         ]);
     }

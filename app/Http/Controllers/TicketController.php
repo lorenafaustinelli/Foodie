@@ -21,20 +21,50 @@ class TicketController extends Controller
         if($tickets->isEmpty()){
             $tickets = '';
             return view('user/ticket', compact('tickets'));
+        } else{
+
+            foreach($tickets as $ticket){
+
+                if($ticket->status == 0){
+
+                    $ticket->message = "Richiesta aperta";
+                }else {
+                    $ticket->message = "Richiesta conclusa";
+                }
+            }
+            return view('user/ticket', compact('tickets'));
         }
 
-        return view('/user/ticket', compact('tickets'));
     }
 
     public function admin_index()
     {
         $tickets = Ticket::orderBy('tickets.created_at', 'desc')->get();
         if($tickets->isEmpty()){
-            $tickets = '';
-            return view('admin/ticket', compact('tickets'));
+            $open_ticket = '';
+            $close_ticket = '';
+            return view('admin/ticket', compact('open_ticket', 'close_ticket'));
+        } else{
+            //devo splittare l'array in due sotto array, uno con le richieste aperte e uno con le richieste chiuse
+            foreach($tickets as $ticket){
+
+                //inserisco il nome dell'utente
+                $ticket->user_name = app('App\Http\Controllers\UserController')->name($ticket->user_id);
+  
+            }
+
+            $open_tickets = Ticket::orderBy('tickets.created_at', 'desc')->where('status', '=', '0')->get();
+            $close_tickets = Ticket::orderBy('tickets.created_at', 'desc')->where('status', '=', '1')->get();
+            if($open_tickets->isEmpty()){
+                $open_tickets = '';
+            }
+
+            if($close_tickets->isEmpty()){
+                $close_tickets = '';
+            }
         }
 
-        return view('admin/ticket', compact('tickets'));
+        return view('admin/ticket', compact('open_tickets', 'close_tickets'));
     }
 
     /**
@@ -58,23 +88,29 @@ class TicketController extends Controller
         $ticket = new Ticket();
         $ticket->user_id = $request->user_id;
         $ticket->text = $request->text;
+        $ticket->type = $request->type;
+        $ticket->result = "La richiesta non è ancora stata presa in carico dall'admin";
         //Quando è a 0 la richiesta è aperta, a 1 è chiusa
+        //di default viene quindi impostato a 0
 
         $ticket->save();
         return response()->json($ticket);
     }
 
-    //funzione per cambiare stato di un ticket
+    //funzione per cambiare stato di un ticket 
+    //NON IN USO
     public function change_status($id){
         
         $ticket = Ticket::find($id);
         
         if($ticket->status == true){
-            //Quando la richiesta è aperta chiudila
+
+            //quando la richiesta è aperta, chiudila
             $ticket->update(['status' => false]);
 
         }else{
-            //quando la richiesta è chiusa aprila
+
+            //quando la risposta è chiusa, aprila
             $ticket->update(['status' => true]);
 
         }
@@ -115,7 +151,11 @@ class TicketController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request -> all(); 
+        $ticket = Ticket::find($id);
+        $ticket->update($input);
+
+        return redirect()->route('ticket_index.adm');
     }
 
     /**

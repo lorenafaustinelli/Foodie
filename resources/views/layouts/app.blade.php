@@ -30,8 +30,10 @@
 
 </head>
 <body>
+    
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        
+        <nav class="navbar navbar-expand-md navbar_text_color navbar_custom shadow-sm">
             <div class="container fluid">
             @guest
                 <a class="navbar-brand" href="/home">
@@ -50,7 +52,7 @@
                 <form action="{{ url('search') }}" method="GET" role="search">
                     <div class="input-group">
                         <input type="search" name="search" value="" placeholder="Ricerca rapida" class="form-control me-2" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                        <button class="btn btn-outline-light" type="submit">Search</button>
                     </div>
                 </form>
 
@@ -113,7 +115,7 @@
                             <!-- menù per inserimento -->
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{__('Inserisci')}}
+                                    {{__('Aggiungi')}}
                                 </a> 
                                 
                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -257,7 +259,25 @@
             @yield('content')
         </main>
     </div>
-    
+    <style> .btn-custom {
+  color: #fff;
+  background-color: #0d77e9;
+  border-color: #227dc7;
+  --bs-btn-hover-color: var(--bs-white);
+  
+  
+}
+
+.btn-custom-little {
+  color: #fff;
+  background-color: #0d77e9;
+  border-color: #227dc7;
+  --bs-btn-hover-color: var(--bs-white);
+  font-size:12px;
+  padding: 3px 7px;
+}
+
+ </style>
 </body>
 </html>
 

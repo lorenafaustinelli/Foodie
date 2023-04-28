@@ -12,7 +12,7 @@
             @if($saved_recipes->where('user_id', Auth::id())->where('recipe_id', $recipe->id)->count() > 0)
                 <a class="btn btn-success" role="button" href="{{ route('recipe.destroy', $recipe->id)}}"> Salvata </a>
             @else
-                <a class="btn btn-success" role="button" href="{{ route('recipe.save', $recipe->id)}}"> Salva ricetta </a>
+                <a class="btn btn-primary" role="button" href="{{ route('recipe.save', $recipe->id)}}"> Salva ricetta </a>
             @endif
         @endif
         @endforeach
@@ -52,7 +52,7 @@
     @if($recipe_category != '')
 
        
-        <p> <strong> Categoria: </strong> @foreach($recipe_category as $cat)  {{ $cat->name_category }} @endforeach </p> 
+        <p> <strong> Categoria: </strong> @foreach($recipe_category as $cat) <button type="button" class="btn btn-custom-little" disabled> {{ $cat->name_category }} </button> @endforeach </p> 
         <p> <strong> Tempo di preparazione: </strong> {{ $recipe->time }} minuti </p>
         <h5> Preparazione </h5> {{ $recipe->instruction }}</p> </div> <!-- tenere </div> qui perchè sennò si disallinea testo -->
             
@@ -78,7 +78,6 @@ foreach($recipe_ing as $rp){
 $(document).ready(function() {
     $(portion).change(function(e){
         e.preventDefault();
-
         var data = {
             'portion': $('#portion').val(),
             recipe_ing : JSON.stringify(<?php echo $recipe_ing ?>), 
@@ -87,12 +86,10 @@ $(document).ready(function() {
         
         //console.log(data);
         $.ajaxSetup({
-
             headers:{
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
         $.ajax({
           url: "{{route('recipe_ingredient.change.quantity')}}",
           type:"POST",
@@ -114,9 +111,9 @@ $(document).ready(function() {
             }
           }
         });
-
     });
   });
   
 </script>
 @endsection
+

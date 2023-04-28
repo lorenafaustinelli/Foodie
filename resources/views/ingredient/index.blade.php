@@ -1,12 +1,14 @@
 @extends('layouts.app')
 
 @section('content') 
-
-
+<div class="container"> 
+<div id="alerts"> </div>
+</div>
 <div class="ingredient_index">
     <div class="headers">
         <div class="title"> 
             <h1> Ingredienti </h1>
+            </br>
         </div>
         <div class="button">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -54,6 +56,7 @@
             @csrf
             <div class="modal-body">
               <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}"/>
+              <input type="hidden" name="type" id="type" value="ingrediente"/>
               </br>
               <input type="text" class="form-control" placeholder="descrivi la tua richiesta" name="text" id="text" />
             </div>
@@ -76,6 +79,7 @@
       
       var data = {
         'user_id': $('#user_id').val(),
+        'type': $('#type').val(),
         'text': $('#text').val(),
       }
 
@@ -96,11 +100,19 @@
             if(response)
             {
               $("#TicketModal").modal('hide');
-              alert("Richiesta inviata correttamente!");
+              insert_success();
             }
           }
         });
     });
+
+    function insert_success(){
+      $('#alerts').append(
+        '<div class="alert alert-primary alert-dismissible fade show" role="alert">' 
+        +'Richiesta inviata correttamente <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">' +
+         '</div>'
+      );
+    }
   });
   
 

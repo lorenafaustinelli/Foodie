@@ -32,7 +32,9 @@ class HomeController extends Controller
 
         foreach($recipe as $rp){
             $rp->name_category1 = app('App\Http\Controllers\CategoryController')->name_category($rp->category_id);
-            $rp->name_category2 = app('App\Http\Controllers\CategoryController')->name_category($rp->category_id2);
+            if($rp->category_id2){
+                $rp->name_category2 = app('App\Http\Controllers\CategoryController')->name_category($rp->category_id2);
+            }
         }
 
         return view('home', compact('recipe'));
