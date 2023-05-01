@@ -46,7 +46,7 @@ class IngredientsTableSeeder extends Seeder
         ], 
         [   
             'id'              =>      '8',
-            'name_ingredient'   =>      'farina',
+            'name_ingredient'   =>      'farina 00',
             'variation'         =>      'farina di riso', 
         ], 
         [   
@@ -56,7 +56,7 @@ class IngredientsTableSeeder extends Seeder
         ],
         [   
             'id'              =>      '10',
-            'name_ingredient'   =>      'olio',
+            'name_ingredient'   =>      'olio d\'oliva',
             'variation'         =>      '', 
         ],  
         [   
@@ -103,6 +103,18 @@ class IngredientsTableSeeder extends Seeder
         ], [   
             'id'              =>      '21',
             'name_ingredient'   =>      'cipolla',
+            'variation'         =>      '', 
+        ],[   
+            'id'              =>      '22',
+            'name_ingredient'   =>      'lievito di birra fresco',
+            'variation'         =>      '', 
+        ], [   
+            'id'              =>      '23',
+            'name_ingredient'   =>      'olio extravergine d\'oliva',
+            'variation'         =>      '', 
+        ], [   
+            'id'              =>      '24',
+            'name_ingredient'   =>      'farina 0',
             'variation'         =>      '', 
         ]
         ]);

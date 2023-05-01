@@ -11,7 +11,8 @@
 
 
 <div class="container">
-  <h1> Aggiungi gli ingredienti </h1>
+  <h1>Step 2 di 3 </h1> 
+ <h2> Aggiungi gli ingredienti </h2>
 </br>
    <div class="row">
        <div class="card">

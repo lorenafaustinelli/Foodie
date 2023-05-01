@@ -33,8 +33,15 @@
                 <tr>
 
                 <td> {{ $i->name_ingredient }} </td> 
+                @if($i->quantity == 0)
+
+                <td> - </td> 
+
+                @else
 
                 <td> {{ $i->quantity }} </td> 
+
+                @endif
 
                 <td> {{ $i->measure }} </td> 
 
@@ -52,7 +59,7 @@
     @if($recipe_category != '')
 
        
-        <p> <strong> Categoria: </strong> @foreach($recipe_category as $cat) <button type="button" class="btn btn-custom-little" disabled> {{ $cat->name_category }} </button> @endforeach </p> 
+        <p> <strong> Categoria: </strong> @foreach($recipe_category as $cat) <button type="button" class="btn btn-custom-little" disabled> #{{ $cat->name_category }} </button> @endforeach </p> 
         <p> <strong> Tempo di preparazione: </strong> {{ $recipe->time }} minuti </p>
         <h5> Preparazione </h5> {{ $recipe->instruction }}</p> </div> <!-- tenere </div> qui perchè sennò si disallinea testo -->
             

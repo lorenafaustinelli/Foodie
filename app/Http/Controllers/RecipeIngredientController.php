@@ -155,7 +155,10 @@ class RecipeIngredientController extends Controller
         //cambio i valori delle quantità nell'array originale
         $i = 0;
         foreach($recipe_ing as $rp){
-            $rp->quantity = $qu[$i];
+            if($rp->quantity == 0){
+                $rp->quantity = "-";
+            }else{
+            $rp->quantity = $qu[$i];}
             $i = $i + 1;
         }
 

@@ -12,7 +12,7 @@
         </div>
         <div class="button">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#TicketModal" >Richiesta ingrediente</button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#TicketModal" >Richiedi ingrediente</button>
             </div>
         </div>
     </div>
