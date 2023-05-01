@@ -45,22 +45,31 @@ class TicketController extends Controller
             $close_ticket = '';
             return view('admin/ticket', compact('open_ticket', 'close_ticket'));
         } else{
-            //devo splittare l'array in due sotto array, uno con le richieste aperte e uno con le richieste chiuse
-            foreach($tickets as $ticket){
-
-                //inserisco il nome dell'utente
-                $ticket->user_name = app('App\Http\Controllers\UserController')->name($ticket->user_id);
-  
-            }
 
             $open_tickets = Ticket::orderBy('tickets.created_at', 'desc')->where('status', '=', '0')->get();
+            
             $close_tickets = Ticket::orderBy('tickets.created_at', 'desc')->where('status', '=', '1')->get();
+
             if($open_tickets->isEmpty()){
                 $open_tickets = '';
+            } else{
+                foreach($open_tickets as $ticket){
+
+                    //inserisco il nome dell'utente
+                    $ticket->user_name = app('App\Http\Controllers\UserController')->name($ticket->user_id);
+      
+                }
             }
 
             if($close_tickets->isEmpty()){
                 $close_tickets = '';
+            } else{
+                foreach($close_tickets as $ticket){
+
+                    //inserisco il nome dell'utente
+                    $ticket->user_name = app('App\Http\Controllers\UserController')->name($ticket->user_id);
+      
+                }
             }
         }
 

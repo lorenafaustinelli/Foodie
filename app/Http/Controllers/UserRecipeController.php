@@ -24,6 +24,157 @@ class UserRecipeController extends Controller
 
     }
 
+    public function filter_index(Request $request)
+    {   
+        $user_id = Auth::id();
+        if($request->time){
+
+            if($request->category_id1){
+
+                if($request->category_id2){
+
+                    if($request->ingredient_id){
+
+                        //tutti i campi
+
+                        $recipe = UserRecipe::where('user_id', '=', $user_id)
+                        ->join('recipes', 'recipes.id', "=", 'user_recipes.recipe_id')
+                        ->where('time', '<=', $request->time)
+                        ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                        ->whereIn('category_id', [$request->category_id1, $request->category_id2])
+                        ->whereIn('category_id2', [$request->category_id1, $request->category_id2])
+                        ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                        ->where('ingredient_id', 'LIKE', $request->ingredient_id)
+                        ->get();
+
+                        return view('user_recipe/index', compact('recipe'));
+
+                    }
+
+                    //tutti i campi tranne ingrediente
+                    $recipe = UserRecipe::where('user_id', '=', $user_id)
+                    ->join('recipes', 'recipes.id', "=", 'user_recipes.recipe_id')
+                    ->where('time', '<=', $request->time)
+                    ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                    ->whereIn('category_id', [$request->category_id1, $request->category_id2])
+                    ->whereIn('category_id2', [$request->category_id1, $request->category_id2])
+                    ->get();
+
+                    return view('user_recipe/index', compact('recipe'));
+
+                }
+
+                //solo tempo e prima categoria
+                $recipe = UserRecipe::where('user_id', '=', $user_id)
+                ->join('recipes', 'recipes.id', "=", 'user_recipes.recipe_id')
+                ->where('time', '<=', $request->time)
+                ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                ->whereIn('category_id', [$request->category_id1, $request->category_id2])
+                ->get();
+
+                return view('user_recipe/index', compact('recipe'));
+
+            }
+
+            //solo tempo
+            $recipe = UserRecipe::where('user_id', '=', $user_id)
+            ->join('recipes', 'recipes.id', "=", 'user_recipes.recipe_id')
+            ->where('time', '<=', $request->time)
+            ->get();
+
+            return view('user_recipe/index', compact('recipe'));
+
+        }
+        else if($request->category_id1){
+
+            if($request->category_id2){
+
+                if($request->ingredient_id){
+
+                    //tutti i campi tranne time
+                    $recipe = UserRecipe::where('user_id', '=', $user_id)
+                    ->join('recipes', 'recipes.id', "=", 'user_recipes.recipe_id')
+                    ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                    ->whereIn('category_id', [$request->category_id1, $request->category_id2])
+                    ->whereIn('category_id2', [$request->category_id1, $request->category_id2])
+                    ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                    ->where('ingredient_id', 'LIKE', $request->ingredient_id)
+                    ->get();
+
+                    return view('user_recipe/index', compact('recipe'));
+
+                }
+
+                //solo categorie
+                $recipe = UserRecipe::where('user_id', '=', $user_id)
+                ->join('recipes', 'recipes.id', "=", 'user_recipes.recipe_id')
+                ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                ->whereIn('category_id', [$request->category_id1, $request->category_id2])
+                ->whereIn('category_id2', [$request->category_id1, $request->category_id2])
+                ->get();
+
+                return view('user_recipe/index', compact('recipe'));
+            }
+
+            //solo prima categoria
+
+            $recipe = UserRecipe::where('user_id', '=', $user_id)
+            ->join('recipes', 'recipes.id', "=", 'user_recipes.recipe_id')
+            ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+            ->whereIn('category_id', [$request->category_id1, $request->category_id2])
+            ->get();
+
+            return view('user_recipe/index', compact('recipe'));
+
+        } else if($request->category_id2){
+
+            if($request->ingredient_id){
+
+                //solo categoria 2 e ingrediente
+
+                $recipe = UserRecipe::where('user_id', '=', $user_id)
+                ->join('recipes', 'recipes.id', "=", 'user_recipes.recipe_id')
+                ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+                ->whereIn('category_id2', [$request->category_id1, $request->category_id2])
+                ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+                ->where('ingredient_id', 'LIKE', $request->ingredient_id)
+                ->get();
+
+                return view('user_recipe/index', compact('recipe'));
+
+            }
+
+            //solo categoria 2
+
+            $recipe = UserRecipe::where('user_id', '=', $user_id)
+            ->join('recipes', 'recipes.id', "=", 'user_recipes.recipe_id')
+            ->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+            ->whereIn('category_id2', [$request->category_id1, $request->category_id2])
+            ->get();
+
+            return view('user_recipe/index', compact('recipe'));
+
+        } else if($request->ingredient_id){
+            
+            //solo campo ingredient
+            $recipe = UserRecipe::where('user_id', '=', $user_id)
+            ->join('recipes', 'recipes.id', "=", 'user_recipes.recipe_id')
+            ->join('recipe_ingredients', 'recipe_ingredients.recipe_id', "=", 'recipes.id')
+            ->where('ingredient_id', 'LIKE', $request->ingredient_id)
+            ->get();
+
+            return view('user_recipe/index', compact('recipe'));
+
+        } else{
+
+            $recipe = DB::table('user_recipes')->where('user_id', '=', $user_id)
+            ->join('recipes', 'recipes.id', "=", 'user_recipes.recipe_id')->get();
+        
+            return view('user_recipe/index', compact('recipe'));
+        }
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *

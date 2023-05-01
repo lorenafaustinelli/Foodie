@@ -92,6 +92,7 @@ Route::group(['middleware'=>['user']], function(){
 
     //UserRecipe
     Route::get('/user_recipe/index', 'UserRecipeController@index')->name('user.recipe');
+    Route::get('/user_recipe/filter_index', 'UserRecipeController@filter_index')->name('user_recipe.filter_index');
 
     //Research
     Route::view('/research/advanced_search', '/research/advanced_search')->name('advanced.search');

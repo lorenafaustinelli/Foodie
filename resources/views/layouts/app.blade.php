@@ -51,8 +51,8 @@
 
                 <form action="{{ url('search') }}" method="GET" role="search">
                     <div class="input-group">
-                        <input type="search" name="search" value="" placeholder="Ricerca rapida" class="form-control me-2" aria-label="Search">
-                        <button class="btn btn-outline-light" type="submit">Search</button>
+                        <input type="search" name="search" value="" placeholder="Nome ricetta" class="form-control me-2" aria-label="Search">
+                        <button class="btn btn-outline-light" type="submit">Cerca</button>
                     </div>
                 </form>
 
@@ -214,11 +214,6 @@
                                 </div>
                             </li>
 
-                            <!-- inserimento ricetta -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('recipe.create') }}">{{__('Nuova Ricetta')}}</a> 
-                            </li>
-
                             <!-- menù per visualizzare le varie entità -->
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -239,6 +234,11 @@
                                     </a>
                                     
                                 </div>
+                            </li> 
+
+                            <!-- inserimento ricetta -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('recipe.create') }}">{{__('Nuova Ricetta')}}</a> 
                             </li>
 
 

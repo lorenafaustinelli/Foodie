@@ -59,7 +59,7 @@
     @else
 
         <p> Tempo di preparazione: {{ $recipe->time }} minuti </p>
-        <h5> Preparazione </h5> {{ $recipe->instruction }}</p> </div> <!-- tenere </div> qui perchè sennò si disallinea testo -->
+        <h5> Preparazione </h5> {{ $recipe->instruction }}</div> <!-- tenere </div> qui perchè sennò si disallinea testo -->
 
 
     @endif

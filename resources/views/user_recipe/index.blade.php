@@ -6,6 +6,11 @@
 <div class="container">
     <h1> Ricette create da {{ Auth::user()->name }} </h1> 
     </br>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#FilterModal"> Filtri </button>
+    <a class="btn btn-primary" href="{{ route('user.recipe') }}" role="button">Resetta filtri</a> 
+    </div>
+    </br>
     <div class="grid-layout"> 
     @foreach($recipe as $r) <!-- scorro gli id delle ricette scritte dall'utente --> 
         <div class="card text-center" style="width: 15rem;">
@@ -31,5 +36,65 @@
     @endforeach
     </div> 
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="FilterModal" tabindex="-1" aria-labelledby="FilterModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="FilterModalLabel">Filtri</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <form action="{{ route('user_recipe.filter_index') }}" method="GET" enctype="multipart/form-data">
+
+            <div class="modal-body">
+                
+                <div class="container">
+                <h5> Tempo di preparazione massimo: </h5>
+                    <input type="number" min="0" max="600" step="5" class="form-control" name="time" placeholder="minuti" id="time" >
+                    </br>
+                </div>
+                <div class="container">
+                <h5> Categorie: </h5> 
+                    <select id="category_id1" class="form-select" aria-label="Default select example" name="category_id1">
+                    <option selected></option>
+                    @foreach ($categories as $cat)
+                        <option value="{{ $cat->id }}"> {{$cat->name_category }} </option>
+                    @endforeach
+                    </select>
+                </div> 
+                </br>
+                <div class="container">
+                    <select id="category_id2" class="form-select" aria-label="Default select example" name="category_id2">
+                    <option selected></option>
+                    @foreach ($categories as $cat)
+                        <option value="{{ $cat->id }}"> {{$cat->name_category }} </option>
+                    @endforeach
+                    </select>
+                </div> 
+                </br>
+                <div class="container">
+                    <h4> Ingrediente: </h4> 
+                    <select id="ingredient_id" class="form-select" aria-label="Default select example" name="ingredient_id">
+                    <option selected></option>
+                        @foreach ($ingredients as $ing)
+                        <option value="{{ $ing->id }}"> {{$ing->name_ingredient }} </option>
+                        @endforeach
+                    </select>
+                </div> 
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                <button type="submit" class="btn btn-primary">Visualizza</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+
+
 
 @endsection

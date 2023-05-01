@@ -14,7 +14,7 @@
 				<a href="#" data-bs-toggle="modal" data-bs-target="#pictureModal">
 					<!--<a href="{{ route('user.update') }}" > 
 					<input type="file" name="image" >-->
-					<img data-toggle="tooltip" title="Click to update your profile picture! :)" src="{{ Storage::url('public/users/default.jpg') }}" class="rounded-circle mb-3" style="width: 150px;" alt="Avatar" />
+					<img data-toggle="tooltip" title="Premi per aggiornare la tua foto profilo" src="{{ Storage::url('public/users/default.jpg') }}" class="rounded-circle mb-3" style="width: 150px;" alt="Avatar" />
 					<!--<br>   data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Update your profile picture!"
 					Questa è un'icona presa da bootstrap - non so se sia utile
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -32,7 +32,7 @@
 
 			<div class="container">
 				<br><br>
-				<h5> Le tue ricette più popolari </h5> <br>
+				<h5> Le tue ricette più salvate: </h5> <br>
 				</br>
 				<div class="grid-layout"> 
 					<script> $i = 0 </script>
@@ -64,6 +64,9 @@
 					@endforeach 
 					
 				</div> 
+				@if($recipe->isEmpty())
+				<p> Non hai ancora inserito delle ricette. </p>
+				@endif
 			    </div>
 		</div>
 		<div class="col-2"> <!-- Barra laterale -->
