@@ -261,8 +261,8 @@
     </div>
     <style> .btn-custom {
   color: #fff;
-  background-color: #0d77e9;
-  border-color: #227dc7;
+  background-color: var(--BLU);/* #0d77e9; */
+  border-color: var(--BLU);/* #227dc7; */
   --bs-btn-hover-color: var(--bs-white);
   
   
@@ -270,8 +270,8 @@
 
 .btn-custom-little {
   color: #fff;
-  background-color: #0d77e9;
-  border-color: #227dc7;
+  background-color:var(--BLU); /* #0d77e9; */
+  border-color:var(--BLU); /* #227dc7; */
   --bs-btn-hover-color: var(--bs-white);
   font-size:12px;
   padding: 3px 7px;

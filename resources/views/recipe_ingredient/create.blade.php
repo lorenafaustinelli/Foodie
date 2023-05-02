@@ -50,7 +50,7 @@
                 </table>
                 </br>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end"> 
-                  <a class="btn btn-primary" href="{{ route('recipe_category.create', $recipe->id) }}" role="button">Prosegui</a>
+                  <a class="btn btn-custom" href="{{ route('recipe_category.create', $recipe->id) }}" role="button">Prosegui</a>
                 </div>
             </div>
         </div>
@@ -101,7 +101,7 @@
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-          <button type="submit" class="btn btn-primary" > Aggiungi </button>
+          <button type="submit" class="btn btn-custom" > Aggiungi </button>
         </div>
       </form>
     </div>

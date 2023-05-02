@@ -22,7 +22,7 @@
 
                   {{$ticket->created_at->format('d M Y - H:i')}} </br>
                   {{$ticket->text}}
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#statusModal-{{$ticket->id}}">
+                  <button type="button" class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#statusModal-{{$ticket->id}}">
                   Stato richiesta
                   </button>
 

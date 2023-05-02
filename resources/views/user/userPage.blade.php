@@ -77,13 +77,13 @@
 					<div class="text-center">
 						<br><br> <br> <br><br><br><br> <br>
 						<!-- Modifica nome -->
-						<a class="btn btn-outline-primary" role="button" href="#" data-bs-toggle="modal" data-bs-target="#nameModal">  Modifica il nome </a> <br><br><br>
+						<a class="btn btn-custom" role="button" href="#" data-bs-toggle="modal" data-bs-target="#nameModal">  Modifica il nome </a> <br><br><br>
 						<!-- Modifica email -->
-						<a class="btn btn-outline-primary" role="button" href="#" data-bs-toggle="modal" data-bs-target="#emailModal">  Modifica l'email </a> <br><br><br>
+						<a class="btn btn-custom" role="button" href="#" data-bs-toggle="modal" data-bs-target="#emailModal">  Modifica l'email </a> <br><br><br>
 						<!-- Logout -->
 						<!-- <a class="btn btn-outline-primary" role="button" href="{{ route('logout') }}"> Logout </a> <br> <br><br> -->
 						<!-- Possibilità di eliminare definitivamente il profilo -->
-						<a class="btn btn-outline-primary" role="button" href="{{ route('user.delete', Auth::id())}}"> Elimina l'account </a>
+						<a class="btn btn-custom" role="button" href="{{ route('user.delete', Auth::id())}}"> Elimina l'account </a>
 					</div>
 				</div>
 				</a>
@@ -109,7 +109,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary" > Aggiungi </button>
+					<button type="submit" class="btn btn-custom" > Aggiungi </button>
 				</div>
 			</form>
 		</div>
@@ -132,7 +132,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary" > Aggiungi </button>
+					<button type="submit" class="btn btn-custom" > Aggiungi </button>
 				</div>
 			</form>
 		</div>
@@ -154,7 +154,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary" > Aggiungi </button>
+					<button type="submit" class="btn btn-custom" > Aggiungi </button>
 				</div>
 			</form>
 		</div>

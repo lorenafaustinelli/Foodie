@@ -4,13 +4,14 @@
 
 
 <div class="container">
+    <br>
     <h1> Ricette create da {{ Auth::user()->name }} </h1> 
-    </br>
+    <br>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#FilterModal"> Filtri </button>
-    <a class="btn btn-primary" href="{{ route('user.recipe') }}" role="button">Resetta filtri</a> 
+    <button type="button" class="btn btn-custom " data-bs-toggle="modal" data-bs-target="#FilterModal"> Filtri </button>
+    <a class="btn btn-custom" href="{{ route('user.recipe') }}" role="button">Resetta filtri</a> 
     </div>
-    </br>
+    <br>
     <div class="grid-layout"> 
     @foreach($recipe as $r) <!-- scorro gli id delle ricette scritte dall'utente --> 
         <div class="card text-center" style="width: 15rem;">
@@ -52,7 +53,7 @@
                 <div class="container">
                 <h5> Tempo di preparazione massimo: </h5>
                     <input type="number" min="0" max="600" step="5" class="form-control" name="time" placeholder="minuti" id="time" >
-                    </br>
+                    <br>
                 </div>
                 <div class="container">
                 <h5> Categorie: </h5> 
@@ -63,7 +64,7 @@
                     @endforeach
                     </select>
                 </div> 
-                </br>
+                <br>
                 <div class="container">
                     <select id="category_id2" class="form-select" aria-label="Default select example" name="category_id2">
                     <option selected></option>
@@ -72,7 +73,7 @@
                     @endforeach
                     </select>
                 </div> 
-                </br>
+                <br>
                 <div class="container">
                     <h5> Ingrediente: </h5> 
                     <select id="ingredient_id" class="form-select" aria-label="Default select example" name="ingredient_id">
@@ -87,7 +88,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-                <button type="submit" class="btn btn-primary">Visualizza</button>
+                <button type="submit" class="btn btn-custom">Visualizza</button>
             </div>
         </form>
     </div>

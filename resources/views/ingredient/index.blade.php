@@ -12,7 +12,7 @@
         </div>
         <div class="button">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#TicketModal" >Richiedi ingrediente</button>
+                <button class="btn btn-custom" type="button" data-bs-toggle="modal" data-bs-target="#TicketModal" >Richiedi ingrediente</button>
             </div>
         </div>
     </div>
@@ -63,7 +63,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-                <button type="button" class="btn btn-primary add_ticket" > Aggiungi </button>
+                <button type="button" class="btn btn-custom add_ticket" > Aggiungi </button>
             </div>
         </form>
     </div>

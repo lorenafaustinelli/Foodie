@@ -62,7 +62,7 @@
         </div>
         </br>
         <div class="d-grid gap-2 col-6 mx-auto">
-          <button class="btn btn-primary" type="submit">Cerca</button>
+          <button class="btn btn-custom" type="submit">Cerca</button>
           </br>
           </br>
         </div>

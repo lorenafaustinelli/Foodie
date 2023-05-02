@@ -13,7 +13,7 @@
 <div class="container">
     <h1> Richieste aperte</h1>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <p> <a href="{{ route('close.tickets') }}"> Vai alle richieste concluse </a> </p>
+        <p> <a style="color: var(--BLU)" href="{{ route('close.tickets') }}"> Vai alle richieste concluse </a> </p>
     </div>
     @if($open_tickets == '') 
         <h4> Per il momento non ci sono richieste in sospeso. </h4>
@@ -26,7 +26,7 @@
                         
                         Richiesta #{{$op->id}} - {{$op->created_at->format('d M Y - H:i')}} {{$op->user_name}} </br>
                         {{$op->text}}
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requestModal-{{$op->id}}">
+                        <button type="button" class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#requestModal-{{$op->id}}">
                             Gestisci richiesta 
                         </button>
     
@@ -73,7 +73,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-            <button type="submit" class="btn btn-primary">Salva</button>
+            <button type="submit" class="btn btn-custom">Salva</button>
         </div>
         
       </form>

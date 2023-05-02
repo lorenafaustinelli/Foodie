@@ -13,7 +13,7 @@
 <div class="container">
     <h1> Richieste concluse</h1>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <p> <a href="{{ route('ticket_index.adm') }}"> Vai alle richieste aperte </a> </p>
+        <p> <a style="color: var(--BLU)" href="{{ route('ticket_index.adm') }}"> Vai alle richieste aperte </a> </p>
     </div>
     @if($close_tickets == '') 
         <h4> Per il momento non hai completato delle richieste. </h4>
@@ -27,7 +27,7 @@
                     
                     Richiesta #{{$op->id}} - {{$op->created_at->format('d M Y - H:i')}} {{$op->user_name}} </br>
                     {{$op->text}}
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requestModal-{{$op->id}}">
+                    <button type="button" class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#requestModal-{{$op->id}}">
                         Gestisci richiesta 
                     </button>
 
@@ -75,7 +75,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-            <button type="submit" class="btn btn-primary">Salva</button>
+            <button type="submit" class="btn btn-custom">Salva</button>
         </div>
         
       </form>

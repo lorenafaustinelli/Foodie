@@ -16,9 +16,9 @@
                         </div>
                         <ul class="list-group list-group-flush align-items-center">
                             @if($recipe->category_id2)
-                            <li class="list-group-item"> <a class="btn btn-primary" href=" {{ route('category.show', $recipe->category_id )}} " role="button"> {{ $recipe->name_category1 }} </a> <a class="btn btn-primary" href="{{ route('category.show', $recipe->category_id2 )}}" role="button"> {{ $recipe->name_category2 }} </a> </li>
+                            <li class="list-group-item"> <a class="btn btn-custom" href=" {{ route('category.show', $recipe->category_id )}} " role="button"> {{ $recipe->name_category1 }} </a> <a class="btn btn-custom" href="{{ route('category.show', $recipe->category_id2 )}}" role="button"> {{ $recipe->name_category2 }} </a> </li>
                             @else
-                            <li class="list-group-item"> <a class="btn btn-primary" href=" {{ route('category.show', $recipe->category_id )}} " role="button"> {{ $recipe->name_category1 }} </a> </li>
+                            <li class="list-group-item"> <a class="btn btn-custom" href=" {{ route('category.show', $recipe->category_id )}} " role="button"> {{ $recipe->name_category1 }} </a> </li>
                             @endif
                         </ul>
                     </div>

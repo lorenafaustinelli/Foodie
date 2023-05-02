@@ -45,7 +45,7 @@
         </div>
         </br>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button type="submit" class="btn btn-primary"> Continua modifiche </button>
+            <button type="submit" class="btn btn-custom"> Continua modifiche </button>
         </div>
     </form>
 

@@ -95,7 +95,7 @@
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-          <button type="submit" class="btn btn-primary" > Aggiungi </button>
+          <button type="submit" class="btn btn-custom" > Aggiungi </button>
         </div>
       </form>
     </div>
@@ -107,7 +107,7 @@
   <!-- oggetti di sessione che vengono mandati da una pagina all'altra -->
   <div class="d-grid gap-2 col-6 mx-auto"> 
 
-    <a class="btn btn-primary" href="{{ route('recipe_category.edit', $recipe->id) }}" role="button">Prosegui</a>
+    <a class="btn btn-custom" href="{{ route('recipe_category.edit', $recipe->id) }}" role="button">Prosegui</a>
 
   </div>
 

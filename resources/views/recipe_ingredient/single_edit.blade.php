@@ -50,7 +50,7 @@
     </br>
     </br>
     <div class="d-grid gap-2 col-6 mx-auto"> 
-      <button type="submit" class="btn btn-primary">Concludi</button>
+      <button type="submit" class="btn btn-custom">Concludi</button>
     </div>
   </form>
 
