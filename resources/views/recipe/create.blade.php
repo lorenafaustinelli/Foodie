@@ -55,7 +55,7 @@
                         </thead>
                     </table>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button type="submit" class="btn btn-custom" data-inline="true"> Continua </button>
+                        <button type="submit" class="btn btn-custom"> Continua </button>
                     </div>
                     </form>
                 </div>

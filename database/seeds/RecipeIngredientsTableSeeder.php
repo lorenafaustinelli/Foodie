@@ -283,7 +283,7 @@ class RecipeIngredientsTableSeeder extends Seeder
             'recipe_id' => '6',
             'ingredient_id' => '5',
             'quantity' => '7',
-            'measure' => '7'
+            'measure' => 'gr'
             
         ]
         ]);

@@ -24,7 +24,7 @@
                 <ul class="list-group">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         
-                        Richiesta #{{$op->id}} - {{$op->created_at->format('d M Y - H:i')}} {{$op->user_name}} </br>
+                        <b> Richiesta #{{$op->id}} - {{$op->created_at->format('d M Y - H:i')}} {{$op->user_name}} </b> </br> 
                         {{$op->text}}
                         <button type="button" class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#requestModal-{{$op->id}}">
                             Gestisci richiesta 
