@@ -41,9 +41,9 @@ class TicketController extends Controller
     {
         $tickets = Ticket::orderBy('tickets.created_at', 'desc')->get();
         if($tickets->isEmpty()){
-            $open_ticket = '';
-            $close_ticket = '';
-            return view('admin/ticket', compact('open_ticket', 'close_ticket'));
+            $open_tickets = '';
+            $close_tickets = '';
+            return view('admin/ticket', compact('open_tickets', 'close_tickets'));
         } else{
 
             $open_tickets = Ticket::orderBy('tickets.created_at', 'desc')->where('status', '=', '0')->get();
