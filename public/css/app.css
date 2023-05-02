@@ -174,13 +174,13 @@ sup {
 }
 
 .l {
-  color: #2d995b;
+  color:  #0952a0;
   font-variant: small-caps;
   text-decoration: none;
   background-color: transparent;
 }
 .l:hover{
-  color: #2d995b;
+  color: #0952a0;
   text-decoration: underline;
 }
 
@@ -2719,6 +2719,13 @@ fieldset:disabled a.btn {
   border-color: #2176bd;
 }
 
+.btn-custom {
+  color: #fff;
+  background-color: #0d77e9;
+  border-color: #0d77e9;
+}
+
+
 .btn-primary:focus,
 .btn-primary.focus {
   color: #fff;
@@ -4665,6 +4672,7 @@ input[type=button].btn-block {
   .navbar-expand-sm > .container-xl {
     padding-right: 0;
     padding-left: 0;
+    
   }
 }
 
@@ -4719,6 +4727,7 @@ input[type=button].btn-block {
   .navbar-expand-md > .container-xl {
     padding-right: 0;
     padding-left: 0;
+    
   }
 }
 
@@ -7107,7 +7116,8 @@ button.bg-dark:focus {
 }
 
 .bg-white {
-  background-color: #fff !important;
+  background-color: #000 !important;
+  
 }
 
 .bg-transparent {
@@ -11089,3 +11099,100 @@ a.text-dark:focus {
 .recipe {
   grid-area: recipe;
 }
+
+/* parte index ingredienti */
+.ingredient_index {  display: grid;
+  grid-template-columns: 0.4fr 3.1fr 0.4fr; 
+  grid-template-rows: 0.3fr 2.5fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    ". . ."
+    ". headers ."
+    ". table_ing .";
+}
+
+.headers {  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "title . button";
+  grid-area: headers;
+}
+
+.title { grid-area: title; }
+
+.button { grid-area: button; }
+
+.table_ing { grid-area: table_ing; }
+
+
+/* modifiche per il navbar di bootstrap */
+.navbar_custom{
+  background-color: #063970;
+  background-image: none;
+
+}
+
+.navbar_text_color{
+   color: #fff;
+}
+
+.navbar_text_color .navbar-brand {
+color: #fff;
+}
+
+.navbar_text_color .navbar-brand:hover,
+.navbar_text_color .navbar-brand:focus {
+color: #fff;
+}
+
+.navbar_text_color .navbar-nav .nav-link {
+color: #fff;
+}
+
+.navbar_text_color .navbar-nav .nav-link:hover,
+.navbar_text_color .navbar-nav .nav-link:focus {
+color: rgba(255, 255, 255, 0.75);
+}
+
+.navbar_text_color .navbar-nav .nav-link.disabled {
+color: rgba(255, 255, 255, 0.25);
+}
+
+.navbar_text_color .navbar-nav .show > .nav-link,
+.navbar_text_color .navbar-nav .active > .nav-link,
+.navbar_text_color .navbar-nav .nav-link.show,
+.navbar_text_color .navbar-nav .nav-link.active {
+color: #fff;
+}
+
+.navbar_text_color .navbar-toggler {
+color: rgba(255, 255, 255, 0.5);
+border-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar_text_color .navbar-toggler-icon {
+background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.navbar_text_color .navbar-text {
+color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar_text_color .navbar-text a {
+color: #fff;
+}
+
+.navbar_text_color .navbar-text a:hover,
+.navbar_text_color .navbar-text a:focus {
+color: #fff;
+}
+
+
+
+
+
+

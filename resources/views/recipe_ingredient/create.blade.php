@@ -11,7 +11,9 @@
 
 
 <div class="container">
-  <h1> Aggiungi gli ingredienti </h1>
+  <h1>Step 2 di 3 </h1> 
+ <h2> Aggiungi gli ingredienti </h2>
+</br>
    <div class="row">
        <div class="card">
             <div class="card-header">
@@ -46,6 +48,10 @@
                       @endforeach
                     </tbody>
                 </table>
+                </br>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end"> 
+                  <a class="btn btn-primary" href="{{ route('recipe_category.create', $recipe->id) }}" role="button">Prosegui</a>
+                </div>
             </div>
         </div>
     </div>
@@ -108,13 +114,7 @@
   <?php 
   //per passare l'id della ricetta alla pagina delle categorie
   {{ session()->put('id', $id); }} ?>
-  <div class="d-grid gap-2 d-md-block">
-    <a class="btn btn-primary" href="{{ redirect()->back() }}" type="button">Indietro</a>
-  </div>
-
-  <div class="d-grid gap-2 d-md-flex justify-content-md-end"> 
-    <a class="btn btn-primary" href="{{ route('recipe_category.create', $recipe->id) }}" role="button">Prosegui</a>
-  </div>
+  
 
 
 

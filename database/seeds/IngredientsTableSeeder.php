@@ -46,7 +46,7 @@ class IngredientsTableSeeder extends Seeder
         ], 
         [   
             'id'              =>      '8',
-            'name_ingredient'   =>      'farina',
+            'name_ingredient'   =>      'farina 00',
             'variation'         =>      'farina di riso', 
         ], 
         [   
@@ -56,7 +56,7 @@ class IngredientsTableSeeder extends Seeder
         ],
         [   
             'id'              =>      '10',
-            'name_ingredient'   =>      'olio',
+            'name_ingredient'   =>      'olio d\'oliva',
             'variation'         =>      '', 
         ],  
         [   
@@ -71,6 +71,50 @@ class IngredientsTableSeeder extends Seeder
         ], [   
             'id'              =>      '13',
             'name_ingredient'   =>      'burro',
+            'variation'         =>      '', 
+        ], [   
+            'id'              =>      '14',
+            'name_ingredient'   =>      'acqua',
+            'variation'         =>      '', 
+        ], [   
+            'id'              =>      '15',
+            'name_ingredient'   =>      'pollo',
+            'variation'         =>      '', 
+        ], [   
+            'id'              =>      '16',
+            'name_ingredient'   =>      'zucchero',
+            'variation'         =>      '', 
+        ], [   
+            'id'              =>      '17',
+            'name_ingredient'   =>      'salsa di soia',
+            'variation'         =>      '', 
+        ], [   
+            'id'              =>      '18',
+            'name_ingredient'   =>      'succo di limone',
+            'variation'         =>      '', 
+        ], [   
+            'id'              =>      '19',
+            'name_ingredient'   =>      'amido di mais',
+            'variation'         =>      '', 
+        ], [   
+            'id'              =>      '20',
+            'name_ingredient'   =>      'scorza di limone',
+            'variation'         =>      '', 
+        ], [   
+            'id'              =>      '21',
+            'name_ingredient'   =>      'cipolla',
+            'variation'         =>      '', 
+        ],[   
+            'id'              =>      '22',
+            'name_ingredient'   =>      'lievito di birra fresco',
+            'variation'         =>      '', 
+        ], [   
+            'id'              =>      '23',
+            'name_ingredient'   =>      'olio extravergine d\'oliva',
+            'variation'         =>      '', 
+        ], [   
+            'id'              =>      '24',
+            'name_ingredient'   =>      'farina 0',
             'variation'         =>      '', 
         ]
         ]);

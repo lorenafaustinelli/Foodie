@@ -2,13 +2,17 @@
 
 @section('content')
 <div class ="container">
-<h1> Risultati: </h1>
 
+@if($recipe->isEmpty())
+<h2> La ricerca non ha prodotto risultati. </h2>
+@else 
+<h1> Risultati: </h1>
+</br>
 @foreach($recipe as $recipe)
 
     <div class="grid-layout"> 
        
-    <div class="card" style="width: 18rem;">
+    <div class="card text-center" style="width: 15rem;">
         <!-- scorro poi le ricette corrispondenti agli id del for precedente -->
         
         <img src="{{ Storage::url($recipe->photo) }}" class="card-img-top" width="250px" height="180px" alt="foto ricetta">
@@ -25,6 +29,8 @@
     </div>
 
 @endforeach
+
+@endif
 
 </div>
 @endsection

@@ -37,9 +37,9 @@ class UsersTableSeeder extends Seeder
 
         ], [
             'id'        =>       '3',
-            'name'      =>       'Bill',
-            'surname'   =>       'Gates', 
-            'email'     =>       'bill@foodie.it',
+            'name'      =>       'Mario',
+            'surname'   =>       'Rossi', 
+            'email'     =>       'mario@foodie.it',
             'admin'     =>        false,
             'password'  =>        bcrypt('password'),
             'created_at' =>       date('Y-m-d h:i:s'),

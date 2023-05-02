@@ -55,7 +55,7 @@ class IngredientController extends Controller
 
         $ingredients = Ingredient::orderBy('name_ingredient')->get();
         
-        return view('/ingredient/index', compact('ingredients'));
+        return view('/ingredient/create');
     }
 
     /**

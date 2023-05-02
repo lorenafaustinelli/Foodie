@@ -40,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('measurements', UnityOfMeasurement::all());
             $view->with('recipes', Recipe::all());
             $view->with('recipe_categories', RecipeCategory::all());
-            $view->with('saved_recipes', SavedRecipe::all());
+
         });
     }
 }

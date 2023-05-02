@@ -36,6 +36,14 @@ class UserController extends Controller
         //
     }
 
+    public function name($id){
+
+        $user = User::find($id); 
+        $name = "- ".$user->name." ".$user->surname;
+
+        return $name;
+    }
+
     /**
      * Display the specified resource.
      *

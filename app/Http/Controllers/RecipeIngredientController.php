@@ -57,7 +57,7 @@ class RecipeIngredientController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store inserito nell'update degli ingredienti di una ricetta
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -155,7 +155,10 @@ class RecipeIngredientController extends Controller
         //cambio i valori delle quantità nell'array originale
         $i = 0;
         foreach($recipe_ing as $rp){
-            $rp->quantity = $qu[$i];
+            if($rp->quantity == 0){
+                $rp->quantity = "-";
+            }else{
+            $rp->quantity = $qu[$i];}
             $i = $i + 1;
         }
 

@@ -30,8 +30,10 @@
 
 </head>
 <body>
+    
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        
+        <nav class="navbar navbar-expand-md navbar_text_color navbar_custom shadow-sm">
             <div class="container fluid">
             @guest
                 <a class="navbar-brand" href="/home">
@@ -49,8 +51,8 @@
 
                 <form action="{{ url('search') }}" method="GET" role="search">
                     <div class="input-group">
-                        <input type="search" name="search" value="" placeholder="Ricerca rapida" class="form-control me-2" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                        <input type="search" name="search" value="" placeholder="Nome ricetta" class="form-control me-2" aria-label="Search">
+                        <button class="btn btn-outline-light" type="submit">Cerca</button>
                     </div>
                 </form>
 
@@ -94,7 +96,7 @@
 
                                     <!-- Visualizzare le ricette salvate -->
                                     <a class="dropdown-item" href="{{ route('saved.index')}}">
-                                        Le ricette salvate
+                                        Ricette salvate
                                     </a>
                                                                 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -113,7 +115,7 @@
                             <!-- menù per inserimento -->
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{__('Inserisci')}}
+                                    {{__('Aggiungi')}}
                                 </a> 
                                 
                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -143,6 +145,11 @@
 
                                     <a class="dropdown-item" href="{{ route('user.index') }}">
                                     {{__('Utenti')}}
+                                    </a>
+
+
+                                    <a class="dropdown-item" href="{{ route('ticket_index.adm') }}">
+                                    {{__('Richieste')}} 
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('recipe_index.adm') }}">
@@ -187,7 +194,11 @@
 
                                     <!-- Visualizzare le ricette salvate -->
                                     <a class="dropdown-item" href="{{ route('saved.index')}}">
-                                        Le ricette salvate
+                                        Ricette salvate
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('ticket.index')}}">
+                                        Le mie richieste
                                     </a>
                                                                 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -200,29 +211,6 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
-                                </div>
-                            </li>
-
-                            <!-- menù per inserimento -->
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{__('Inserimento')}}
-                                </a> 
-                                
-                               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
-                                    <a class="dropdown-item" href="{{ route('recipe.create') }}">
-                                    {{__('Ricetta')}}
-                                    </a>
-                                    
-                                    <a class="dropdown-item" href="{{ route('add.ingredient') }}">
-                                    {{ __('Ingrediente') }}
-                                    </a>
-
-                                    <a class="dropdown-item" href="{{ route('add.category') }}">
-                                    {{ __('Categoria') }}
-                                    </a>
-                                    
                                 </div>
                             </li>
 
@@ -246,6 +234,11 @@
                                     </a>
                                     
                                 </div>
+                            </li> 
+
+                            <!-- inserimento ricetta -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('recipe.create') }}">{{__('Nuova Ricetta')}}</a> 
                             </li>
 
 
@@ -266,6 +259,27 @@
             @yield('content')
         </main>
     </div>
-    
+    <style> .btn-custom {
+  color: #fff;
+  background-color: #0d77e9;
+  border-color: #227dc7;
+  --bs-btn-hover-color: var(--bs-white);
+  
+  
+}
+
+.btn-custom-little {
+  color: #fff;
+  background-color: #0d77e9;
+  border-color: #227dc7;
+  --bs-btn-hover-color: var(--bs-white);
+  font-size:12px;
+  padding: 3px 7px;
+}
+
+ </style>
 </body>
 </html>
+
+
+

@@ -27,8 +27,15 @@ class HomeController extends Controller
      */
     public function index()
     {   
-        $recipe = Recipe::orderBy('recipes.created_at', 'desc')//->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+        $recipe = Recipe::orderBy('recipes.created_at', 'desc')->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
         ->get();
+
+        foreach($recipe as $rp){
+            $rp->name_category1 = app('App\Http\Controllers\CategoryController')->name_category($rp->category_id);
+            if($rp->category_id2){
+                $rp->name_category2 = app('App\Http\Controllers\CategoryController')->name_category($rp->category_id2);
+            }
+        }
 
         return view('home', compact('recipe'));
     }

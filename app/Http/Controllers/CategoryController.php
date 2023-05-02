@@ -57,9 +57,12 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($id)
     {
-        //
+        $category = Category::find($id);
+        $recipe = RecipeCategory::where('category_id', '=', $category->id)->orWhere('category_id2', '=', $category->id)->join('recipes', 'recipes.id', "=", 'recipe_categories.recipe_id')->get();
+
+        return view('/category/show', compact('category', 'recipe'));
     }
 
     /**
@@ -113,6 +116,8 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         return $category->name_category;
+
+        
     }
 
 }
