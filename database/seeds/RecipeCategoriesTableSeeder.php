@@ -35,6 +35,18 @@ class RecipeCategoriesTableSeeder extends Seeder
             'category_id' => '1',
             'category_id2' => '2',
 
+        ],  [
+
+            'recipe_id' => '5',
+            'category_id' => '4',
+            'category_id2' => '8',
+
+        ],  [
+
+            'recipe_id' => '6',
+            'category_id' => '2',
+            'category_id2' => '1',
+
         ]
         ]);
     }

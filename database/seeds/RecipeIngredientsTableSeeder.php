@@ -173,6 +173,118 @@ class RecipeIngredientsTableSeeder extends Seeder
             'quantity' => '0',
             'measure' => 'q.b.'
             
+        ], [
+            'id' => '24',
+            'recipe_id' => '5',
+            'ingredient_id' => '25',
+            'quantity' => '1',
+            'measure' => 'kg'
+            
+        ], [
+            'id' => '25',
+            'recipe_id' => '5',
+            'ingredient_id' => '26',
+            'quantity' => '1',
+            'measure' => 'spicchio'
+            
+        ], [
+            'id' => '26',
+            'recipe_id' => '5',
+            'ingredient_id' => '27',
+            'quantity' => '80',
+            'measure' => 'gr'
+            
+        ], [
+            'id' => '27',
+            'recipe_id' => '5',
+            'ingredient_id' => '28',
+            'quantity' => '0',
+            'measure' => 'q.b'
+            
+        ], [
+            'id' => '28',
+            'recipe_id' => '5',
+            'ingredient_id' => '5',
+            'quantity' => '0',
+            'measure' => 'q.b.'
+            
+        ], [
+            'id' => '29',
+            'recipe_id' => '5',
+            'ingredient_id' => '10',
+            'quantity' => '0',
+            'measure' => 'q.b.'
+            
+        ], [
+            'id' => '30',
+            'recipe_id' => '5',
+            'ingredient_id' => '29',
+            'quantity' => '700',
+            'measure' => 'gr'
+            
+        ], [
+            'id' => '31',
+            'recipe_id' => '5',
+            'ingredient_id' => '30',
+            'quantity' => '200',
+            'measure' => 'gr'
+            
+        ], [
+            'id' => '32',
+            'recipe_id' => '5',
+            'ingredient_id' => '14',
+            'quantity' => '200',
+            'measure' => 'gr'
+            
+        ], [
+            'id' => '33',
+            'recipe_id' => '5',
+            'ingredient_id' => '31',
+            'quantity' => '0',
+            'measure' => 'q.b.'
+            
+        ], [
+            'id' => '34',
+            'recipe_id' => '5',
+            'ingredient_id' => '4',
+            'quantity' => '0',
+            'measure' => 'q.b.'
+            
+        ], [
+            'id' => '35',
+            'recipe_id' => '6',
+            'ingredient_id' => '8',
+            'quantity' => '300',
+            'measure' => 'gr'
+            
+        ], [
+            'id' => '36',
+            'recipe_id' => '6',
+            'ingredient_id' => '22',
+            'quantity' => '6',
+            'measure' => 'gr'
+            
+        ], [
+            'id' => '37',
+            'recipe_id' => '6',
+            'ingredient_id' => '9',
+            'quantity' => '5',
+            'measure' => 'gr'
+            
+        ], [
+            'id' => '38',
+            'recipe_id' => '6',
+            'ingredient_id' => '14',
+            'quantity' => '180',
+            'measure' => 'gr'
+            
+        ], [
+            'id' => '39',
+            'recipe_id' => '6',
+            'ingredient_id' => '5',
+            'quantity' => '7',
+            'measure' => '7'
+            
         ]
         ]);
 

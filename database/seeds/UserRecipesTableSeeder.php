@@ -31,6 +31,16 @@ class UserRecipesTableSeeder extends Seeder
             'user_id' => '3',
             'recipe_id' => '4',
 
+        ], [
+
+            'user_id' => '2',
+            'recipe_id' => '5',
+
+        ], [
+
+            'user_id' => '1',
+            'recipe_id' => '6',
+
         ]
         ]);
     }

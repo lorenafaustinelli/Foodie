@@ -116,6 +116,34 @@ class IngredientsTableSeeder extends Seeder
             'id'              =>      '24',
             'name_ingredient'   =>      'farina 0',
             'variation'         =>      '', 
+        ], [   
+            'id'              =>      '25',
+            'name_ingredient'   =>      'calamari',
+            'variation'         =>      '', 
+        ], [   
+            'id'              =>      '26',
+            'name_ingredient'   =>      'aglio',
+            'variation'         =>      '', 
+        ], [   
+            'id'              =>      '27',
+            'name_ingredient'   =>      'vino bianco',
+            'variation'         =>      'birra', 
+        ], [   
+            'id'              =>      '28',
+            'name_ingredient'   =>      'origano',
+            'variation'         =>      '', 
+        ], [   
+            'id'              =>      '29',
+            'name_ingredient'   =>      'patate',
+            'variation'         =>      '', 
+        ], [   
+            'id'              =>      '30',
+            'name_ingredient'   =>      'pomodorini pelati',
+            'variation'         =>      '', 
+        ], [   
+            'id'              =>      '31',
+            'name_ingredient'   =>      'salvia',
+            'variation'         =>      '', 
         ]
         ]);
     }
