@@ -63,7 +63,7 @@
     <body>
     <style> 
     .links > a {
-        color: #0b0a0a;
+        color: #ffffff;
         padding: 0 25px;
         font-size: 15px;
         font-weight: 600;
