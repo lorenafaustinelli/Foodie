@@ -108,7 +108,7 @@
 
     function insert_success(){
       $('#alerts').append(
-        '<div class="alert alert-primary alert-dismissible fade show" role="alert">' 
+        '<div class="alert alert-success alert-dismissible fade show" role="alert">' 
         +'Richiesta inviata correttamente <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">' +
          '</div>'
       );

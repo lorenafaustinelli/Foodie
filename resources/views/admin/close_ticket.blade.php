@@ -11,36 +11,38 @@
 </style>
 
 <div class="container">
-    <h1> Richieste aperte</h1>
+    <h1> Richieste concluse</h1>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <p> <a href="{{ route('close.tickets') }}"> Vai alle richieste concluse </a> </p>
+        <p> <a href="{{ route('ticket_index.adm') }}"> Vai alle richieste aperte </a> </p>
     </div>
-    @if($open_tickets == '') 
-        <h4> Per il momento non ci sono richieste in sospeso. </h4>
+    @if($close_tickets == '') 
+        <h4> Per il momento non hai completato delle richieste. </h4>
         
     @else
-            @foreach($open_tickets as $op)
 
-                <ul class="list-group">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        
-                        Richiesta #{{$op->id}} - {{$op->created_at->format('d M Y - H:i')}} {{$op->user_name}} </br>
-                        {{$op->text}}
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requestModal-{{$op->id}}">
-                            Gestisci richiesta 
-                        </button>
-    
-                    </li>
-                </ul>
-                </br>
-            @endforeach
-            
+        @foreach($close_tickets as $op)
+
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    
+                    Richiesta #{{$op->id}} - {{$op->created_at->format('d M Y - H:i')}} {{$op->user_name}} </br>
+                    {{$op->text}}
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requestModal-{{$op->id}}">
+                        Gestisci richiesta 
+                    </button>
+
+                </li>
+            </ul>
+            </br>
+        @endforeach
+
     @endif
 </div>
 
 <!-- Modal -->
-@if($open_tickets != '')
-@foreach($open_tickets as $ticket)
+
+@if($close_tickets != '')
+@foreach($close_tickets as $ticket)
 <div class="modal fade" id="requestModal-{{$ticket->id}}" tabindex="-1" aria-labelledby="requestModalLabel-{{$ticket->id}}" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -81,7 +83,13 @@
   </div>
 </div>
 @endforeach
+
+
 @endif
+
+
+
+
 
 
 @endsection

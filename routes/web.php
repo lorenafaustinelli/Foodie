@@ -112,6 +112,9 @@ Route::group(['middleware'=>['user']], function(){
     Route::get('/admin/ticket', 'TicketController@admin_index')->name('ticket_index.adm');
     Route::get('/ticket/{id}/status', 'TicketController@change_status')->name('ticket.status'); //versione old da non usare
     Route::post('/ticket/{id}/update', 'TicketController@update')->name('ticket.update');
+    Route::get('/admin/close_ticket', 'TicketController@close_tickets')->name('close.tickets');
+    
+
 
 
 

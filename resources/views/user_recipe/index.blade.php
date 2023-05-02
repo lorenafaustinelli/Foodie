@@ -74,7 +74,7 @@
                 </div> 
                 </br>
                 <div class="container">
-                    <h4> Ingrediente: </h4> 
+                    <h5> Ingrediente: </h5> 
                     <select id="ingredient_id" class="form-select" aria-label="Default select example" name="ingredient_id">
                     <option selected></option>
                         @foreach ($ingredients as $ing)

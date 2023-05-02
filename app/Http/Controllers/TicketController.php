@@ -37,44 +37,53 @@ class TicketController extends Controller
 
     }
 
+   
     public function admin_index()
     {
-        $tickets = Ticket::orderBy('tickets.created_at', 'desc')->get();
-        if($tickets->isEmpty()){
+        $open_tickets = Ticket::orderBy('tickets.created_at', 'desc')->where('status', '=', '0')->get();
+
+        if($open_tickets->isEmpty()){
             $open_tickets = '';
-            $close_tickets = '';
-            return view('admin/ticket', compact('open_tickets', 'close_tickets'));
+            return view('admin/ticket', compact('open_tickets'));
         } else{
 
-            $open_tickets = Ticket::orderBy('tickets.created_at', 'desc')->where('status', '=', '0')->get();
+            foreach($open_tickets as $ticket){
+
+                //inserisco il nome dell'utente
+                $ticket->user_name = app('App\Http\Controllers\UserController')->name($ticket->user_id);
+    
+            }
+
+            return view('admin/ticket', compact('open_tickets'));
+
             
-            $close_tickets = Ticket::orderBy('tickets.created_at', 'desc')->where('status', '=', '1')->get();
-
-            if($open_tickets->isEmpty()){
-                $open_tickets = '';
-            } else{
-                foreach($open_tickets as $ticket){
-
-                    //inserisco il nome dell'utente
-                    $ticket->user_name = app('App\Http\Controllers\UserController')->name($ticket->user_id);
-      
-                }
-            }
-
-            if($close_tickets->isEmpty()){
-                $close_tickets = '';
-            } else{
-                foreach($close_tickets as $ticket){
-
-                    //inserisco il nome dell'utente
-                    $ticket->user_name = app('App\Http\Controllers\UserController')->name($ticket->user_id);
-      
-                }
-            }
         }
-
-        return view('admin/ticket', compact('open_tickets', 'close_tickets'));
+        
     }
+
+    public function close_tickets()
+    {
+        $close_tickets = Ticket::orderBy('tickets.created_at', 'desc')->where('status', '=', '1')->get();
+
+         
+        if($close_tickets->isEmpty()){
+            $close_tickets = '';
+            return view('/admin/close_ticket', compact('close_tickets'));
+        } else{
+            foreach($close_tickets as $ticket){
+
+                //inserisco il nome dell'utente
+                $ticket->user_name = app('App\Http\Controllers\UserController')->name($ticket->user_id);
+
+            }
+
+            return view('/admin/close_ticket', compact('close_tickets'));
+        }
+        
+        
+    }
+    
+
 
     /**
      * Show the form for creating a new resource.
