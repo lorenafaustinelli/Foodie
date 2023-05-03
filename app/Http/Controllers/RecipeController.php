@@ -224,6 +224,29 @@ class RecipeController extends Controller
         return redirect()->back();
     }
 
+    public function destroy2(Request $request){
+
+        $id = $request->id;
+        //parte recipe_categories
+        RecipeCategory::where('recipe_id', $id)->delete();
+
+        //parte recipe_ingredients
+        RecipeIngredient::where('recipe_id', $id)->delete();
+
+        //parte user_recipe
+        UserRecipe::where('recipe_id', $id)->delete();
+
+        //parte saved_recipe
+        SavedRecipe::where('recipe_id', $id)->delete();
+
+        //parte recipe
+        Recipe::where('id', $id)->delete();
+
+        $recipe = Recipe::orderBy('recipes.created_at', 'desc')->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
+        ->get();
+
+        return view('home', compact('recipe'));
+    }
 
     //funzione per ricerca rapida ricette da layout
     public function search_recipe(Request $request){

@@ -22,30 +22,30 @@
 
           <div class="form-group">
                 <select name="category_id" class="form-control" >
-                @foreach ($categories as $category)
-                  <option value="{{ $category->id }}"> {{$category->name_category }} </option>
-                @endforeach
+                  <option value="" disabled selected>Prima categoria*:</option>
+                  @foreach ($categories as $category)
+                    <option value="{{ $category->id }}"> {{$category->name_category }} </option>
+                  @endforeach
                 </select>
           </div> 
 
           <div class="form-group">
               <select name="category_id2" class="form-control" >
-              <option value=""> </option>
-              @foreach ($categories as $category)
-                <option value="{{ $category->id }}"> {{$category->name_category }} </option>
-              @endforeach
-              
+                <option value="" disabled selected>Seconda categoria:</option>
+                @foreach ($categories as $category)
+                  <option value="{{ $category->id }}"> {{$category->name_category }} </option>
+                @endforeach
               </select>
           </div> 
-          </br>
+          <br>
           <div class="d-grid gap-2 col-6 mx-auto"> 
             <button type="submit" class="btn btn-custom">Concludi</button>
           </div>
         </div>
       </div>
     </div>
-    </br>
-    </br>
+    <br>
+    <br>
     
   </form>
 </div> 

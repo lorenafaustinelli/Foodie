@@ -23,14 +23,14 @@ Route::get('/', function () {
 Route::group(['middleware'=>['user']], function(){
         
     Route::get('/home', 'HomeController@index')->name('home');  //assegnazione del nome - Route(home)
-    //Route::get('/home', function () {
-        //prendo dal database le ricette scritte fin'ora, ordinate dall'ultima 
-       // $recipes = App\Recipe::latest()->get();
+    // Route::get('/home', function () {
+    //     //prendo dal database le ricette scritte fin'ora, ordinate dall'ultima 
+    //     $recipes = App\Recipe::latest()->get();
 
-        //return view('home', [
-          //  'recipes' => $recipes   //passo le ricette alla view
-        //]);
-    //})->name('home');
+    //     return view('home', [
+    //         'recipes' => $recipes   //passo le ricette alla view
+    //     ]);
+    // })->name('home');
 
 
     //SavedRecipe
@@ -50,6 +50,7 @@ Route::group(['middleware'=>['user']], function(){
     Route::get('/recipe/index', 'RecipeController@index')->name('recipes.index');
     Route::get('/recipe/show/{id}', 'RecipeController@show')->name('recipe.show');
     Route::get('/recipe_destroy/{id}', 'RecipeController@destroy')->name('recipe.delete');
+    Route::get('/recipe_destroy2/{id}', 'RecipeController@destroy2')->name('recipe.delete2');
     Route::get('/recipe/edit/{id}', 'RecipeController@edit')->name('recipe.edit');
     Route::post('/recipe/update/{id}', 'RecipeController@update')->name('recipe.update');
     

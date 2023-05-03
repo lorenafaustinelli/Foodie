@@ -16,6 +16,7 @@
             @endif
         @else
             <a class="btn btn-custom" role="button" href="{{ route('recipe.edit', $recipe->id) }}"> Modifica </a>
+            <a class="btn btn-custom" role="button" href="{{ route('recipe.delete2', $recipe->id) }}"> Elimina </a>
         @endif
         @endforeach
     </div>
