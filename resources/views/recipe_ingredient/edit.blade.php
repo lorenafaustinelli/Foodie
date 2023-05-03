@@ -2,12 +2,8 @@
 <?php
   /*<input type ="hidden" name = "recipe_id" value="{{ $recipe_id }}"/> 
 */
- 
-  
- 
 ?>
 @section('content')
-
 
 <div class="container">
   <h1> Modifica Ingredienti </h1>

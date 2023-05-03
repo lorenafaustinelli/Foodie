@@ -19,6 +19,10 @@ class UserRecipeController extends Controller
         $user_id = Auth::id();
         $recipe = DB::table('user_recipes')->where('user_id', '=', $user_id)
         ->join('recipes', 'recipes.id', "=", 'user_recipes.recipe_id')->get();
+        if($recipe->isEmpty()){
+            $recipe= '';
+            return view('user_recipe/index', compact('recipe'));
+        }
         
         return view('user_recipe/index', compact('recipe'));
 

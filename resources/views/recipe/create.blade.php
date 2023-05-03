@@ -10,7 +10,7 @@
 </style>
 
 <div class="container">
-<h1> <b> Step 1 di 3: </b> </h1> 
+<h1> Step 1 di 3: </h1> 
 <h2> Iniziamo con alcune informazioni sulla ricetta! </h2>
 </br>
     

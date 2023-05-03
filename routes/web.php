@@ -65,6 +65,9 @@ Route::group(['middleware'=>['user']], function(){
     Route::post('/recipe_ingredient/update/{id}', 'RecipeIngredientController@update')->name('recipe_ingredient.update');
     Route::post('/recipe_ingredient/change_quantity', 'RecipeIngredientController@change_quantity')->name('recipe_ingredient.change.quantity');
     Route::get('/recipe_ingredient/single_edit/{id}', 'RecipeIngredientController@single_edit')->name('recipe_ingredient.single_edit');
+    Route::post('/recipe_ingredient/update_first/{id}', 'RecipeIngredientController@update_first')->name('recipe_ingredient.update_first');
+    Route::get('/recipe_ingredient/single_edit_first/{id}', 'RecipeIngredientController@single_edit_first')->name('recipe_ingredient.single_edit_first');
+
 
     //Ingredient
     Route::get('/ingredient/create', 'IngredientController@create')->name('add.ingredient');

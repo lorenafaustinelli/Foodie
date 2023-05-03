@@ -6,7 +6,7 @@
 <div class="container">
   <h2> Modifica ingrediente </h2>
   <br>
-  <form action="{{route('recipe_ingredient.update', $recipe_ing->id)}}" method="POST" enctype="multipart/form-data">
+  <form action="{{route('recipe_ingredient.update_first', $recipe_ing->id)}}" method="POST" enctype="multipart/form-data">
     {{ csrf_field() }}
     <div class="row">
       <div class="card">

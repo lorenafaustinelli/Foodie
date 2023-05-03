@@ -245,7 +245,7 @@ class RecipeController extends Controller
         $recipe = Recipe::orderBy('recipes.created_at', 'desc')->join('recipe_categories', 'recipe_categories.recipe_id', "=", 'recipes.id')
         ->get();
 
-        return view('home', compact('recipe'));
+        return redirect()->route('home'); //ho tolto il return view('home') perchè non caricava le categorie
     }
 
     //funzione per ricerca rapida ricette da layout

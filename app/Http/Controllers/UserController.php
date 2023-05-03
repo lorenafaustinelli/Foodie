@@ -113,6 +113,7 @@ class UserController extends Controller
         $user->delete();
 
         //return redirect()->back();
-        return view('/home');
+        //return view('/home'); l'ho cambiato perchè dava un errore poi nell'home page
+        return redirect()->route('user.index');
     }
 }

@@ -232,6 +232,18 @@ class RecipeIngredientController extends Controller
 
     }
 
+    public function single_edit_first($id)
+    {   
+        //$id = id del recipe_ingredient
+        $recipe_ing = RecipeIngredient::find($id);
+
+        $recipe_ing->name_ingredient = app('App\Http\Controllers\IngredientController')->name_ingredient($recipe_ing->ingredient_id);
+
+
+        return view('recipe_ingredient.single_edit_first', compact('recipe_ing'));
+
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -252,6 +264,21 @@ class RecipeIngredientController extends Controller
         return redirect()->route('recipe_ingredient.edit', $recipe_id);
 
     }
+
+    public function update_first(Request $request, $id)
+    {
+        //arriva id di recipe_ingredient
+        $input = $request->all();
+        $recipe_ingredient = RecipeIngredient::find($id);
+        $recipe_ingredient->update($input);
+
+        $recipe_id = $recipe_ingredient->recipe_id;
+        $recipe = Recipe::find($recipe_id);
+        
+        return redirect()->route('recipe_ingredient.create', $recipe_id);
+
+    }
+
 
     /**
      * Remove the specified resource from storage.

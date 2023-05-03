@@ -268,6 +268,10 @@
   
 }
 
+.btn-icon {
+  background-color: var(--WHITE);/* #0d77e9; */
+}
+
 .btn-custom-little {
   color: #fff;
   background-color:var(--BLU); /* #0d77e9; */
