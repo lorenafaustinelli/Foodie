@@ -20,7 +20,7 @@ class CreateRecipesTable extends Migration
             $table->string('name_recipe');
             $table->integer('time');
             $table->integer('portion');
-            $table->text('instruction');
+            $table->longtext('instruction');
             $table->string('photo')->nullable(); 
             $table->string('photo2')->nullable();
 

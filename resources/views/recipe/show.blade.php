@@ -61,7 +61,7 @@
     @if($recipe_category != '')
 
        
-        <p> <strong> Categoria: </strong> @foreach($recipe_category as $cat) <a style="color: var(--BLU)"> #{{ $cat->name_category }} </a>   @endforeach </p> 
+        <p> <strong> Categoria: </strong> @foreach($recipe_category as $cat) <a style="color: var(--BLU); text-decoration: none;" href=" {{ route('category.show', $cat->id )}}" > #{{ $cat->name_category }} </a>   @endforeach </p> 
         <p> <strong> Tempo di preparazione: </strong> {{ $recipe->time }} minuti </p>
         <h5> Preparazione </h5> {{ $recipe->instruction }}</p> </div> <!-- tenere </div> qui perchè sennò si disallinea testo -->
             
