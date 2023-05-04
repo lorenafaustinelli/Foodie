@@ -649,7 +649,7 @@ class RecipeController extends Controller
             //se l'utente non inserisce nessun campo vai a tutte le ricette
 
             $recipe = DB::table('recipes')->latest()->get();
-            return view('/recipe/index', compact('recipe'));
+            return view('research.results', compact('recipe'));
         }
     
     }   

@@ -8,7 +8,7 @@
 		<div class="col-10">
 			@if(Auth::user()->picture) <!-- Se l'utente ha gia scelto un'immagine profilo-->
 				<a href="#" data-bs-toggle="modal" data-bs-target="#pictureModal"> <!-- La recuperiamo e la visualizziamo-->
-					<img data-toggle="tooltip" title="Click to update your profile picture! :)" src="{{ Storage::url(Auth::user()->picture) }}" class="rounded-circle mb-3" style="width: 150px;" alt="Avatar" />
+					<img data-toggle="tooltip" title="Premi per aggiornare la tua foto profilo" src="{{ Storage::url(Auth::user()->picture) }}" class="rounded-circle mb-3" style="width: 150px;" alt="Avatar" />
 				</a>
 			@else <!-- Altrimenti si visualizza un'immagine predefinita -->
 				<a href="#" data-bs-toggle="modal" data-bs-target="#pictureModal">
@@ -128,6 +128,7 @@
 				<div class="modal-body">
 					<label class="form-label" for="customFile"> Vuoi cambiare nome? </label>
 					<input type="string" class="form-control" id="name" name="name" placeholder="Inserisci il tuo nuovo nome">
+					<br>
 					<input type="string" class="form-control" id="surname" name="surname" placeholder="Inserisci il tuo nuovo cognome">
 				</div>
 				<div class="modal-footer">

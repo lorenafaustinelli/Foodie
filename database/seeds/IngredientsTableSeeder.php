@@ -82,7 +82,7 @@ class IngredientsTableSeeder extends Seeder
             'variation'         =>      '', 
         ], [   
             'id'              =>      '16',
-            'name_ingredient'   =>      'zucchero',
+            'name_ingredient'   =>      'burro d\'arachidi',
             'variation'         =>      '', 
         ], [   
             'id'              =>      '17',

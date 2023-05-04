@@ -25,6 +25,10 @@ class UnityOfMeasurementTableSeeder extends Seeder
         ], [    
             'name_measurement'   =>      'q.b.',
              
+        ], [
+            'name_measurement'   =>      'spicchi',
+        ], [
+            'name_measurement'   =>      'kg',
         ]
         ]);
     }

@@ -38,7 +38,7 @@
 
                                 <div class="form-group">
                                     <h4>Numero porzioni*:</h4>
-                                    <input type="number"  min="1" max="20" name="portion" class="form-control" placeholder="Da 1 a 20">
+                                    <input type="number"  min="1" max="3 0" name="portion" class="form-control" placeholder="Da 1 a 20">
                                 </div>
 
                                 <div class="form-group">

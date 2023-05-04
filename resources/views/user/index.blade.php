@@ -8,7 +8,7 @@
     </br>
     <div class="grid-layout"> 
     @foreach($users as $user) <!-- scorro gli id delle ricette scritte dall'utente --> 
-        <div class="card card text-center" style="width: 15rem;">
+        <div class="card card text-center" style="width: 14rem;">
             @if($user->picture)
                 <img src="{{ Storage::url(($user->picture)) }}" class="card-img-top" width="250px" height="180px" alt="foto utente">
             @else

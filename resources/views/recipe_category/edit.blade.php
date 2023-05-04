@@ -4,7 +4,7 @@
 
 <div class="container">
   <h1> Modifica categoria </h1>
-
+  <br>
   <form action="{{route('recipe_category.update', $recipe->id)}}" method="POST" enctype="multipart/form-data">
     {{ csrf_field() }} 
     <div class="row">
